@@ -15,7 +15,7 @@
 <meta name="twitter:description" content="Eight zero-dependency tools that turn questions into evidence and evidence into decisions.">
 <meta name="twitter:image" content="https://grainulator.github.io/grainulator/og-image.svg">
 <link rel="canonical" href="https://grainulator.github.io/grainulator/">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2309090b'/><text x='32' y='48' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='800' font-size='36' fill='%23fbbf24'>gr</text></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2309090b'/><text x='32' y='48' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='800' font-size='36' fill='%23a78bfa'>gr</text></svg>">
 <style>
 :root {
   --bg: #09090b;
@@ -24,17 +24,17 @@
   --surface-hover: rgba(255,255,255,0.06);
   --border: rgba(255,255,255,0.07);
   --border-light: rgba(255,255,255,0.12);
-  --accent: #fbbf24;
-  --accent-dim: rgba(251,191,36,0.12);
-  --accent-glow: rgba(251,191,36,0.06);
+  --accent: #a78bfa;
+  --accent-dim: rgba(167,139,250,0.12);
+  --accent-glow: rgba(167,139,250,0.06);
   --green: #22c55e;
   --green-dim: rgba(34,197,94,0.1);
-  --emerald: #10b981;
-  --copper: #d97706;
-  --blue: #3b82f6;
-  --blue-dim: rgba(59,130,246,0.1);
+  --emerald: #92622a;
+  --copper: #e2e8f0;
+  --blue: #60a5fa;
+  --blue-dim: rgba(96,165,250,0.1);
   --orange: #f97316;
-  --brown: #c9891f;
+  --brown: #ef4444;
   --text: #e8ecf1;
   --text-2: #9ba5b7;
   --text-3: #8b95a5;
@@ -78,7 +78,7 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
 .nav-cta:hover{opacity:.85;text-decoration:none}
 
 .hero{padding:120px 0 100px;text-align:center;position:relative}
-.hero::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:1px;height:80px;background:linear-gradient(to bottom,transparent,rgba(251,191,36,.3))}
+.hero::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:1px;height:80px;background:linear-gradient(to bottom,transparent,rgba(167,139,250,.3))}
 .hero-badge{display:inline-block;padding:5px 14px;border:1px solid var(--border-light);border-radius:100px;font-size:.75rem;color:var(--text-2);margin-bottom:28px;letter-spacing:.04em;text-transform:uppercase}
 .hero h1{font-size:clamp(2rem,4.5vw,3rem);font-weight:800;letter-spacing:-.03em;line-height:1.15;margin-bottom:24px;max-width:720px;margin-left:auto;margin-right:auto}
 .hero h1 em{font-style:normal;color:var(--accent)}
@@ -144,14 +144,14 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
 .tool-role{font-size:.75rem;font-weight:600}
 .tool-desc{font-size:.8125rem;color:var(--text-2);line-height:1.55;margin-bottom:14px}
 .tool-install{font-family:var(--mono);font-size:.75rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:6px 12px;color:var(--text-3);display:inline-block;user-select:all}
-.tool-card.highlight{border-color:rgba(251,191,36,.3);position:relative}
+.tool-card.highlight{border-color:rgba(167,139,250,.3);position:relative}
 .tool-card.highlight::before{content:'START HERE';position:absolute;top:-10px;right:16px;background:var(--accent);color:#000;font-family:var(--mono);font-size:.625rem;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:.05em}
 
 /* Features/philosophy */
 .features{padding:80px 0}
 .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
 .feature-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px 24px;transition:border-color .2s}
-.feature-card:hover{border-color:rgba(251,191,36,.25)}
+.feature-card:hover{border-color:rgba(167,139,250,.25)}
 .feature-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:18px;background:var(--accent-dim);color:var(--accent)}
 .feature-card h3{font-size:.9375rem;font-weight:700;margin-bottom:6px}
 .feature-card p{font-size:.8125rem;color:var(--text-2);line-height:1.6}
@@ -310,7 +310,7 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
       <div style="display:inline-flex;gap:32px;flex-wrap:wrap;justify-content:center" class="rv rv-d4">
         <div style="display:flex;align-items:center;gap:8px">
           <div style="width:12px;height:12px;border-radius:50%;border:2px solid var(--emerald)"></div>
-          <span style="font-size:.8125rem;color:var(--text-2)"><strong style="color:var(--emerald)">grove</strong> -- shared utilities</span>
+          <span style="font-size:.8125rem;color:var(--text-2)"><strong style="color:var(--emerald)">barn</strong> -- shared utilities</span>
         </div>
         <div style="display:flex;align-items:center;gap:8px">
           <div style="width:12px;height:12px;border-radius:50%;border:2px solid var(--blue)"></div>
@@ -318,7 +318,7 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
         </div>
         <div style="display:flex;align-items:center;gap:8px">
           <div style="width:12px;height:12px;border-radius:50%;border:2px solid var(--brown)"></div>
-          <span style="font-size:.8125rem;color:var(--text-2)"><strong style="color:var(--brown)">field</strong> -- orchestration</span>
+          <span style="font-size:.8125rem;color:var(--text-2)"><strong style="color:var(--brown)">orchard</strong> -- orchestration</span>
         </div>
       </div>
     </div>
@@ -454,13 +454,13 @@ Written: output/brief.html</div>
         <div class="tool-install">npx @grainulator/farmer start</div>
       </a>
 
-      <a href="https://grainulator.github.io/grove/" class="tool-card rv rv-d3" style="text-decoration:none;color:inherit">
+      <a href="https://grainulator.github.io/barn/" class="tool-card rv rv-d3" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
-          <div class="tool-icon" style="background:rgba(16,185,129,.1);color:var(--emerald)">
+          <div class="tool-icon" style="background:rgba(146,98,42,.1);color:var(--emerald)">
             <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           </div>
           <div>
-            <div class="tool-name">grove</div>
+            <div class="tool-name">barn</div>
             <div class="tool-role" style="color:var(--emerald)">Shared utilities</div>
           </div>
         </div>
@@ -470,7 +470,7 @@ Written: output/brief.html</div>
 
       <a href="https://grainulator.github.io/mill/" class="tool-card rv rv-d4" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
-          <div class="tool-icon" style="background:rgba(217,119,6,.1);color:var(--copper)">
+          <div class="tool-icon" style="background:rgba(226,232,240,.1);color:var(--copper)">
             <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
           </div>
           <div>
@@ -484,7 +484,7 @@ Written: output/brief.html</div>
 
       <a href="https://grainulator.github.io/silo/" class="tool-card rv rv-d1" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
-          <div class="tool-icon" style="background:rgba(59,130,246,.1);color:var(--blue)">
+          <div class="tool-icon" style="background:rgba(96,165,250,.1);color:var(--blue)">
             <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
           </div>
           <div>
@@ -510,13 +510,13 @@ Written: output/brief.html</div>
         <div class="tool-install">npx @grainulator/harvest analyze ./sprints/</div>
       </a>
 
-      <a href="https://grainulator.github.io/field/" class="tool-card rv rv-d3" style="text-decoration:none;color:inherit">
+      <a href="https://grainulator.github.io/orchard/" class="tool-card rv rv-d3" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
-          <div class="tool-icon" style="background:rgba(201,137,31,.1);color:var(--brown)">
+          <div class="tool-icon" style="background:rgba(239,68,68,.1);color:var(--brown)">
             <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
           </div>
           <div>
-            <div class="tool-name">field</div>
+            <div class="tool-name">orchard</div>
             <div class="tool-role" style="color:var(--brown)">Orchestration</div>
           </div>
         </div>
