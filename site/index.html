@@ -1,662 +1,419 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>grainulator -- structured research for decisions that satisfice</title>
-  <meta name="description" content="Eight tools for turning questions into evidence and evidence into decisions. Start with wheat. Add what you need.">
-  <style>
-    /* ── Reset & Base ─────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>grainulator — The structured research ecosystem</title>
+<meta name="description" content="Eight tools for turning questions into evidence and evidence into decisions. Start with wheat. Add what you need.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2309090b'/><text x='32' y='48' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='800' font-size='36' fill='%23fbbf24'>gr</text></svg>">
+<style>
+:root {
+  --bg: #09090b;
+  --bg-2: #111113;
+  --surface: rgba(255,255,255,0.03);
+  --surface-hover: rgba(255,255,255,0.06);
+  --border: rgba(255,255,255,0.07);
+  --border-light: rgba(255,255,255,0.12);
+  --accent: #fbbf24;
+  --accent-dim: rgba(251,191,36,0.12);
+  --accent-glow: rgba(251,191,36,0.06);
+  --green: #22c55e;
+  --green-dim: rgba(34,197,94,0.1);
+  --emerald: #10b981;
+  --copper: #d97706;
+  --blue: #3b82f6;
+  --blue-dim: rgba(59,130,246,0.1);
+  --orange: #f97316;
+  --brown: #a16207;
+  --purple: #a78bfa;
+  --red: #f87171;
+  --text: #e8ecf1;
+  --text-2: #9ba5b7;
+  --text-3: #5a6478;
+  --mono: 'SF Mono','Fira Code','Cascadia Code','Consolas',monospace;
+  --sans: -apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  --max-w: 1080px;
+  --ease: cubic-bezier(.22,1,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code,pre{font-family:var(--mono)}
 
-    :root {
-      --gold: #fbbf24;
-      --gold-dim: #92702a;
-      --bg: #0a0a0a;
-      --bg-card: #141414;
-      --bg-card-hover: #1a1a1a;
-      --text: #e5e5e5;
-      --text-dim: #737373;
-      --text-bright: #fafafa;
-      --border: #262626;
-      --font-mono: 'SF Mono', 'Cascadia Code', 'Fira Code', 'JetBrains Mono', monospace;
-      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    }
+.bg-ambient{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.bg-ambient .orb{position:absolute;border-radius:50%;filter:blur(140px);opacity:.035;animation:drift 30s ease-in-out infinite alternate}
+.bg-ambient .orb:nth-child(1){width:700px;height:700px;background:var(--accent);top:-15%;left:15%}
+.bg-ambient .orb:nth-child(2){width:500px;height:500px;background:var(--blue);top:40%;right:-10%;animation-delay:-10s}
+.bg-ambient .orb:nth-child(3){width:400px;height:400px;background:var(--orange);bottom:5%;left:-5%;animation-delay:-20s}
+@keyframes drift{0%{transform:translate(0,0) scale(1)}50%{transform:translate(25px,-20px) scale(1.04)}100%{transform:translate(-15px,12px) scale(.96)}}
 
-    html {
-      scroll-behavior: smooth;
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-sans);
-      line-height: 1.6;
-    }
+.page{position:relative;z-index:2}
+.container{max-width:var(--max-w);margin:0 auto;padding:0 24px}
 
-    body {
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+.rv{opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.rv.vis{opacity:1;transform:none}
+.rv-d1{transition-delay:.08s}.rv-d2{transition-delay:.16s}.rv-d3{transition-delay:.24s}.rv-d4{transition-delay:.32s}.rv-d5{transition-delay:.4s}
+.hf{opacity:0;transform:translateY(16px);animation:hIn .65s var(--ease) forwards}
+.hf1{animation-delay:.05s}.hf2{animation-delay:.15s}.hf3{animation-delay:.25s}.hf4{animation-delay:.4s}
+@keyframes hIn{to{opacity:1;transform:none}}
 
-    a { color: var(--gold); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    code { font-family: var(--font-mono); font-size: 0.9em; }
+nav{position:sticky;top:0;z-index:100;background:rgba(9,9,11,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:14px 0}
+nav .container{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-weight:700;font-size:1.1rem;letter-spacing:-.02em;display:flex;align-items:center;gap:8px;color:var(--text);text-decoration:none}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:24px;font-size:.875rem;color:var(--text-2);align-items:center}
+.nav-links a{color:var(--text-2);transition:color .2s}
+.nav-links a:hover{color:var(--text);text-decoration:none}
+.nav-cta{background:var(--accent);color:#000;padding:6px 16px;border-radius:6px;font-weight:600;font-size:.8125rem;transition:opacity .2s}
+.nav-cta:hover{opacity:.85;text-decoration:none}
 
-    /* ── Layout ───────────────────────────────────────────────── */
-    .section {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 5rem 1.5rem;
-    }
+/* Hero - extra special for the brand page */
+.hero{padding:120px 0 100px;text-align:center;position:relative}
+.hero::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:1px;height:80px;background:linear-gradient(to bottom,transparent,rgba(251,191,36,.3))}
+.hero-badge{display:inline-block;padding:5px 14px;border:1px solid var(--border-light);border-radius:100px;font-size:.75rem;color:var(--text-2);margin-bottom:28px;letter-spacing:.04em;text-transform:uppercase}
+.hero h1{font-size:clamp(3rem,7vw,5rem);font-weight:800;letter-spacing:-.04em;line-height:1.05;margin-bottom:24px;font-family:var(--mono)}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.hero-sub{font-size:clamp(1.1rem,2.2vw,1.35rem);color:var(--text-2);max-width:580px;margin:0 auto 44px;line-height:1.55}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:10px;font-weight:600;font-size:.9375rem;transition:all .2s}
+.btn-primary{background:var(--accent);color:#000}.btn-primary:hover{opacity:.88;text-decoration:none;transform:translateY(-1px);box-shadow:0 0 32px var(--accent-glow)}
+.btn-ghost{border:1px solid var(--border-light);color:var(--text)}.btn-ghost:hover{background:var(--surface-hover);text-decoration:none;transform:translateY(-1px)}
 
-    /* ── Hero ─────────────────────────────────────────────────── */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2rem 1.5rem;
-      position: relative;
-    }
+.section-label{font-size:.8125rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:12px;font-weight:600}
+.section-title{font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:800;letter-spacing:-.03em;margin-bottom:16px;line-height:1.15}
+.section-sub{color:var(--text-2);font-size:1.05rem;max-width:620px;margin-bottom:48px;line-height:1.55}
 
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 1px;
-      height: 80px;
-      background: linear-gradient(to bottom, transparent, var(--gold-dim));
-    }
+/* Quick start */
+.quickstart{padding:100px 0 60px}
+.qs-label{text-align:center;font-size:.8125rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:40px;font-weight:600}
+.qs-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.qs-step{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:32px 28px}
+.qs-num{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;background:var(--accent-dim);color:var(--accent);font-weight:700;font-size:.875rem;margin-bottom:16px}
+.qs-step h3{font-size:1.05rem;font-weight:700;margin-bottom:8px}
+.qs-step p{color:var(--text-2);font-size:.875rem;line-height:1.55;margin-bottom:16px}
+.qs-code{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 16px;font-size:.8125rem;overflow-x:auto;white-space:pre;position:relative;line-height:1.6;color:#34d399}
+.qs-code .dim{color:var(--text-3)}
+@media(max-width:720px){.qs-steps{grid-template-columns:1fr}}
 
-    .hero-title {
-      font-family: var(--font-mono);
-      font-size: clamp(3rem, 8vw, 6rem);
-      font-weight: 700;
-      color: var(--gold);
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-    }
+/* Example */
+.example{padding:80px 0}
+.term-block{background:var(--bg-2);border:1px solid var(--border);border-radius:12px;padding:24px;font-family:var(--mono);font-size:.8125rem;line-height:1.8;overflow-x:auto}
+.term-block .prompt{color:var(--text-3)}
+.term-block .cmd{color:var(--accent)}
+.term-block .output{color:var(--text-2)}
+.term-block .hl{color:var(--accent)}
+.term-block .success{color:#34d399}
 
-    .hero-tagline {
-      font-size: clamp(1rem, 2.5vw, 1.35rem);
-      color: var(--text-dim);
-      margin-top: 1rem;
-      max-width: 36ch;
-    }
+/* Tools grid */
+.tools{padding:80px 0}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.tool-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px;transition:border-color .2s,transform .15s}
+.tool-card:hover{border-color:rgba(255,255,255,.15);transform:translateY(-2px);text-decoration:none}
+.tool-card-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.tool-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;flex-shrink:0;border:1px solid var(--border)}
+.tool-name{font-family:var(--mono);font-weight:700;font-size:1rem}
+.tool-role{font-size:.75rem;font-weight:600}
+.tool-desc{font-size:.8125rem;color:var(--text-2);line-height:1.55;margin-bottom:14px}
+.tool-install{font-family:var(--mono);font-size:.75rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:6px 12px;color:var(--text-3);display:inline-block;user-select:all}
+.tool-card.highlight{border-color:rgba(251,191,36,.3);position:relative}
+.tool-card.highlight::before{content:'START HERE';position:absolute;top:-10px;right:16px;background:var(--accent);color:#000;font-family:var(--mono);font-size:.625rem;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:.05em}
 
-    .hero-cta {
-      margin-top: 3rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
-    }
+/* Features */
+.features{padding:80px 0}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.feature-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px 24px;transition:border-color .2s}
+.feature-card:hover{border-color:rgba(251,191,36,.25)}
+.feature-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:18px;background:var(--accent-dim);color:var(--accent)}
+.feature-card h3{font-size:.9375rem;font-weight:700;margin-bottom:6px}
+.feature-card p{font-size:.8125rem;color:var(--text-2);line-height:1.6}
 
-    .hero-cta code {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
-      font-size: 1.05rem;
-      color: var(--text-bright);
-      user-select: all;
-    }
+footer{border-top:1px solid var(--border);padding:40px 0;text-align:center;font-size:.8125rem;color:var(--text-3)}
+footer a{color:var(--text-2)}
+footer .origin{font-style:italic;color:var(--text-3);max-width:560px;margin:0 auto 16px;line-height:1.6}
+.sep{border:none;border-top:1px solid var(--border);margin:0}
+.copy-wrap{position:relative}
+.copy-btn{position:absolute;top:8px;right:8px;background:var(--surface-hover);border:1px solid var(--border);color:var(--text-3);border-radius:6px;padding:4px 10px;font-size:.7rem;cursor:pointer;font-family:var(--sans);transition:all .15s}
+.copy-btn:hover{color:var(--text);border-color:var(--border-light)}
+.copy-btn.copied{color:var(--accent);border-color:var(--accent)}
 
-    .hero-cta .hint {
-      font-size: 0.85rem;
-      color: var(--text-dim);
-    }
-
-    /* ── Journey ──────────────────────────────────────────────── */
-    .journey {
-      text-align: center;
-      border-top: 1px solid var(--border);
-    }
-
-    .journey h2 {
-      font-family: var(--font-mono);
-      font-size: 1.5rem;
-      color: var(--text-bright);
-      margin-bottom: 1rem;
-    }
-
-    .journey p {
-      color: var(--text-dim);
-      max-width: 52ch;
-      margin: 0 auto 3rem;
-      font-size: 1.05rem;
-    }
-
-    /* ── Flow diagram (CSS-only) ──────────────────────────────── */
-    .flow {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0;
-      flex-wrap: wrap;
-      margin: 2rem auto;
-      max-width: 700px;
-    }
-
-    .flow-step {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      flex: 1;
-      min-width: 140px;
-      padding: 1rem;
-    }
-
-    .flow-step .circle {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      border: 2px solid var(--gold);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      background: var(--bg);
-      position: relative;
-      z-index: 1;
-    }
-
-    .flow-step .label {
-      font-family: var(--font-mono);
-      font-size: 0.95rem;
-      color: var(--text-bright);
-      font-weight: 600;
-    }
-
-    .flow-step .sublabel {
-      font-size: 0.8rem;
-      color: var(--text-dim);
-    }
-
-    .flow-arrow {
-      width: 48px;
-      height: 2px;
-      background: linear-gradient(to right, var(--gold-dim), var(--gold));
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .flow-arrow::after {
-      content: '';
-      position: absolute;
-      right: -1px;
-      top: -4px;
-      width: 0;
-      height: 0;
-      border-left: 8px solid var(--gold);
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-    }
-
-    /* ── Adversarial loop ─────────────────────────────────────── */
-    .loop-note {
-      margin-top: 1.5rem;
-      padding: 1rem 1.5rem;
-      border: 1px dashed var(--gold-dim);
-      border-radius: 8px;
-      display: inline-block;
-      font-size: 0.9rem;
-      color: var(--text-dim);
-    }
-
-    .loop-note strong { color: var(--gold); }
-
-    /* ── Tools grid ───────────────────────────────────────────── */
-    .tools {
-      border-top: 1px solid var(--border);
-    }
-
-    .tools h2 {
-      font-family: var(--font-mono);
-      font-size: 1.5rem;
-      color: var(--text-bright);
-      text-align: center;
-      margin-bottom: 0.5rem;
-    }
-
-    .tools .subtitle {
-      text-align: center;
-      color: var(--text-dim);
-      margin-bottom: 3rem;
-      font-size: 1.05rem;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1rem;
-    }
-
-    .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      transition: border-color 0.2s, background 0.2s;
-    }
-
-    .card:hover {
-      border-color: var(--gold-dim);
-      background: var(--bg-card-hover);
-    }
-
-    .card-header {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .card-icon {
-      font-size: 1.5rem;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      flex-shrink: 0;
-    }
-
-    .card-name {
-      font-family: var(--font-mono);
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: var(--text-bright);
-    }
-
-    .card-role {
-      font-size: 0.85rem;
-      color: var(--gold);
-    }
-
-    .card-desc {
-      font-size: 0.9rem;
-      color: var(--text-dim);
-      margin-bottom: 1rem;
-      line-height: 1.5;
-    }
-
-    .card-install {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 0.4rem 0.75rem;
-      color: var(--text);
-      user-select: all;
-      display: inline-block;
-    }
-
-    .card.highlight {
-      border-color: var(--gold-dim);
-      position: relative;
-    }
-
-    .card.highlight::before {
-      content: 'start here';
-      position: absolute;
-      top: -10px;
-      right: 16px;
-      background: var(--gold);
-      color: var(--bg);
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    /* ── Start here ───────────────────────────────────────────── */
-    .start {
-      border-top: 1px solid var(--border);
-      text-align: center;
-    }
-
-    .start h2 {
-      font-family: var(--font-mono);
-      font-size: 1.5rem;
-      color: var(--text-bright);
-      margin-bottom: 1rem;
-    }
-
-    .start p {
-      color: var(--text-dim);
-      max-width: 48ch;
-      margin: 0 auto 2rem;
-      font-size: 1.05rem;
-    }
-
-    .start-steps {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-
-    .start-steps .step {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1rem 1.5rem;
-      max-width: 500px;
-      width: 100%;
-    }
-
-    .start-steps .step-num {
-      font-family: var(--font-mono);
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--gold);
-      flex-shrink: 0;
-      width: 28px;
-    }
-
-    .start-steps .step-text {
-      font-size: 0.95rem;
-      color: var(--text);
-    }
-
-    .start-steps .step-text code {
-      color: var(--text-bright);
-    }
-
-    /* ── Philosophy ───────────────────────────────────────────── */
-    .philosophy {
-      border-top: 1px solid var(--border);
-    }
-
-    .philosophy h2 {
-      font-family: var(--font-mono);
-      font-size: 1.5rem;
-      color: var(--text-bright);
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    .tenets {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .tenet h3 {
-      font-family: var(--font-mono);
-      font-size: 0.95rem;
-      color: var(--gold);
-      margin-bottom: 0.5rem;
-    }
-
-    .tenet p {
-      font-size: 0.9rem;
-      color: var(--text-dim);
-      line-height: 1.5;
-    }
-
-    /* ── Footer ───────────────────────────────────────────────── */
-    .footer {
-      border-top: 1px solid var(--border);
-      text-align: center;
-      padding: 4rem 1.5rem 3rem;
-      max-width: 640px;
-      margin: 0 auto;
-    }
-
-    .footer .origin {
-      font-size: 0.95rem;
-      color: var(--text-dim);
-      line-height: 1.7;
-      font-style: italic;
-    }
-
-    .footer .copy {
-      margin-top: 2rem;
-      font-size: 0.8rem;
-      color: var(--text-dim);
-    }
-
-    /* ── Responsive ───────────────────────────────────────────── */
-    @media (max-width: 600px) {
-      .flow { flex-direction: column; }
-      .flow-arrow {
-        width: 2px;
-        height: 32px;
-        background: linear-gradient(to bottom, var(--gold-dim), var(--gold));
-      }
-      .flow-arrow::after {
-        right: -4px;
-        top: auto;
-        bottom: -1px;
-        border-left: 5px solid transparent;
-        border-right: 5px solid transparent;
-        border-top: 8px solid var(--gold);
-        border-bottom: none;
-      }
-      .grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+@media(max-width:600px){.nav-links a:not(.nav-cta){display:none}.hero{padding:80px 0 70px}.tools-grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 
-  <!-- ── Hero ──────────────────────────────────────────────────── -->
-  <section class="hero">
-    <h1 class="hero-title">grainulator</h1>
-    <p class="hero-tagline">Structured research for decisions that satisfice.</p>
-    <div class="hero-cta">
-      <code>npx @grainulator/wheat init</code>
-      <span class="hint">No install. No dependencies. Just a question.</span>
+<div class="bg-ambient"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
+
+<div class="page">
+
+<nav>
+  <div class="container">
+    <a href="#" class="nav-logo"><span>gr</span> grainulator</a>
+    <div class="nav-links">
+      <a href="#quickstart">Quick Start</a>
+      <a href="#tools">Tools</a>
+      <a href="#example">Example</a>
+      <a href="https://github.com/aid-ninja/grainulator" class="nav-cta">GitHub</a>
     </div>
-  </section>
+  </div>
+</nav>
 
-  <!-- ── Journey ───────────────────────────────────────────────── -->
-  <section class="section journey">
-    <h2>The journey</h2>
-    <p>Every decision starts with a question. The tools exist to turn that question into evidence, and evidence into conviction.</p>
-
-    <div class="flow">
-      <div class="flow-step">
-        <div class="circle">?</div>
-        <span class="label">Question</span>
-        <span class="sublabel">/init</span>
-      </div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step">
-        <div class="circle" style="color: var(--gold);">&#9670;</div>
-        <span class="label">Evidence</span>
-        <span class="sublabel">/research</span>
-      </div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step">
-        <div class="circle" style="color: var(--gold);">&#10003;</div>
-        <span class="label">Decision</span>
-        <span class="sublabel">/brief</span>
-      </div>
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge hf hf1">8 tools, zero dependencies, one ecosystem</div>
+    <h1 class="hf hf2"><em>grainulator</em></h1>
+    <p class="hero-sub hf hf3">The structured research ecosystem. Turn questions into evidence and evidence into decisions. Start with one tool. Add what you need.</p>
+    <div class="hero-actions hf hf4">
+      <a href="#quickstart" class="btn btn-primary">Get started</a>
+      <a href="#tools" class="btn btn-ghost">Explore the tools</a>
     </div>
+  </div>
+</section>
 
-    <div class="loop-note">
-      <strong>/challenge</strong> + <strong>/witness</strong> + <strong>/blind-spot</strong> apply adversarial pressure between every step.
-    </div>
-  </section>
-
-  <!-- ── Tools ─────────────────────────────────────────────────── -->
-  <section class="section tools">
-    <h2>The ecosystem</h2>
-    <p class="subtitle">Eight tools. Each does one thing. Use what you need.</p>
-
-    <div class="grid">
-
-      <div class="card highlight">
-        <div class="card-header">
-          <div class="card-icon">&#127806;</div>
-          <div>
-            <div class="card-name">wheat</div>
-            <div class="card-role">Grows evidence</div>
-          </div>
+<section class="quickstart" id="quickstart">
+  <div class="container">
+    <div class="qs-label rv">How to start</div>
+    <div class="qs-steps">
+      <div class="qs-step rv rv-d1">
+        <div class="qs-num">1</div>
+        <h3>Pick a question</h3>
+        <p>What technical decision do you need to make? That is all you need to get started.</p>
+        <div class="qs-code"><span class="dim">"Should we migrate to GraphQL?"</span></div>
+      </div>
+      <div class="qs-step rv rv-d2">
+        <div class="qs-num">2</div>
+        <h3>Run one command</h3>
+        <p>Grainulator starts you with wheat -- the core research engine. No install required.</p>
+        <div class="copy-wrap">
+          <div class="qs-code"><span class="dim">$</span> npx @grainulator/wheat init</div>
+          <button class="copy-btn" onclick="copyText(this,'npx @grainulator/wheat init')">Copy</button>
         </div>
-        <div class="card-desc">Research sprint engine. Ask a question, grow claims from multiple angles, compile a brief.</div>
-        <code class="card-install">npx @grainulator/wheat init</code>
       </div>
-
-      <div class="card">
-        <div class="card-header">
-          <div class="card-icon">&#128065;</div>
-          <div>
-            <div class="card-name">farmer</div>
-            <div class="card-role">Watches the field</div>
-          </div>
-        </div>
-        <div class="card-desc">Permission dashboard. Approve tool calls, review AI actions in real time from any device.</div>
-        <code class="card-install">npm i -g @grainulator/farmer</code>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <div class="card-icon">&#127795;</div>
-          <div>
-            <div class="card-name">grove</div>
-            <div class="card-role">Shared tools</div>
-          </div>
-        </div>
-        <div class="card-desc">Public utilities. Claim schemas, HTML templates, shared validators used across the ecosystem.</div>
-        <code class="card-install">npm i -g @grainulator/grove</code>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <div class="card-icon">&#127981;</div>
-          <div>
-            <div class="card-name">mill</div>
-            <div class="card-role">Processes output</div>
-          </div>
-        </div>
-        <div class="card-desc">Export and publish. Turn compiled research into PDFs, slide decks, and wiki pages.</div>
-        <code class="card-install">npm i -g @grainulator/mill</code>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <div class="card-icon">&#127963;&#65039;</div>
-          <div>
-            <div class="card-name">silo</div>
-            <div class="card-role">Stores knowledge</div>
-          </div>
-        </div>
-        <div class="card-desc">Reusable claim libraries. Share vetted claims across sprints and teams without re-researching.</div>
-        <code class="card-install">npm i -g @grainulator/silo</code>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <div class="card-icon">&#127803;</div>
-          <div>
-            <div class="card-name">harvest</div>
-            <div class="card-role">Analytics &amp; retros</div>
-          </div>
-        </div>
-        <div class="card-desc">Cross-sprint learning. Track prediction accuracy, find systemic blind spots over time.</div>
-        <code class="card-install">npm i -g @grainulator/harvest</code>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <div class="card-icon">&#127966;&#65039;</div>
-          <div>
-            <div class="card-name">field</div>
-            <div class="card-role">Orchestration</div>
-          </div>
-        </div>
-        <div class="card-desc">Multi-sprint coordination. Run parallel research tracks and merge results into one picture.</div>
-        <code class="card-install">npm i -g @grainulator/field</code>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <div class="card-icon">&#9881;&#65039;</div>
-          <div>
-            <div class="card-name">grainulator</div>
-            <div class="card-role">The machine</div>
-          </div>
-        </div>
-        <div class="card-desc">Unified CLI and brand. Routes to the right tool, checks ecosystem health, sets you up.</div>
-        <code class="card-install">npm i -g grainulator</code>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ── Start here ────────────────────────────────────────────── -->
-  <section class="section start">
-    <h2>Start here</h2>
-    <p>You don't need all eight tools. You need one question and one command.</p>
-
-    <div class="start-steps">
-      <div class="step">
-        <span class="step-num">1.</span>
-        <span class="step-text">Run <code>npx @grainulator/wheat init</code> in any directory</span>
-      </div>
-      <div class="step">
-        <span class="step-num">2.</span>
-        <span class="step-text">Answer the question: what decision are you trying to make?</span>
-      </div>
-      <div class="step">
-        <span class="step-num">3.</span>
-        <span class="step-text">Research, challenge, witness. Let the evidence compile.</span>
-      </div>
-      <div class="step">
-        <span class="step-num">4.</span>
-        <span class="step-text">Run <code>/brief</code> when you're ready. Ship the decision.</span>
+      <div class="qs-step rv rv-d3">
+        <div class="qs-num">3</div>
+        <h3>Research and decide</h3>
+        <p>Research, challenge assumptions, compile evidence. When ready, run <code>/brief</code> and ship the decision.</p>
+        <div class="qs-code"><span class="dim">/</span>research, <span class="dim">/</span>challenge, <span class="dim">/</span>brief</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ── Philosophy ────────────────────────────────────────────── -->
-  <section class="section philosophy">
-    <h2>Philosophy</h2>
+<hr class="sep">
 
-    <div class="tenets">
-      <div class="tenet">
+<section class="example" id="example">
+  <div class="container">
+    <div class="section-label rv">Real example</div>
+    <h2 class="section-title rv rv-d1">New user: question to decision in 10 minutes</h2>
+    <p class="section-sub rv rv-d2">You have a question about your architecture. Grainulator suggests wheat, you init a sprint, and 10 minutes later you have a brief.</p>
+
+    <div class="term-block rv rv-d3">
+<span class="prompt">$</span> <span class="cmd">npx @grainulator/wheat init</span>
+
+<span class="output">  Question: Should we migrate from REST to GraphQL?
+  Audience: Backend team
+  Constraints: Must support existing mobile clients</span>
+
+<span class="success">  Sprint created. claims.json + wheat.config.json ready.</span>
+
+<span class="prompt">wheat&gt;</span> <span class="cmd">/research "GraphQL performance and migration cost"</span>
+
+<span class="output">  r001 [factual|documented] GraphQL reduces mobile payload 15-25%
+  r002 [risk|documented]    REST caching (CDN) does not transfer to GraphQL
+  r003 [estimate|web]       Migration effort: 3-5 weeks for core endpoints</span>
+
+<span class="prompt">wheat&gt;</span> <span class="cmd">/challenge r001</span>
+
+<span class="output">  x001 [risk|documented] Payload reduction varies by endpoint;
+                         some REST endpoints are already optimized</span>
+
+<span class="prompt">wheat&gt;</span> <span class="cmd">/brief</span>
+
+<span class="success">  Compiled 8 claims (1 conflict resolved)
+  Written: output/brief.html</span>
+
+<span class="output">  Recommendation: Proceed with GraphQL for new endpoints only.
+  Migrate existing REST endpoints opportunistically.</span>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="tools" id="tools">
+  <div class="container">
+    <div class="section-label rv" style="text-align:center">The ecosystem</div>
+    <h2 class="section-title rv rv-d1" style="text-align:center">Eight tools. Each does one thing.</h2>
+    <p class="section-sub rv rv-d2" style="text-align:center;margin-left:auto;margin-right:auto">Use what you need. Start with wheat. Everything else is optional.</p>
+
+    <div class="tools-grid">
+      <a href="https://aid-ninja.github.io/wheat/" class="tool-card highlight rv rv-d1" style="text-decoration:none;color:inherit">
+        <div class="tool-card-head">
+          <div class="tool-icon" style="background:rgba(251,191,36,.1);color:var(--accent)">w</div>
+          <div>
+            <div class="tool-name">wheat</div>
+            <div class="tool-role" style="color:var(--accent)">Research engine</div>
+          </div>
+        </div>
+        <div class="tool-desc">Ask a question, grow claims from multiple angles, compile a decision brief. The core of everything.</div>
+        <div class="tool-install">npx @grainulator/wheat init</div>
+      </a>
+
+      <a href="https://github.com/aid-ninja/farmer" class="tool-card rv rv-d2" style="text-decoration:none;color:inherit">
+        <div class="tool-card-head">
+          <div class="tool-icon" style="background:rgba(34,197,94,.1);color:var(--green)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/></svg>
+          </div>
+          <div>
+            <div class="tool-name">farmer</div>
+            <div class="tool-role" style="color:var(--green)">Permission dashboard</div>
+          </div>
+        </div>
+        <div class="tool-desc">Approve AI agent tool calls from your phone, another tab, or a meeting. Real-time WebSocket dashboard.</div>
+        <div class="tool-install">npx @grainulator/farmer start</div>
+      </a>
+
+      <a href="https://github.com/aid-ninja/grove" class="tool-card rv rv-d3" style="text-decoration:none;color:inherit">
+        <div class="tool-card-head">
+          <div class="tool-icon" style="background:rgba(16,185,129,.1);color:var(--emerald)">g</div>
+          <div>
+            <div class="tool-name">grove</div>
+            <div class="tool-role" style="color:var(--emerald)">Shared tools</div>
+          </div>
+        </div>
+        <div class="tool-desc">Sprint detection, manifest generation, HTML templates. The shared utilities the ecosystem relies on.</div>
+        <div class="tool-install">npx @grainulator/grove detect-sprints</div>
+      </a>
+
+      <a href="https://github.com/aid-ninja/mill" class="tool-card rv rv-d4" style="text-decoration:none;color:inherit">
+        <div class="tool-card-head">
+          <div class="tool-icon" style="background:rgba(217,119,6,.1);color:var(--copper)">m</div>
+          <div>
+            <div class="tool-name">mill</div>
+            <div class="tool-role" style="color:var(--copper)">Export &amp; publish</div>
+          </div>
+        </div>
+        <div class="tool-desc">Turn compiled research into PDFs, CSVs, static sites. Every format you need to share decisions.</div>
+        <div class="tool-install">mill export --format pdf brief.html</div>
+      </a>
+
+      <a href="https://github.com/aid-ninja/silo" class="tool-card rv rv-d1" style="text-decoration:none;color:inherit">
+        <div class="tool-card-head">
+          <div class="tool-icon" style="background:rgba(59,130,246,.1);color:var(--blue)">s</div>
+          <div>
+            <div class="tool-name">silo</div>
+            <div class="tool-role" style="color:var(--blue)">Knowledge packs</div>
+          </div>
+        </div>
+        <div class="tool-desc">Reusable claim libraries. HIPAA constraints, migration risks, architecture patterns. Pull, don't re-research.</div>
+        <div class="tool-install">silo pull compliance --into claims.json</div>
+      </a>
+
+      <a href="https://github.com/aid-ninja/harvest" class="tool-card rv rv-d2" style="text-decoration:none;color:inherit">
+        <div class="tool-card-head">
+          <div class="tool-icon" style="background:rgba(249,115,22,.1);color:var(--orange)">h</div>
+          <div>
+            <div class="tool-name">harvest</div>
+            <div class="tool-role" style="color:var(--orange)">Analytics</div>
+          </div>
+        </div>
+        <div class="tool-desc">Cross-sprint learning. Track prediction accuracy, find systemic blind spots, detect stale claims.</div>
+        <div class="tool-install">harvest analyze ./sprints/</div>
+      </a>
+
+      <a href="https://github.com/aid-ninja/field" class="tool-card rv rv-d3" style="text-decoration:none;color:inherit">
+        <div class="tool-card-head">
+          <div class="tool-icon" style="background:rgba(161,98,7,.1);color:var(--brown)">f</div>
+          <div>
+            <div class="tool-name">field</div>
+            <div class="tool-role" style="color:var(--brown)">Orchestration</div>
+          </div>
+        </div>
+        <div class="tool-desc">Multi-sprint coordination. Dependencies, conflict detection, team assignment. The org-wide view.</div>
+        <div class="tool-install">field status</div>
+      </a>
+
+      <a href="https://github.com/aid-ninja/grainulator" class="tool-card rv rv-d4" style="text-decoration:none;color:inherit">
+        <div class="tool-card-head">
+          <div class="tool-icon" style="background:var(--accent-dim);color:var(--accent)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          </div>
+          <div>
+            <div class="tool-name">grainulator</div>
+            <div class="tool-role" style="color:var(--accent)">The machine</div>
+          </div>
+        </div>
+        <div class="tool-desc">Unified CLI. Routes to the right tool, checks ecosystem health, sets everything up.</div>
+        <div class="tool-install">npx grainulator</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-label rv" style="text-align:center">Philosophy</div>
+    <h2 class="section-title rv rv-d1" style="text-align:center">Built on four principles</h2>
+    <p class="section-sub rv rv-d2" style="text-align:center;margin-left:auto;margin-right:auto">The decisions behind the tools.</p>
+
+    <div class="features-grid">
+      <div class="feature-card rv rv-d1">
+        <div class="feature-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
         <h3>Satisficing over maximizing</h3>
         <p>You will never have perfect information. The goal is enough evidence to make a defensible decision, not a perfect one.</p>
       </div>
-      <div class="tenet">
+      <div class="feature-card rv rv-d2">
+        <div class="feature-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
         <h3>Claims over opinions</h3>
-        <p>Every finding is a typed claim with an evidence tier. "I think" becomes a claim ID with provenance you can trace.</p>
+        <p>Every finding is a typed claim with an evidence tier and provenance. "I think" becomes a traceable claim ID.</p>
       </div>
-      <div class="tenet">
+      <div class="feature-card rv rv-d3">
+        <div class="feature-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
         <h3>Adversarial pressure</h3>
-        <p>Comfortable agreement is the enemy of good decisions. Challenge everything. Look for blind spots. Stress-test the claims.</p>
+        <p>Comfortable agreement is the enemy of good decisions. Challenge, witness, and stress-test every claim.</p>
       </div>
-      <div class="tenet">
+      <div class="feature-card rv rv-d4">
+        <div class="feature-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
         <h3>Zero dependencies</h3>
         <p>Node built-ins only. No supply chain anxiety. No left-pad. The tools ship what they need and nothing more.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ── Footer ────────────────────────────────────────────────── -->
-  <footer class="footer">
-    <p class="origin">The name comes last. You build the crop, the steward, the orchard, the mill, the silo, the harvest, the field &mdash; and only then do you name the machine.</p>
-    <p class="copy">MIT &middot; <a href="https://github.com/grainulator">github.com/grainulator</a></p>
-  </footer>
+<footer>
+  <div class="container">
+    <p class="origin">The name comes last. You build the crop, the steward, the orchard, the mill, the silo, the harvest, the field -- and only then do you name the machine.</p>
+    <p>grainulator &middot; MIT License &middot; <a href="https://github.com/aid-ninja/grainulator">GitHub</a> &middot; <a href="https://github.com/aid-ninja/grainulator#readme">Docs</a></p>
+  </div>
+</footer>
 
+</div>
+
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); }});
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+function copyText(btn, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1500);
+  });
+}
+</script>
 </body>
 </html>
