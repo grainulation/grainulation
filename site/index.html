@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>grainulator — The structured research ecosystem</title>
 <meta name="description" content="Eight tools for turning questions into evidence and evidence into decisions. Start with wheat. Add what you need.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="grainulator — The structured research ecosystem">
+<meta property="og:description" content="Eight tools for turning questions into evidence and evidence into decisions. Start with wheat. Add what you need.">
+<meta property="og:url" content="https://grainulator.github.io/grainulator/">
+<link rel="canonical" href="https://grainulator.github.io/grainulator/">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2309090b'/><text x='32' y='48' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='800' font-size='36' fill='%23fbbf24'>gr</text></svg>">
 <style>
 :root {
@@ -154,7 +159,7 @@ footer .origin{font-style:italic;color:var(--text-3);max-width:560px;margin:0 au
       <a href="#quickstart">Quick Start</a>
       <a href="#tools">Tools</a>
       <a href="#example">Example</a>
-      <a href="https://github.com/aid-ninja/grainulator" class="nav-cta">GitHub</a>
+      <a href="https://github.com/grainulator/grainulator" class="nav-cta">GitHub</a>
     </div>
   </div>
 </nav>
@@ -248,7 +253,7 @@ footer .origin{font-style:italic;color:var(--text-3);max-width:560px;margin:0 au
     <p class="section-sub rv rv-d2" style="text-align:center;margin-left:auto;margin-right:auto">Use what you need. Start with wheat. Everything else is optional.</p>
 
     <div class="tools-grid">
-      <a href="https://aid-ninja.github.io/wheat/" class="tool-card highlight rv rv-d1" style="text-decoration:none;color:inherit">
+      <a href="https://grainulator.github.io/wheat/" class="tool-card highlight rv rv-d1" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
           <div class="tool-icon" style="background:rgba(251,191,36,.1);color:var(--accent)">w</div>
           <div>
@@ -260,7 +265,7 @@ footer .origin{font-style:italic;color:var(--text-3);max-width:560px;margin:0 au
         <div class="tool-install">npx @grainulator/wheat init</div>
       </a>
 
-      <a href="https://github.com/aid-ninja/farmer" class="tool-card rv rv-d2" style="text-decoration:none;color:inherit">
+      <a href="https://grainulator.github.io/farmer/" class="tool-card rv rv-d2" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
           <div class="tool-icon" style="background:rgba(34,197,94,.1);color:var(--green)">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/></svg>
@@ -274,7 +279,7 @@ footer .origin{font-style:italic;color:var(--text-3);max-width:560px;margin:0 au
         <div class="tool-install">npx @grainulator/farmer start</div>
       </a>
 
-      <a href="https://github.com/aid-ninja/grove" class="tool-card rv rv-d3" style="text-decoration:none;color:inherit">
+      <a href="https://grainulator.github.io/grove/" class="tool-card rv rv-d3" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
           <div class="tool-icon" style="background:rgba(16,185,129,.1);color:var(--emerald)">g</div>
           <div>
@@ -286,7 +291,7 @@ footer .origin{font-style:italic;color:var(--text-3);max-width:560px;margin:0 au
         <div class="tool-install">npx @grainulator/grove detect-sprints</div>
       </a>
 
-      <a href="https://github.com/aid-ninja/mill" class="tool-card rv rv-d4" style="text-decoration:none;color:inherit">
+      <a href="https://grainulator.github.io/mill/" class="tool-card rv rv-d4" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
           <div class="tool-icon" style="background:rgba(217,119,6,.1);color:var(--copper)">m</div>
           <div>
@@ -295,10 +300,10 @@ footer .origin{font-style:italic;color:var(--text-3);max-width:560px;margin:0 au
           </div>
         </div>
         <div class="tool-desc">Turn compiled research into PDFs, CSVs, static sites. Every format you need to share decisions.</div>
-        <div class="tool-install">mill export --format pdf brief.html</div>
+        <div class="tool-install">npx @grainulator/mill export --format pdf brief.html</div>
       </a>
 
-      <a href="https://github.com/aid-ninja/silo" class="tool-card rv rv-d1" style="text-decoration:none;color:inherit">
+      <a href="https://grainulator.github.io/silo/" class="tool-card rv rv-d1" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
           <div class="tool-icon" style="background:rgba(59,130,246,.1);color:var(--blue)">s</div>
           <div>
@@ -307,10 +312,10 @@ footer .origin{font-style:italic;color:var(--text-3);max-width:560px;margin:0 au
           </div>
         </div>
         <div class="tool-desc">Reusable claim libraries. HIPAA constraints, migration risks, architecture patterns. Pull, don't re-research.</div>
-        <div class="tool-install">silo pull compliance --into claims.json</div>
+        <div class="tool-install">npx @grainulator/silo pull compliance --into claims.json</div>
       </a>
 
-      <a href="https://github.com/aid-ninja/harvest" class="tool-card rv rv-d2" style="text-decoration:none;color:inherit">
+      <a href="https://grainulator.github.io/harvest/" class="tool-card rv rv-d2" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
           <div class="tool-icon" style="background:rgba(249,115,22,.1);color:var(--orange)">h</div>
           <div>
@@ -319,10 +324,10 @@ footer .origin{font-style:italic;color:var(--text-3);max-width:560px;margin:0 au
           </div>
         </div>
         <div class="tool-desc">Cross-sprint learning. Track prediction accuracy, find systemic blind spots, detect stale claims.</div>
-        <div class="tool-install">harvest analyze ./sprints/</div>
+        <div class="tool-install">npx @grainulator/harvest analyze ./sprints/</div>
       </a>
 
-      <a href="https://github.com/aid-ninja/field" class="tool-card rv rv-d3" style="text-decoration:none;color:inherit">
+      <a href="https://grainulator.github.io/field/" class="tool-card rv rv-d3" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
           <div class="tool-icon" style="background:rgba(161,98,7,.1);color:var(--brown)">f</div>
           <div>
@@ -331,10 +336,10 @@ footer .origin{font-style:italic;color:var(--text-3);max-width:560px;margin:0 au
           </div>
         </div>
         <div class="tool-desc">Multi-sprint coordination. Dependencies, conflict detection, team assignment. The org-wide view.</div>
-        <div class="tool-install">field status</div>
+        <div class="tool-install">npx @grainulator/field status</div>
       </a>
 
-      <a href="https://github.com/aid-ninja/grainulator" class="tool-card rv rv-d4" style="text-decoration:none;color:inherit">
+      <a href="https://github.com/grainulator/grainulator" class="tool-card rv rv-d4" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
           <div class="tool-icon" style="background:var(--accent-dim);color:var(--accent)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
@@ -395,7 +400,7 @@ footer .origin{font-style:italic;color:var(--text-3);max-width:560px;margin:0 au
 <footer>
   <div class="container">
     <p class="origin">The name comes last. You build the crop, the steward, the orchard, the mill, the silo, the harvest, the field -- and only then do you name the machine.</p>
-    <p>grainulator &middot; MIT License &middot; <a href="https://github.com/aid-ninja/grainulator">GitHub</a> &middot; <a href="https://github.com/aid-ninja/grainulator#readme">Docs</a></p>
+    <p>grainulator &middot; MIT License &middot; <a href="https://github.com/grainulator/grainulator">GitHub</a> &middot; <a href="https://github.com/grainulator/grainulator#readme">Docs</a></p>
   </div>
 </footer>
 
