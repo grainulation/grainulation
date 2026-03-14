@@ -34,10 +34,10 @@
   --blue: #3b82f6;
   --blue-dim: rgba(59,130,246,0.1);
   --orange: #f97316;
-  --brown: #a16207;
+  --brown: #c9891f;
   --text: #e8ecf1;
   --text-2: #9ba5b7;
-  --text-3: #5a6478;
+  --text-3: #8b95a5;
   --mono: 'SF Mono','Fira Code','Cascadia Code','Consolas',monospace;
   --sans: -apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
   --max-w: 1080px;
@@ -102,13 +102,13 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
 /* Quick start */
 .quickstart{padding:80px 0 60px}
 .qs-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.qs-step{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:32px 28px}
+.qs-step{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:32px 28px;overflow:hidden;min-width:0}
 .qs-num{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;background:var(--accent-dim);color:var(--accent);font-weight:700;font-size:.875rem;margin-bottom:16px}
 .qs-step h3{font-size:1.05rem;font-weight:700;margin-bottom:8px}
 .qs-step p{color:var(--text-2);font-size:.875rem;line-height:1.55;margin-bottom:16px}
-.qs-code{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 16px;font-size:.8125rem;overflow-x:auto;white-space:pre;position:relative;line-height:1.6;color:#34d399}
+.qs-code{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 16px;font-size:.8125rem;overflow-x:auto;white-space:pre;position:relative;line-height:1.6;color:#34d399;max-width:100%}
 .qs-code .dim{color:var(--text-3)}
-.qs-out{background:var(--bg);border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;padding:10px 16px;font-size:.75rem;color:var(--text-3);font-family:var(--mono);line-height:1.6;white-space:pre}
+.qs-out{background:var(--bg);border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;padding:10px 16px;font-size:.75rem;color:var(--text-3);font-family:var(--mono);line-height:1.6;white-space:pre;overflow-x:auto;max-width:100%}
 .qs-code+.qs-out{margin-top:-1px}
 /* Ecosystem flow diagram */
 .flow{padding:80px 0}
@@ -202,12 +202,13 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
 </style>
 </head>
 <body>
+<a href="#main" class="skip-link">Skip to main content</a>
 
-<div class="bg-ambient"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
+<div class="bg-ambient" aria-hidden="true"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
 
 <div class="page">
 
-<nav>
+<nav aria-label="Main navigation">
   <div class="container">
     <a href="#" class="nav-logo"><span>gr</span> grainulator</a>
     <div class="nav-links">
@@ -220,6 +221,8 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
   </div>
 </nav>
 
+<main id="main">
+
 <!-- Hero: problem-first -->
 <section class="hero">
   <div class="container">
@@ -228,11 +231,11 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
     <p class="hero-sub hf hf3">grainulator turns questions into typed, evidence-graded claims and compiles them into decision briefs. Research that holds up to scrutiny.</p>
     <div class="hero-actions hf hf4">
       <a href="#quickstart" class="btn btn-primary">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
         Get started
       </a>
       <a href="#tools" class="btn btn-ghost">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
+        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
         Explore the tools
       </a>
     </div>
@@ -267,7 +270,7 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
       </div>
 
       <div class="flow-arrow">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </div>
 
       <!-- farmer -->
@@ -277,7 +280,7 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
       </div>
 
       <div class="flow-arrow">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </div>
 
       <!-- mill -->
@@ -287,7 +290,7 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
       </div>
 
       <div class="flow-arrow">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </div>
 
       <!-- harvest -->
@@ -332,7 +335,7 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
         <h3>Initialize a sprint</h3>
         <p>Start with the question you need answered. Wheat creates a claims file and config.</p>
         <div class="copy-wrap">
-          <div class="qs-code"><span class="dim">$</span> npx @grainulator/wheat init</div>
+          <pre class="qs-code"><code><span class="dim">$</span> npx @grainulator/wheat init</code></pre>
           <button class="copy-btn" onclick="copyText(this,'npx @grainulator/wheat init')">Copy</button>
         </div>
         <div class="qs-out">Sprint initialized.
@@ -343,7 +346,7 @@ wheat.config.json ready</div>
         <div class="qs-num">2</div>
         <h3>Research and challenge</h3>
         <p>Gather evidence, then stress-test it. Every finding becomes a typed, graded claim.</p>
-        <div class="qs-code"><span class="dim">wheat&gt;</span> /research "topic"
+        <pre class="qs-code"><code><span class="dim">wheat&gt;</span> /research "topic"
 <span class="dim">wheat&gt;</span> /challenge r001</div>
         <div class="qs-out">r001 [factual|documented] ...
 x001 [risk|documented] ...</div>
@@ -352,7 +355,7 @@ x001 [risk|documented] ...</div>
         <div class="qs-num">3</div>
         <h3>Compile and ship</h3>
         <p>The compiler resolves conflicts, checks evidence, and produces a decision brief.</p>
-        <div class="qs-code"><span class="dim">wheat&gt;</span> /brief</div>
+        <pre class="qs-code"><code><span class="dim">wheat&gt;</span> /brief</code></pre>
         <div class="qs-out">Compiled 12 claims (2 conflicts resolved)
 Written: output/brief.html</div>
       </div>
@@ -421,7 +424,7 @@ Written: output/brief.html</div>
       <a href="https://grainulator.github.io/wheat/" class="tool-card highlight rv rv-d1" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
           <div class="tool-icon" style="background:rgba(251,191,36,.1);color:var(--accent)">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
           </div>
           <div>
             <div class="tool-name">wheat</div>
@@ -435,7 +438,7 @@ Written: output/brief.html</div>
       <a href="https://grainulator.github.io/farmer/" class="tool-card rv rv-d2" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
           <div class="tool-icon" style="background:rgba(34,197,94,.1);color:var(--green)">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/></svg>
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/></svg>
           </div>
           <div>
             <div class="tool-name">farmer</div>
@@ -449,7 +452,7 @@ Written: output/brief.html</div>
       <a href="https://grainulator.github.io/grove/" class="tool-card rv rv-d3" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
           <div class="tool-icon" style="background:rgba(16,185,129,.1);color:var(--emerald)">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           </div>
           <div>
             <div class="tool-name">grove</div>
@@ -463,7 +466,7 @@ Written: output/brief.html</div>
       <a href="https://grainulator.github.io/mill/" class="tool-card rv rv-d4" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
           <div class="tool-icon" style="background:rgba(217,119,6,.1);color:var(--copper)">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
           </div>
           <div>
             <div class="tool-name">mill</div>
@@ -477,7 +480,7 @@ Written: output/brief.html</div>
       <a href="https://grainulator.github.io/silo/" class="tool-card rv rv-d1" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
           <div class="tool-icon" style="background:rgba(59,130,246,.1);color:var(--blue)">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
           </div>
           <div>
             <div class="tool-name">silo</div>
@@ -491,7 +494,7 @@ Written: output/brief.html</div>
       <a href="https://grainulator.github.io/harvest/" class="tool-card rv rv-d2" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
           <div class="tool-icon" style="background:rgba(249,115,22,.1);color:var(--orange)">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
           </div>
           <div>
             <div class="tool-name">harvest</div>
@@ -504,8 +507,8 @@ Written: output/brief.html</div>
 
       <a href="https://grainulator.github.io/field/" class="tool-card rv rv-d3" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
-          <div class="tool-icon" style="background:rgba(161,98,7,.1);color:var(--brown)">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          <div class="tool-icon" style="background:rgba(201,137,31,.1);color:var(--brown)">
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
           </div>
           <div>
             <div class="tool-name">field</div>
@@ -519,7 +522,7 @@ Written: output/brief.html</div>
       <a href="https://github.com/grainulator/grainulator" class="tool-card rv rv-d4" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
           <div class="tool-icon" style="background:var(--accent-dim);color:var(--accent)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
           </div>
           <div>
             <div class="tool-name">grainulator</div>
@@ -545,28 +548,28 @@ Written: output/brief.html</div>
     <div class="features-grid">
       <div class="feature-card rv rv-d1">
         <div class="feature-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         </div>
         <h3>Satisficing over maximizing</h3>
         <p>You will never have perfect information. The goal is enough evidence to make a defensible decision, not a perfect one.</p>
       </div>
       <div class="feature-card rv rv-d2">
         <div class="feature-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         </div>
         <h3>Claims over opinions</h3>
         <p>Every finding is a typed claim with an evidence tier and provenance. "I think" becomes a traceable claim ID with a grade.</p>
       </div>
       <div class="feature-card rv rv-d3">
         <div class="feature-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         </div>
         <h3>Adversarial pressure</h3>
         <p>Comfortable agreement is the enemy of good decisions. The system forces you to challenge, witness, and stress-test every claim.</p>
       </div>
       <div class="feature-card rv rv-d4">
         <div class="feature-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
         </div>
         <h3>Zero dependencies</h3>
         <p>Node built-ins only. No supply chain anxiety. No left-pad. Every tool ships what it needs and nothing more.</p>
@@ -588,7 +591,7 @@ Written: output/brief.html</div>
       <div class="faq-item rv rv-d1">
         <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
           Do I need Node.js?
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="faq-a">
           <p>Yes. Node.js 18+ is required. That is the only system dependency. Everything runs via <code>npx</code> with zero npm install required -- packages are fetched and cached automatically.</p>
@@ -598,7 +601,7 @@ Written: output/brief.html</div>
       <div class="faq-item rv rv-d2">
         <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
           Does this work with my programming language / framework?
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="faq-a">
           <p>grainulator is language-agnostic. It researches decisions about any technology -- databases, APIs, infrastructure, architecture. The tools themselves run on Node.js, but the research can be about anything.</p>
@@ -608,7 +611,7 @@ Written: output/brief.html</div>
       <div class="faq-item rv rv-d3">
         <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
           Is this free?
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="faq-a">
           <p>Yes. All eight tools are MIT licensed and free forever. No paid tiers, no telemetry, no accounts. The code is on GitHub.</p>
@@ -618,7 +621,7 @@ Written: output/brief.html</div>
       <div class="faq-item rv rv-d4">
         <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
           Do I need all eight tools?
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="faq-a">
           <p>No. Start with <code>wheat</code> alone -- it handles the full research-to-decision workflow. Add other tools only when you need specific capabilities: <code>farmer</code> for AI permissions, <code>mill</code> for export, <code>silo</code> for reusable knowledge, and so on.</p>
@@ -627,6 +630,8 @@ Written: output/brief.html</div>
     </div>
   </div>
 </section>
+
+</main>
 
 <!-- Footer -->
 <footer>
