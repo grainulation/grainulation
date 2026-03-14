@@ -30,7 +30,7 @@
   --green: #22c55e;
   --green-dim: rgba(34,197,94,0.1);
   --red: #ef4444;
-  --silver: #e2e8f0;
+  --silver: #94a3b8;
   --blue: #60a5fa;
   --blue-dim: rgba(96,165,250,0.1);
   --orange: #f97316;
@@ -69,12 +69,12 @@ code,pre{font-family:var(--mono)}
 
 nav{position:sticky;top:0;z-index:100;background:rgba(9,9,11,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:14px 0}
 nav .container{display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-weight:700;font-size:1.1rem;letter-spacing:-.02em;color:var(--text);text-decoration:none}
+.nav-logo{font-weight:700;font-size:2rem;letter-spacing:-.02em;color:var(--text);text-decoration:none}
 .nav-logo span{color:var(--accent)}
 .nav-links{display:flex;gap:24px;font-size:.875rem;color:var(--text-2);align-items:center}
 .nav-links a{color:var(--text-2);transition:color .2s}
 .nav-links a:hover{color:var(--text);text-decoration:none}
-.nav-cta{background:transparent;color:var(--text);padding:6px 16px;border-radius:6px;font-weight:600;font-size:.8125rem;transition:all .2s;border:1px solid var(--border-light)}.nav-cta:hover{background:var(--surface-hover);text-decoration:none;color:var(--text)}
+.nav-cta{background:transparent;border:none;color:var(--text-2);padding:6px;display:flex;align-items:center;transition:color .2s}.nav-cta:hover{color:var(--text);text-decoration:none}
 
 .hero{padding:80px 0 60px;text-align:center;position:relative}
 .hero::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:1px;height:80px;background:linear-gradient(to bottom,transparent,rgba(167,139,250,.3))}
@@ -84,10 +84,12 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
 .hero p.hero-sub{font-size:clamp(1.05rem,2vw,1.25rem);color:var(--text-2);max-width:580px;margin:0 auto 44px;line-height:1.55}
 .hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:10px;font-weight:600;font-size:.9375rem;transition:all .2s}
+.btn svg { transition: transform 0.2s ease; }
+.btn:hover svg { transform: translateX(3px); }
 .btn-primary{background:var(--accent);color:#000}.btn-primary:hover{opacity:.88;text-decoration:none;transform:translateY(-1px);box-shadow:0 0 32px var(--accent-glow)}
 .btn-ghost{border:1px solid var(--border-light);color:var(--text)}.btn-ghost:hover{background:var(--surface-hover);text-decoration:none;transform:translateY(-1px)}
 
-.section-label{font-size:.8125rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:12px;font-weight:600}
+.section-label{font-size:1.5rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:12px;font-weight:600}
 .section-title{font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:800;letter-spacing:-.03em;margin-bottom:16px;line-height:1.15}
 .section-sub{color:var(--text-2);font-size:1.05rem;max-width:620px;margin-bottom:48px;line-height:1.55}
 
@@ -100,12 +102,12 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
 
 /* Quick start */
 .quickstart{padding:80px 0 60px}
-.qs-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.qs-steps{display:grid;grid-template-columns:1fr;gap:24px;max-width:680px;margin:0 auto}
 .qs-step{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:32px 28px;overflow:hidden;min-width:0}
 .qs-num{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;background:var(--accent-dim);color:var(--accent);font-weight:700;font-size:.875rem;margin-bottom:16px}
 .qs-step h3{font-size:1.05rem;font-weight:700;margin-bottom:8px}
 .qs-step p{color:var(--text-2);font-size:.875rem;line-height:1.55;margin-bottom:16px}
-.qs-code{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 16px;font-size:.8125rem;overflow-x:auto;white-space:pre;position:relative;line-height:1.6;color:#34d399;max-width:100%}
+.qs-code{background:var(--bg);border:none;border-radius:0;padding:16px 20px;font-size:.8125rem;overflow-x:auto;white-space:pre;position:relative;line-height:1.6;color:#34d399;max-width:100%}
 .qs-code .dim{color:var(--text-3)}
 .qs-out{background:var(--bg);border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;padding:10px 16px;font-size:.75rem;color:var(--text-3);font-family:var(--mono);line-height:1.6;white-space:pre;overflow-x:auto;max-width:100%}
 .qs-code+.qs-out{margin-top:-1px}
@@ -121,6 +123,13 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
 .flow-branch{display:flex;flex-direction:column;align-items:center;gap:16px}
 .flow-branch-arrow{color:var(--text-3)}
 .flow-branch-arrow svg{width:20px;height:20px}
+/* Terminal chrome */
+.copy-wrap{position:relative;border-radius:8px;overflow:hidden;background:var(--bg);border:1px solid var(--border)}
+.copy-wrap::before{content:'';display:block;height:32px;background:rgba(255,255,255,0.03);border-bottom:1px solid var(--border);position:relative;background-image:radial-gradient(circle at 16px 50%,#ef4444 4px,transparent 4px),radial-gradient(circle at 32px 50%,#f59e0b 4px,transparent 4px),radial-gradient(circle at 48px 50%,#22c55e 4px,transparent 4px)}
+.copy-btn{position:absolute;top:4px;right:8px;background:rgba(255,255,255,0.06);border:1px solid var(--border);color:var(--text-3);border-radius:6px;padding:4px 12px;font-size:.7rem;cursor:pointer;font-family:var(--sans);transition:all .15s;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:2;line-height:1}
+.copy-btn:hover{color:var(--text);border-color:var(--border-light);background:rgba(255,255,255,0.10)}
+.copy-btn.copied{color:var(--green);border-color:var(--green)}
+
 @media(max-width:600px){.flow-diagram{flex-direction:column;gap:8px}.flow-arrow{transform:rotate(90deg);width:auto;height:32px;margin-bottom:0}}
 
 /* Example */
@@ -182,16 +191,12 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
 footer{border-top:1px solid var(--border);padding:40px 0;text-align:center;font-size:.8125rem;color:var(--text-3)}
 footer a{color:var(--text-2)}
 footer .ft-eco{color:var(--text-3);margin-bottom:8px}
-.copy-wrap{position:relative}
-.copy-btn{position:absolute;top:8px;right:8px;background:var(--surface-hover);border:1px solid var(--border);color:var(--text-3);border-radius:6px;padding:4px 10px;font-size:.7rem;cursor:pointer;font-family:var(--sans);transition:all .15s}
-.copy-btn:hover{color:var(--text);border-color:var(--border-light)}
-.copy-btn.copied{color:var(--accent);border-color:var(--accent)}
 
 @media(max-width:720px){
   .qs-steps,.features-grid,.tools-grid{grid-template-columns:1fr}
   .hero{padding:56px 0 40px}
   .hero h1{font-size:2rem}
-  .term-block,.qs-code,.qs-out,pre,code{font-size:12px;overflow-x:auto}
+  .term-block,.qs-code,.qs-out,pre,code{font-size:12px;overflow-x:auto;max-width:100%;white-space:pre-wrap}
   .container{padding:0 16px}
   section,.what-is,.quickstart,.features,.faq,.tools,.flow,.example{padding:40px 0}
   .term-block{max-width:100%;overflow-x:auto}
@@ -199,7 +204,7 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
   .flow-diagram{padding:20px 10px}
   .flow-circle{width:60px;height:60px;font-size:.75rem}
   .qs-step{padding:20px 16px}
-  .copy-btn{padding:3px 7px;font-size:.625rem;min-width:36px;min-height:32px;border-radius:5px;top:4px;right:4px;opacity:.7}.copy-btn:hover,.copy-btn:active{opacity:1}.copy-btn.copied{opacity:1}
+  .copy-btn{display:none !important}
 }
 @media(max-width:480px){
   .hero h1{font-size:1.6rem}
@@ -215,7 +220,7 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
 *:focus-visible{outline:2px solid currentColor;outline-offset:2px}
 .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:1000}
 .skip-link:focus{position:fixed;top:8px;left:8px;width:auto;height:auto;padding:12px 24px;background:var(--accent);color:#000;font-weight:700;font-size:.875rem;border-radius:8px;text-decoration:none;z-index:10000}
-.copy-btn{min-width:44px;min-height:36px;display:inline-flex;align-items:center;justify-content:center}
+.copy-btn{min-width:44px;min-height:24px;display:inline-flex;align-items:center;justify-content:center}
 .nav-links a{min-height:44px;display:inline-flex;align-items:center}
 </style>
 </head>
@@ -234,7 +239,7 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
       <a href="#tools">Tools</a>
       <a href="#example">Example</a>
       <a href="#faq">FAQ</a>
-      <a href="https://github.com/grainulator/grainulator" class="nav-cta">GitHub</a>
+      <a href="https://github.com/grainulator/grainulator" class="nav-cta" aria-label="GitHub"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
     </div>
   </div>
 </nav>
@@ -249,7 +254,7 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
     <p class="hero-sub hf hf3"><strong style="color:#fff"><span style="color:var(--accent)">gr</span>ainulator</strong> turns questions into typed, evidence-graded claims and compiles them into decision briefs. Research that holds up to scrutiny.</p>
     <div class="hero-actions hf hf4">
       <a href="#quickstart" class="btn btn-primary">
-        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
         Get started
       </a>
       <a href="#tools" class="btn btn-ghost">
@@ -264,7 +269,7 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
 <section class="what-is" id="what">
   <div class="container">
     <div class="what-box rv">
-      <p><strong style="color:#fff"><span style="color:var(--accent)">gr</span>ainulator</strong> is an ecosystem of eight command-line tools for structured technical research. You start with a question — "Should we migrate to GraphQL?" -- and the tools guide you through research, adversarial challenge, and compilation into a decision brief.</p>
+      <p><strong style="color:#fff"><span style="color:var(--accent)">gr</span>ainulator</strong> is an ecosystem of eight command-line tools for structured technical research. You start with a question — "Should we migrate to GraphQL?" — and the tools guide you through research, adversarial challenge, and compilation into a decision brief.</p>
       <p>Every finding is tracked as a typed claim with an evidence tier (from "someone said it" to "we measured it in production"). The system forces you to challenge your own assumptions before shipping a recommendation.</p>
       <p>You need <strong><a href="https://docs.anthropic.com/en/docs/claude-code" style="color:var(--text)">Claude Code</a></strong>, <strong>Node.js 18+</strong>, and <strong>npx</strong>. No accounts, no cloud services, no npm install. Everything runs locally, everything is plain JSON and HTML.</p>
     </div>
@@ -284,7 +289,7 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
       <!-- wheat -->
       <div class="flow-node">
         <div class="flow-circle" style="border-color:#fbbf24;color:#fbbf24;background:rgba(251,191,36,.06)"><strong style="color:#fff"><span style="color:#fbbf24">w</span>heat</strong></div>
-        <div class="flow-label">Research engine</div>
+        <div class="flow-label">Research</div>
       </div>
 
       <div class="flow-arrow">
@@ -303,7 +308,7 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
 
       <!-- mill -->
       <div class="flow-node">
-        <div class="flow-circle" style="border-color:var(--silver);color:var(--silver);background:rgba(217,119,6,.06)"><strong style="color:#fff"><span style="color:#e2e8f0">m</span>ill</strong></div>
+        <div class="flow-circle" style="border-color:var(--silver);color:var(--silver);background:rgba(217,119,6,.06)"><strong style="color:#fff"><span style="color:#94a3b8">m</span>ill</strong></div>
         <div class="flow-label">Export</div>
       </div>
 
@@ -490,7 +495,7 @@ Written: output/brief.html</div>
             <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
           </div>
           <div>
-            <div class="tool-name"><strong style="color:#fff"><span style="color:#e2e8f0">m</span>ill</strong></div>
+            <div class="tool-name"><strong style="color:#fff"><span style="color:#94a3b8">m</span>ill</strong></div>
             <div class="tool-role" style="color:var(--silver)">Export and publish</div>
           </div>
         </div>
@@ -593,7 +598,7 @@ Written: output/brief.html</div>
           <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
         </div>
         <h3>Zero dependencies</h3>
-        <p>Node built-ins only. No supply chain anxiety. No left-pad. Every tool ships what it needs and nothing more.</p>
+        <p>Standard library only. No supply chain anxiety. No left-pad. Every tool ships what it needs and nothing more.</p>
       </div>
     </div>
   </div>
@@ -625,7 +630,7 @@ Written: output/brief.html</div>
           <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="faq-a">
-          <p><strong style="color:#fff"><span style="color:var(--accent)">gr</span>ainulator</strong> is language-agnostic. It researches decisions about any technology — databases, APIs, infrastructure, architecture. The tools themselves run on Node.js, but the research can be about anything.</p>
+          <p><strong style="color:#fff"><span style="color:var(--accent)">gr</span>ainulator</strong> is language-agnostic. It researches decisions about any technology — databases, APIs, infrastructure, architecture. The tools run locally, but the research can be about anything.</p>
         </div>
       </div>
 
@@ -635,7 +640,7 @@ Written: output/brief.html</div>
           <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="faq-a">
-          <p>RFCs and ADRs document a decision after it is made. grainulator captures the research process — the evidence gathering, adversarial testing, and conflict resolution that leads to the decision. The output brief can serve as your ADR.</p>
+          <p>RFCs and ADRs document a decision after it is made. <strong style="color:#fff"><span style="color:var(--accent)">gr</span>ainulator</strong> captures the research process — the evidence gathering, adversarial testing, and conflict resolution that leads to the decision. The output brief can serve as your ADR.</p>
         </div>
       </div>
 
@@ -657,7 +662,7 @@ Written: output/brief.html</div>
 <!-- Footer -->
 <footer>
   <div class="container">
-    <p class="ft-eco">Part of the <strong style="color:#fff"><span style="color:#a78bfa">gr</span>ainulator</strong> ecosystem</p>
+    <p class="ft-eco"><span style="color:#fff">Part of the </span><strong style="color:#fff"><span style="color:#a78bfa">gr</span>ainulator</strong> ecosystem</p>
     <p><strong style="color:#fff"><span style="color:#a78bfa">gr</span>ainulator</strong> &middot; <a href="https://github.com/grainulator/grainulator">GitHub</a> &middot; <a href="https://github.com/grainulator/grainulator#readme">Docs</a></p>
   </div>
 </footer>
@@ -726,6 +731,8 @@ function copyText(btn, text) {
     container.classList.add('t-done');
     blockData.forEach(function(d) {
       d.block.classList.add('t-active');
+      d.block.style.opacity = '';
+      d.block.style.transform = '';
       if (d.cmd) { d.cmd.textContent = d.cmdText; d.cmd.classList.remove('typing-cursor'); }
       if (d.output) d.output.classList.add('t-visible');
     });
@@ -752,6 +759,7 @@ function copyText(btn, text) {
     var d = blockData[i];
     d.block.classList.add('t-active');
     d.block.style.opacity = '';
+    d.block.style.transform = '';
     setTimeout(function() {
       if (d.cmd && d.cmdText) {
         typeText(d.cmd, d.cmdText, function() {
@@ -800,6 +808,8 @@ function copyText(btn, text) {
   window.addEventListener('scroll', onScroll, { passive: true });
 
   termObs.observe(container);
+  /* Fallback: if IntersectionObserver doesn't fire (e.g. in iframes), show after 2s */
+  setTimeout(function() { if (!animated) { animated = true; termObs.unobserve(container); showFinalState(); window.removeEventListener('scroll', onScroll); } }, 2000);
 })();
 </script>
 </body>
