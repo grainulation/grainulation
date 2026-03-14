@@ -1,0 +1,33 @@
+{
+  "name": "grainulator",
+  "version": "0.1.0",
+  "description": "Structured research for decisions that satisfice",
+  "license": "MIT",
+  "bin": {
+    "grainulator": "./bin/grainulator.js"
+  },
+  "main": "./lib/ecosystem.js",
+  "files": [
+    "bin/",
+    "lib/"
+  ],
+  "scripts": {
+    "test": "node test/basic.test.js",
+    "start": "node bin/grainulator.js"
+  },
+  "keywords": [
+    "research",
+    "decision-making",
+    "evidence",
+    "sprint",
+    "cli"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grainulator/grainulator"
+  },
+  "homepage": "https://grainulator.dev",
+  "engines": {
+    "node": ">=18"
+  }
+}

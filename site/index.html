@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>grainulator -- structured research for decisions that satisfice</title>
+  <meta name="description" content="Eight tools for turning questions into evidence and evidence into decisions. Start with wheat. Add what you need.">
+  <style>
+    /* ── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #fbbf24;
+      --gold-dim: #92702a;
+      --bg: #0a0a0a;
+      --bg-card: #141414;
+      --bg-card-hover: #1a1a1a;
+      --text: #e5e5e5;
+      --text-dim: #737373;
+      --text-bright: #fafafa;
+      --border: #262626;
+      --font-mono: 'SF Mono', 'Cascadia Code', 'Fira Code', 'JetBrains Mono', monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code { font-family: var(--font-mono); font-size: 0.9em; }
+
+    /* ── Layout ───────────────────────────────────────────────── */
+    .section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem;
+    }
+
+    /* ── Hero ─────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      position: relative;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, var(--gold-dim));
+    }
+
+    .hero-title {
+      font-family: var(--font-mono);
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      color: var(--text-dim);
+      margin-top: 1rem;
+      max-width: 36ch;
+    }
+
+    .hero-cta {
+      margin-top: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hero-cta code {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-size: 1.05rem;
+      color: var(--text-bright);
+      user-select: all;
+    }
+
+    .hero-cta .hint {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    /* ── Journey ──────────────────────────────────────────────── */
+    .journey {
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .journey h2 {
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      color: var(--text-bright);
+      margin-bottom: 1rem;
+    }
+
+    .journey p {
+      color: var(--text-dim);
+      max-width: 52ch;
+      margin: 0 auto 3rem;
+      font-size: 1.05rem;
+    }
+
+    /* ── Flow diagram (CSS-only) ──────────────────────────────── */
+    .flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+      margin: 2rem auto;
+      max-width: 700px;
+    }
+
+    .flow-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      flex: 1;
+      min-width: 140px;
+      padding: 1rem;
+    }
+
+    .flow-step .circle {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      background: var(--bg);
+      position: relative;
+      z-index: 1;
+    }
+
+    .flow-step .label {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      color: var(--text-bright);
+      font-weight: 600;
+    }
+
+    .flow-step .sublabel {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    .flow-arrow {
+      width: 48px;
+      height: 2px;
+      background: linear-gradient(to right, var(--gold-dim), var(--gold));
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .flow-arrow::after {
+      content: '';
+      position: absolute;
+      right: -1px;
+      top: -4px;
+      width: 0;
+      height: 0;
+      border-left: 8px solid var(--gold);
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+    }
+
+    /* ── Adversarial loop ─────────────────────────────────────── */
+    .loop-note {
+      margin-top: 1.5rem;
+      padding: 1rem 1.5rem;
+      border: 1px dashed var(--gold-dim);
+      border-radius: 8px;
+      display: inline-block;
+      font-size: 0.9rem;
+      color: var(--text-dim);
+    }
+
+    .loop-note strong { color: var(--gold); }
+
+    /* ── Tools grid ───────────────────────────────────────────── */
+    .tools {
+      border-top: 1px solid var(--border);
+    }
+
+    .tools h2 {
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      color: var(--text-bright);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .tools .subtitle {
+      text-align: center;
+      color: var(--text-dim);
+      margin-bottom: 3rem;
+      font-size: 1.05rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .card:hover {
+      border-color: var(--gold-dim);
+      background: var(--bg-card-hover);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-icon {
+      font-size: 1.5rem;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .card-name {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--text-bright);
+    }
+
+    .card-role {
+      font-size: 0.85rem;
+      color: var(--gold);
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .card-install {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.4rem 0.75rem;
+      color: var(--text);
+      user-select: all;
+      display: inline-block;
+    }
+
+    .card.highlight {
+      border-color: var(--gold-dim);
+      position: relative;
+    }
+
+    .card.highlight::before {
+      content: 'start here';
+      position: absolute;
+      top: -10px;
+      right: 16px;
+      background: var(--gold);
+      color: var(--bg);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Start here ───────────────────────────────────────────── */
+    .start {
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .start h2 {
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      color: var(--text-bright);
+      margin-bottom: 1rem;
+    }
+
+    .start p {
+      color: var(--text-dim);
+      max-width: 48ch;
+      margin: 0 auto 2rem;
+      font-size: 1.05rem;
+    }
+
+    .start-steps {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .start-steps .step {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      max-width: 500px;
+      width: 100%;
+    }
+
+    .start-steps .step-num {
+      font-family: var(--font-mono);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--gold);
+      flex-shrink: 0;
+      width: 28px;
+    }
+
+    .start-steps .step-text {
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .start-steps .step-text code {
+      color: var(--text-bright);
+    }
+
+    /* ── Philosophy ───────────────────────────────────────────── */
+    .philosophy {
+      border-top: 1px solid var(--border);
+    }
+
+    .philosophy h2 {
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      color: var(--text-bright);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .tenets {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .tenet h3 {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .tenet p {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    /* ── Footer ───────────────────────────────────────────────── */
+    .footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 4rem 1.5rem 3rem;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .footer .origin {
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    .footer .copy {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    /* ── Responsive ───────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .flow { flex-direction: column; }
+      .flow-arrow {
+        width: 2px;
+        height: 32px;
+        background: linear-gradient(to bottom, var(--gold-dim), var(--gold));
+      }
+      .flow-arrow::after {
+        right: -4px;
+        top: auto;
+        bottom: -1px;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 8px solid var(--gold);
+        border-bottom: none;
+      }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Hero ──────────────────────────────────────────────────── -->
+  <section class="hero">
+    <h1 class="hero-title">grainulator</h1>
+    <p class="hero-tagline">Structured research for decisions that satisfice.</p>
+    <div class="hero-cta">
+      <code>npx @grainulator/wheat init</code>
+      <span class="hint">No install. No dependencies. Just a question.</span>
+    </div>
+  </section>
+
+  <!-- ── Journey ───────────────────────────────────────────────── -->
+  <section class="section journey">
+    <h2>The journey</h2>
+    <p>Every decision starts with a question. The tools exist to turn that question into evidence, and evidence into conviction.</p>
+
+    <div class="flow">
+      <div class="flow-step">
+        <div class="circle">?</div>
+        <span class="label">Question</span>
+        <span class="sublabel">/init</span>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step">
+        <div class="circle" style="color: var(--gold);">&#9670;</div>
+        <span class="label">Evidence</span>
+        <span class="sublabel">/research</span>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step">
+        <div class="circle" style="color: var(--gold);">&#10003;</div>
+        <span class="label">Decision</span>
+        <span class="sublabel">/brief</span>
+      </div>
+    </div>
+
+    <div class="loop-note">
+      <strong>/challenge</strong> + <strong>/witness</strong> + <strong>/blind-spot</strong> apply adversarial pressure between every step.
+    </div>
+  </section>
+
+  <!-- ── Tools ─────────────────────────────────────────────────── -->
+  <section class="section tools">
+    <h2>The ecosystem</h2>
+    <p class="subtitle">Eight tools. Each does one thing. Use what you need.</p>
+
+    <div class="grid">
+
+      <div class="card highlight">
+        <div class="card-header">
+          <div class="card-icon">&#127806;</div>
+          <div>
+            <div class="card-name">wheat</div>
+            <div class="card-role">Grows evidence</div>
+          </div>
+        </div>
+        <div class="card-desc">Research sprint engine. Ask a question, grow claims from multiple angles, compile a brief.</div>
+        <code class="card-install">npx @grainulator/wheat init</code>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">&#129329;&#8205;&#127806;</div>
+          <div>
+            <div class="card-name">farmer</div>
+            <div class="card-role">Watches the field</div>
+          </div>
+        </div>
+        <div class="card-desc">Permission dashboard. Approve tool calls, review AI actions in real time from any device.</div>
+        <code class="card-install">npm i -g @grainulator/farmer</code>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">&#127795;</div>
+          <div>
+            <div class="card-name">grove</div>
+            <div class="card-role">Shared tools</div>
+          </div>
+        </div>
+        <div class="card-desc">Public utilities. Claim schemas, HTML templates, shared validators used across the ecosystem.</div>
+        <code class="card-install">npm i -g @grainulator/grove</code>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">&#127981;</div>
+          <div>
+            <div class="card-name">mill</div>
+            <div class="card-role">Processes output</div>
+          </div>
+        </div>
+        <div class="card-desc">Export and publish. Turn compiled research into PDFs, slide decks, and wiki pages.</div>
+        <code class="card-install">npm i -g @grainulator/mill</code>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">&#127963;&#65039;</div>
+          <div>
+            <div class="card-name">silo</div>
+            <div class="card-role">Stores knowledge</div>
+          </div>
+        </div>
+        <div class="card-desc">Reusable claim libraries. Share vetted claims across sprints and teams without re-researching.</div>
+        <code class="card-install">npm i -g @grainulator/silo</code>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">&#127803;</div>
+          <div>
+            <div class="card-name">harvest</div>
+            <div class="card-role">Analytics &amp; retros</div>
+          </div>
+        </div>
+        <div class="card-desc">Cross-sprint learning. Track prediction accuracy, find systemic blind spots over time.</div>
+        <code class="card-install">npm i -g @grainulator/harvest</code>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">&#127966;&#65039;</div>
+          <div>
+            <div class="card-name">field</div>
+            <div class="card-role">Orchestration</div>
+          </div>
+        </div>
+        <div class="card-desc">Multi-sprint coordination. Run parallel research tracks and merge results into one picture.</div>
+        <code class="card-install">npm i -g @grainulator/field</code>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">&#9881;&#65039;</div>
+          <div>
+            <div class="card-name">grainulator</div>
+            <div class="card-role">The machine</div>
+          </div>
+        </div>
+        <div class="card-desc">Unified CLI and brand. Routes to the right tool, checks ecosystem health, sets you up.</div>
+        <code class="card-install">npm i -g grainulator</code>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Start here ────────────────────────────────────────────── -->
+  <section class="section start">
+    <h2>Start here</h2>
+    <p>You don't need all eight tools. You need one question and one command.</p>
+
+    <div class="start-steps">
+      <div class="step">
+        <span class="step-num">1.</span>
+        <span class="step-text">Run <code>npx @grainulator/wheat init</code> in any directory</span>
+      </div>
+      <div class="step">
+        <span class="step-num">2.</span>
+        <span class="step-text">Answer the question: what decision are you trying to make?</span>
+      </div>
+      <div class="step">
+        <span class="step-num">3.</span>
+        <span class="step-text">Research, challenge, witness. Let the evidence compile.</span>
+      </div>
+      <div class="step">
+        <span class="step-num">4.</span>
+        <span class="step-text">Run <code>/brief</code> when you're ready. Ship the decision.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Philosophy ────────────────────────────────────────────── -->
+  <section class="section philosophy">
+    <h2>Philosophy</h2>
+
+    <div class="tenets">
+      <div class="tenet">
+        <h3>Satisficing over maximizing</h3>
+        <p>You will never have perfect information. The goal is enough evidence to make a defensible decision, not a perfect one.</p>
+      </div>
+      <div class="tenet">
+        <h3>Claims over opinions</h3>
+        <p>Every finding is a typed claim with an evidence tier. "I think" becomes a claim ID with provenance you can trace.</p>
+      </div>
+      <div class="tenet">
+        <h3>Adversarial pressure</h3>
+        <p>Comfortable agreement is the enemy of good decisions. Challenge everything. Look for blind spots. Stress-test the claims.</p>
+      </div>
+      <div class="tenet">
+        <h3>Zero dependencies</h3>
+        <p>Node built-ins only. No supply chain anxiety. No left-pad. The tools ship what they need and nothing more.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ────────────────────────────────────────────────── -->
+  <footer class="footer">
+    <p class="origin">The name comes last. You build the crop, the steward, the orchard, the mill, the silo, the harvest, the field &mdash; and only then do you name the machine.</p>
+    <p class="copy">MIT &middot; <a href="https://github.com/grainulator">github.com/grainulator</a></p>
+  </footer>
+
+</body>
+</html>
