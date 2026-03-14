@@ -1,5 +1,5 @@
 {
-  "name": "grainulator",
+  "name": "@grainulator/grainulator",
   "version": "0.1.0",
   "description": "Structured research for decisions that satisfice",
   "license": "MIT",
@@ -29,5 +29,6 @@
   "homepage": "https://grainulator.dev",
   "engines": {
     "node": ">=18"
-  }
+  },
+  "author": "grainulator contributors"
 }
