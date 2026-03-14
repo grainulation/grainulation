@@ -74,8 +74,7 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
 .nav-links{display:flex;gap:24px;font-size:.875rem;color:var(--text-2);align-items:center}
 .nav-links a{color:var(--text-2);transition:color .2s}
 .nav-links a:hover{color:var(--text);text-decoration:none}
-.nav-cta{background:var(--accent);color:#fff;padding:6px 16px;border-radius:6px;font-weight:600;font-size:.8125rem;transition:opacity .2s}
-.nav-cta:hover{opacity:.85;text-decoration:none}
+.nav-cta{background:transparent;color:var(--text);padding:6px 16px;border-radius:6px;font-weight:600;font-size:.8125rem;transition:all .2s;border:1px solid var(--border-light)}.nav-cta:hover{background:var(--surface-hover);text-decoration:none;color:var(--text)}
 
 .hero{padding:80px 0 60px;text-align:center;position:relative}
 .hero::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:1px;height:80px;background:linear-gradient(to bottom,transparent,rgba(167,139,250,.3))}
@@ -85,7 +84,7 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
 .hero p.hero-sub{font-size:clamp(1.05rem,2vw,1.25rem);color:var(--text-2);max-width:580px;margin:0 auto 44px;line-height:1.55}
 .hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:10px;font-weight:600;font-size:.9375rem;transition:all .2s}
-.btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{opacity:.88;text-decoration:none;transform:translateY(-1px);box-shadow:0 0 32px var(--accent-glow)}
+.btn-primary{background:var(--accent);color:#000}.btn-primary:hover{opacity:.88;text-decoration:none;transform:translateY(-1px);box-shadow:0 0 32px var(--accent-glow)}
 .btn-ghost{border:1px solid var(--border-light);color:var(--text)}.btn-ghost:hover{background:var(--surface-hover);text-decoration:none;transform:translateY(-1px)}
 
 .section-label{font-size:.8125rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:12px;font-weight:600}
@@ -133,6 +132,17 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
 .term-block .hl{color:var(--accent)}
 .term-block .success{color:#34d399}
 
+/* Terminal simulation */
+.term-sim-wrap .term-block{opacity:0;transform:translateY(8px);transition:opacity .4s var(--ease),transform .4s var(--ease)}
+.term-sim-wrap .term-block.t-active{opacity:1;transform:none}
+.term-sim-wrap .typing-cursor::after{content:'|';animation:term-blink 1s step-end infinite;color:var(--accent);font-weight:400}
+@keyframes term-blink{0%,100%{opacity:1}50%{opacity:0}}
+.term-sim-wrap .t-output-wrap{opacity:0;transform:translateY(4px);transition:opacity .3s var(--ease),transform .3s var(--ease)}
+.term-sim-wrap .t-output-wrap.t-visible{opacity:1;transform:none}
+.term-sim-wrap.t-done .term-block{opacity:1;transform:none;transition:none}
+.term-sim-wrap.t-done .t-output-wrap{opacity:1;transform:none;transition:none}
+.term-sim-wrap.t-done .typing-cursor::after{display:none}
+
 /* Tools grid */
 .tools{padding:80px 0}
 .tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
@@ -165,7 +175,7 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
 .faq-q svg{flex-shrink:0;transition:transform .25s var(--ease);color:var(--text-3)}
 .faq-item.open .faq-q svg{transform:rotate(180deg)}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .35s var(--ease),padding .35s var(--ease)}
-.faq-item.open .faq-a{max-height:300px;padding:0 24px 20px}
+.faq-item.open .faq-a{max-height:300px;padding:12px 24px 20px}
 .faq-a p{color:var(--text-2);font-size:.875rem;line-height:1.65}
 
 .sep{border:none;border-top:1px solid var(--border);margin:0}
@@ -188,6 +198,8 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
   .what-box{padding:28px 20px}
   .flow-diagram{padding:20px 10px}
   .flow-circle{width:60px;height:60px;font-size:.75rem}
+  .qs-step{padding:20px 16px}
+  .copy-btn{position:static;margin-top:8px;width:auto;align-self:flex-start}
 }
 @media(max-width:480px){
   .hero h1{font-size:1.6rem}
@@ -378,41 +390,44 @@ Written: output/brief.html</div>
     <h2 class="section-title rv rv-d1">Question to decision in 10 minutes</h2>
     <p class="section-sub rv rv-d2">A team needs to decide whether to migrate from REST to GraphQL. Here is the full sprint, start to finish.</p>
 
-    <div class="term-block rv rv-d3">
+    <div style="display:flex;flex-direction:column;gap:16px" id="term-sim-container">
+      <div class="term-block">
 <span class="prompt">$</span> <span class="cmd">npx @grainulator/wheat init</span>
 
 <span class="output">  Question: Should we migrate from REST to GraphQL?
   Audience: Backend team + mobile leads
   Constraints: Must support existing iOS/Android clients</span>
 
-<span class="success">  Sprint created. claims.json + wheat.config.json ready.</span>
+<span class="success">  Sprint created. claims.json + wheat.config.json ready.</span></div>
 
+      <div class="term-block">
 <span class="prompt">wheat&gt;</span> <span class="cmd">/research "GraphQL performance, migration cost, mobile payload"</span>
 
-<span class="output">  r001 [factual|documented]  GraphQL reduces mobile payload 15-25% via field selection
-  r002 [risk|documented]     REST CDN caching does not transfer to GraphQL
-  r003 [estimate|web]        Migration effort: 3-5 weeks for core endpoints
-  r004 [factual|documented]  Apollo Client adds 35KB gzipped to mobile bundle</span>
+<span class="output">  r001 [factual|documented]  GraphQL reduces mobile payload 15-25%
+  r002 [risk|documented]     REST CDN caching doesn't transfer
+  r003 [estimate|web]        Migration effort: 3-5 weeks
+  r004 [factual|documented]  Apollo Client adds 35KB gzipped</span></div>
 
+      <div class="term-block">
 <span class="prompt">wheat&gt;</span> <span class="cmd">/challenge r001</span>
 
-<span class="output">  x001 [risk|documented]     Payload reduction varies by endpoint -- some REST
-                             responses are already lean (< 2KB)</span>
+<span class="output">  x001 [risk|documented]  Payload reduction varies by endpoint
+                          -- some REST responses already lean</span></div>
 
+      <div class="term-block">
 <span class="prompt">wheat&gt;</span> <span class="cmd">/prototype</span>
 
-<span class="output">  Built: prototypes/graphql-poc/
-  p001 [factual|tested]      Measured 18% payload reduction on /api/feed
-  p002 [risk|tested]         N+1 query problem hit immediately on nested resolvers</span>
+<span class="output">  p001 [factual|tested]  Measured 18% reduction on /api/feed
+  p002 [risk|tested]     N+1 query problem on nested resolvers</span></div>
 
+      <div class="term-block">
 <span class="prompt">wheat&gt;</span> <span class="cmd">/brief</span>
 
 <span class="success">  Compiled 8 claims (1 conflict resolved)
   Written: output/brief.html</span>
 
 <span class="output">  Recommendation: Adopt GraphQL for new endpoints only.
-  Migrate existing REST endpoints opportunistically.
-  Budget 1 week for resolver performance testing before each migration.</span>
+  Migrate existing REST endpoints opportunistically.</span></div>
     </div>
   </div>
 </section>
@@ -643,7 +658,7 @@ Written: output/brief.html</div>
 <footer>
   <div class="container">
     <p class="ft-eco">Part of the grainulator ecosystem</p>
-    <p>grainulator &middot; MIT License &middot; <a href="https://github.com/grainulator/grainulator">GitHub</a> &middot; <a href="https://github.com/grainulator/grainulator#readme">Docs</a></p>
+    <p>grainulator &middot; <a href="https://github.com/grainulator/grainulator">GitHub</a> &middot; <a href="https://github.com/grainulator/grainulator#readme">Docs</a></p>
   </div>
 </footer>
 
@@ -662,6 +677,130 @@ function copyText(btn, text) {
     setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1500);
   });
 }
+
+/* Terminal simulation for example blocks */
+(function() {
+  var TYPING_SPEED = 35;
+  var LINE_PAUSE = 150;
+  var BLOCK_PAUSE = 400;
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var container = document.getElementById('term-sim-container');
+  if (!container) return;
+
+  var blocks = container.querySelectorAll('.term-block');
+  if (!blocks.length) return;
+
+  var blockData = [];
+  blocks.forEach(function(block) {
+    var cmdEl = block.querySelector('.cmd');
+    var cmdText = cmdEl ? cmdEl.textContent : '';
+
+    var outputNodes = [];
+    var children = block.childNodes;
+    for (var i = 0; i < children.length; i++) {
+      var n = children[i];
+      if (n.classList && (n.classList.contains('output') || n.classList.contains('success'))) {
+        outputNodes.push(n);
+      }
+    }
+
+    if (outputNodes.length > 0) {
+      var wrap = document.createElement('span');
+      wrap.className = 't-output-wrap';
+      outputNodes[0].parentNode.insertBefore(wrap, outputNodes[0]);
+      outputNodes.forEach(function(n) { wrap.appendChild(n); });
+      blockData.push({ block: block, cmd: cmdEl, cmdText: cmdText, output: wrap });
+    } else {
+      blockData.push({ block: block, cmd: cmdEl, cmdText: cmdText, output: null });
+    }
+
+    if (cmdEl) cmdEl.textContent = '';
+    block.style.opacity = '0';
+  });
+
+  container.classList.add('term-sim-wrap');
+  var animated = false;
+
+  function showFinalState() {
+    container.classList.add('t-done');
+    blockData.forEach(function(d) {
+      d.block.classList.add('t-active');
+      if (d.cmd) { d.cmd.textContent = d.cmdText; d.cmd.classList.remove('typing-cursor'); }
+      if (d.output) d.output.classList.add('t-visible');
+    });
+  }
+
+  function typeText(el, text, cb) {
+    var idx = 0;
+    el.classList.add('typing-cursor');
+    function tick() {
+      if (idx < text.length) {
+        el.textContent += text[idx];
+        idx++;
+        setTimeout(tick, TYPING_SPEED);
+      } else {
+        el.classList.remove('typing-cursor');
+        cb();
+      }
+    }
+    tick();
+  }
+
+  function animateBlock(i, cb) {
+    if (i >= blockData.length) { cb(); return; }
+    var d = blockData[i];
+    d.block.classList.add('t-active');
+    d.block.style.opacity = '';
+    setTimeout(function() {
+      if (d.cmd && d.cmdText) {
+        typeText(d.cmd, d.cmdText, function() {
+          setTimeout(function() {
+            if (d.output) d.output.classList.add('t-visible');
+            setTimeout(function() { animateBlock(i + 1, cb); }, BLOCK_PAUSE);
+          }, LINE_PAUSE);
+        });
+      } else {
+        setTimeout(function() { animateBlock(i + 1, cb); }, BLOCK_PAUSE);
+      }
+    }, 100);
+  }
+
+  if (reducedMotion) {
+    showFinalState();
+    return;
+  }
+
+  var termObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting && !animated) {
+        animated = true;
+        termObs.unobserve(container);
+        animateBlock(0, function() { container.classList.add('t-done'); });
+      }
+    });
+  }, { threshold: 0.1 });
+
+  var scrollTimer;
+  function onScroll() {
+    if (animated) { window.removeEventListener('scroll', onScroll); return; }
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(function() {
+      if (!animated) {
+        var rect = container.getBoundingClientRect();
+        if (rect.bottom < 0) {
+          animated = true;
+          termObs.unobserve(container);
+          showFinalState();
+          window.removeEventListener('scroll', onScroll);
+        }
+      }
+    }, 100);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  termObs.observe(container);
+})();
 </script>
 </body>
 </html>

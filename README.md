@@ -44,12 +44,12 @@ Eight tools. Each does one thing. Use what you need.
 | Tool | What it does | Install |
 |------|-------------|---------|
 | **wheat** | Grows evidence. Research sprint engine. | `npx @grainulator/wheat init` |
-| **farmer** | Watches the field. Real-time permission dashboard. | `npm i -g @grainulator/farmer` |
-| **grove** | Shared tools. Claim schemas, templates, validators. | `npm i -g @grainulator/grove` |
+| **farmer** | Permission dashboard. Approve AI actions in real time. | `npm i -g @grainulator/farmer` |
+| **barn** | Shared tools. Claim schemas, templates, validators. | `npm i -g @grainulator/barn` |
 | **mill** | Processes output. Export to PDF, slides, wiki. | `npm i -g @grainulator/mill` |
 | **silo** | Stores knowledge. Reusable claim libraries. | `npm i -g @grainulator/silo` |
 | **harvest** | Analytics. Cross-sprint learning and prediction scoring. | `npm i -g @grainulator/harvest` |
-| **field** | Orchestration. Multi-sprint coordination. | `npm i -g @grainulator/field` |
+| **orchard** | Orchestration. Multi-sprint coordination. | `npm i -g @grainulator/orchard` |
 | **grainulator** | The machine. Unified CLI and brand. | `npm i -g grainulator` |
 
 **You don't need all eight.** Start with wheat. That's it. One command:
@@ -109,7 +109,7 @@ Every grainulator tool runs on Node built-ins only. No npm install waterfall. No
 
 The name comes last.
 
-You build the crop (wheat), the steward (farmer), the orchard (grove), the mill, the silo, the harvest, the field -- and only then do you name the machine that connects them all.
+You build the crop (wheat), the steward (farmer), the barn, the mill, the silo, the harvest, the orchard -- and only then do you name the machine that connects them all.
 
 Grainulator: the machine that processes the grain.
 
