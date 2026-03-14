@@ -110,8 +110,6 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
 .qs-code .dim{color:var(--text-3)}
 .qs-out{background:var(--bg);border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;padding:10px 16px;font-size:.75rem;color:var(--text-3);font-family:var(--mono);line-height:1.6;white-space:pre}
 .qs-code+.qs-out{margin-top:-1px}
-@media(max-width:720px){.qs-steps{grid-template-columns:1fr}}
-
 /* Ecosystem flow diagram */
 .flow{padding:80px 0}
 .flow-diagram{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;padding:40px 20px}
@@ -179,7 +177,28 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
 .copy-btn:hover{color:var(--text);border-color:var(--border-light)}
 .copy-btn.copied{color:var(--accent);border-color:var(--accent)}
 
-@media(max-width:600px){.nav-links a:not(.nav-cta){display:none}.hero{padding:80px 0 70px}.tools-grid{grid-template-columns:1fr}.features-grid{grid-template-columns:1fr}}
+@media(max-width:720px){
+  .qs-steps,.features-grid,.tools-grid{grid-template-columns:1fr}
+  .hero{padding:80px 0 60px}
+  .hero h1{font-size:2rem}
+  .term-block,.qs-code,.qs-out,pre,code{font-size:12px;overflow-x:auto}
+  .container{padding:0 16px}
+  section,.what-is,.quickstart,.features,.faq,.tools,.flow,.example{padding:60px 0}
+  .what-box{padding:28px 20px}
+  .flow-diagram{padding:20px 10px}
+  .flow-circle{width:60px;height:60px;font-size:.75rem}
+}
+@media(max-width:480px){
+  .hero h1{font-size:1.6rem}
+  .hero-sub,.section-sub{font-size:0.95rem}
+  .nav-links a:not(.nav-cta){display:none}
+  .hero-actions{flex-direction:column}
+  .btn{width:100%;justify-content:center;min-height:44px}
+  .tool-card.highlight::before{top:-10px;right:8px;font-size:.5625rem}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms !important;transition-duration:0.01ms !important}
+}
 </style>
 </head>
 <body>
