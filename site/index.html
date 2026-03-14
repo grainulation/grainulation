@@ -44,13 +44,13 @@
   --ease: cubic-bezier(.22,1,.36,1);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;overflow-x:hidden}
+html{scroll-behavior:smooth}
 body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
 code,pre{font-family:var(--mono)}
 
-.bg-ambient{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.bg-ambient{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;contain:paint}
 .bg-ambient .orb{position:absolute;border-radius:50%;filter:blur(140px);opacity:.035;animation:drift 30s ease-in-out infinite alternate}
 .bg-ambient .orb:nth-child(1){width:700px;height:700px;background:var(--accent);top:-15%;left:15%}
 .bg-ambient .orb:nth-child(2){width:500px;height:500px;background:var(--blue);top:40%;right:-10%;animation-delay:-10s}
