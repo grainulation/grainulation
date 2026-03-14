@@ -92,6 +92,151 @@ test('doctor runs without error', () => {
   assert.ok(out.includes('npm'));
 });
 
+// ── Ecosystem registry: extended ──────────────────────────────
+
+test('ecosystem tool names are all unique', () => {
+  const { TOOLS } = require('../lib/ecosystem');
+  const names = TOOLS.map(t => t.name);
+  assert.equal(new Set(names).size, names.length);
+});
+
+test('ecosystem tool packages are all unique', () => {
+  const { TOOLS } = require('../lib/ecosystem');
+  const packages = TOOLS.map(t => t.package);
+  assert.equal(new Set(packages).size, packages.length);
+});
+
+test('every tool has required fields', () => {
+  const { TOOLS } = require('../lib/ecosystem');
+  for (const tool of TOOLS) {
+    assert.ok(tool.name, `tool missing name`);
+    assert.ok(tool.package, `${tool.name} missing package`);
+    assert.ok(tool.role, `${tool.name} missing role`);
+    assert.ok(tool.description, `${tool.name} missing description`);
+    assert.ok(tool.category, `${tool.name} missing category`);
+    assert.equal(typeof tool.entryPoint, 'boolean', `${tool.name} entryPoint not boolean`);
+  }
+});
+
+test('only wheat is an entry point', () => {
+  const { TOOLS } = require('../lib/ecosystem');
+  const entryPoints = TOOLS.filter(t => t.entryPoint);
+  assert.equal(entryPoints.length, 1);
+  assert.equal(entryPoints[0].name, 'wheat');
+});
+
+test('getByName returns null for unknown tool', () => {
+  const { getByName } = require('../lib/ecosystem');
+  assert.equal(getByName('nonexistent'), undefined);
+});
+
+test('getByName finds each of the 8 tools', () => {
+  const { getByName, TOOLS } = require('../lib/ecosystem');
+  for (const tool of TOOLS) {
+    const found = getByName(tool.name);
+    assert.ok(found);
+    assert.equal(found.package, tool.package);
+  }
+});
+
+// ── Router: unit tests ───────────────────────────────────────
+
+test('router overview contains all tool names', () => {
+  const { overview } = require('../lib/router');
+  const text = overview();
+  const { TOOLS } = require('../lib/ecosystem');
+  for (const tool of TOOLS) {
+    assert.ok(text.includes(tool.name), `overview missing ${tool.name}`);
+  }
+});
+
+test('router overview mentions start command', () => {
+  const { overview } = require('../lib/router');
+  const text = overview();
+  assert.ok(text.includes('npx @grainulator/wheat init'));
+});
+
+test('router overview mentions doctor command', () => {
+  const { overview } = require('../lib/router');
+  const text = overview();
+  assert.ok(text.includes('doctor'));
+});
+
+test('router overview mentions setup command', () => {
+  const { overview } = require('../lib/router');
+  const text = overview();
+  assert.ok(text.includes('setup'));
+});
+
+// ── CLI: extended tests ──────────────────────────────────────
+
+test('-v also prints version', () => {
+  const out = run('-v');
+  assert.match(out.trim(), /^grainulator v\d+\.\d+\.\d+$/);
+});
+
+test('help command shows overview', () => {
+  const out = run('help');
+  assert.ok(out.includes('grainulator'));
+  assert.ok(out.includes('wheat'));
+});
+
+test('-h shows overview', () => {
+  const out = run('-h');
+  assert.ok(out.includes('grainulator'));
+  assert.ok(out.includes('Ecosystem'));
+});
+
+test('doctor output includes Tools section', () => {
+  const out = run('doctor');
+  assert.ok(out.includes('Tools'));
+  assert.ok(out.includes('Checking ecosystem health'));
+});
+
+// ── Doctor: unit tests ───────────────────────────────────────
+
+test('doctor getVersion returns null for fake package', () => {
+  const { getVersion } = require('../lib/doctor');
+  const v = getVersion('@grainulator/definitely-not-real-xyz');
+  assert.equal(v, null);
+});
+
+// ── Setup: ROLES validation ──────────────────────────────────
+
+test('setup ROLES all have name, description, tools', () => {
+  const { ROLES } = require('../lib/setup');
+  for (const role of ROLES) {
+    assert.ok(role.name, 'role missing name');
+    assert.ok(role.description, 'role missing description');
+    assert.ok(Array.isArray(role.tools), 'role tools not array');
+    assert.ok(role.tools.length > 0, 'role has no tools');
+  }
+});
+
+test('setup ROLES all reference valid tool names', () => {
+  const { ROLES } = require('../lib/setup');
+  const { getByName } = require('../lib/ecosystem');
+  for (const role of ROLES) {
+    for (const toolName of role.tools) {
+      assert.ok(getByName(toolName), `ROLE "${role.name}" references unknown tool "${toolName}"`);
+    }
+  }
+});
+
+test('setup Full Ecosystem role has 7 tools', () => {
+  const { ROLES } = require('../lib/setup');
+  const full = ROLES.find(r => r.name === 'Full Ecosystem');
+  assert.ok(full);
+  assert.equal(full.tools.length, 7);
+});
+
+test('setup Researcher role only has wheat', () => {
+  const { ROLES } = require('../lib/setup');
+  const researcher = ROLES.find(r => r.name === 'Researcher');
+  assert.ok(researcher);
+  assert.deepEqual(researcher.tools, ['wheat']);
+});
+
 // ── Summary ─────────────────────────────────────────────────────
 
 console.log('');
