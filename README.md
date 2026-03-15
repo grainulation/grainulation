@@ -1,4 +1,4 @@
-# grainulator
+# grainulation
 
 **Structured research for decisions that satisfice.**
 
@@ -8,7 +8,7 @@
 
 Most decisions fail not because the team lacked data, but because they lacked a process for turning data into evidence and evidence into conviction.
 
-Grainulator is that process.
+Grainulation is that process.
 
 You start with a question. Not an answer, not a hypothesis -- a question. Then you grow evidence: claims with types, confidence levels, and evidence tiers. You challenge what you find. You look for blind spots. You corroborate with external sources. And only when the evidence compiles -- when conflicts are resolved and gaps are acknowledged -- do you write the brief.
 
@@ -43,19 +43,19 @@ Eight tools. Each does one thing. Use what you need.
 
 | Tool | What it does | Install |
 |------|-------------|---------|
-| **wheat** | Grows evidence. Research sprint engine. | `npx @grainulator/wheat init` |
-| **farmer** | Permission dashboard. Approve AI actions in real time. | `npm i -g @grainulator/farmer` |
-| **barn** | Shared tools. Claim schemas, templates, validators. | `npm i -g @grainulator/barn` |
-| **mill** | Processes output. Export to PDF, slides, wiki. | `npm i -g @grainulator/mill` |
-| **silo** | Stores knowledge. Reusable claim libraries. | `npm i -g @grainulator/silo` |
-| **harvest** | Analytics. Cross-sprint learning and prediction scoring. | `npm i -g @grainulator/harvest` |
-| **orchard** | Orchestration. Multi-sprint coordination. | `npm i -g @grainulator/orchard` |
-| **grainulator** | The machine. Unified CLI and brand. | `npm i -g grainulator` |
+| **wheat** | Grows evidence. Research sprint engine. | `npx @grainulation/wheat init` |
+| **farmer** | Permission dashboard. Approve AI actions in real time. | `npm i -g @grainulation/farmer` |
+| **barn** | Shared tools. Claim schemas, templates, validators. | `npm i -g @grainulation/barn` |
+| **mill** | Processes output. Export to PDF, slides, wiki. | `npm i -g @grainulation/mill` |
+| **silo** | Stores knowledge. Reusable claim libraries. | `npm i -g @grainulation/silo` |
+| **harvest** | Analytics. Cross-sprint learning and prediction scoring. | `npm i -g @grainulation/harvest` |
+| **orchard** | Orchestration. Multi-sprint coordination. | `npm i -g @grainulation/orchard` |
+| **grainulation** | The machine. Unified CLI and brand. | `npm i -g grainulation` |
 
 **You don't need all eight.** Start with wheat. That's it. One command:
 
 ```bash
-npx @grainulator/wheat init
+npx @grainulation/wheat init
 ```
 
 Everything else is optional. Add tools when you feel the friction.
@@ -64,29 +64,29 @@ Everything else is optional. Add tools when you feel the friction.
 
 ```bash
 # Start a research sprint
-npx @grainulator/wheat init
+npx @grainulation/wheat init
 
 # Or install the unified CLI first
-npm install -g grainulator
+npm install -g grainulation
 
 # See what's installed
-grainulator doctor
+grainulation doctor
 
 # Interactive setup based on your role
-grainulator setup
+grainulation setup
 
 # Delegate to any tool
-grainulator wheat init
-grainulator farmer start
+grainulation wheat init
+grainulation farmer start
 ```
 
 ## The unified CLI
 
 ```bash
-grainulator              # Ecosystem overview
-grainulator doctor       # Health check: which tools, which versions
-grainulator setup        # Install the right tools for your role
-grainulator <tool> ...   # Delegate to any grainulator tool
+grainulation              # Ecosystem overview
+grainulation doctor       # Health check: which tools, which versions
+grainulation setup        # Install the right tools for your role
+grainulation <tool> ...   # Delegate to any grainulation tool
 ```
 
 The CLI is the wayfinder. It doesn't do the work -- it points you to the tool that does.
@@ -103,7 +103,7 @@ The CLI is the wayfinder. It doesn't do the work -- it points you to the tool th
 
 ## Zero dependencies
 
-Every grainulator tool runs on Node built-ins only. No npm install waterfall. No left-pad. No supply chain anxiety. Just `node`, `fs`, `http`, and `crypto`.
+Every grainulation tool runs on Node built-ins only. No npm install waterfall. No left-pad. No supply chain anxiety. Just `node`, `fs`, `http`, and `crypto`.
 
 ## The name
 
@@ -111,7 +111,7 @@ The name comes last.
 
 You build the crop (wheat), the steward (farmer), the barn, the mill, the silo, the harvest, the orchard -- and only then do you name the machine that connects them all.
 
-Grainulator: the machine that processes the grain.
+Grainulation: the machine that processes the grain.
 
 ## License
 

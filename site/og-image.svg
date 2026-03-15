@@ -1,6 +1,6 @@
 <svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
   <rect width="1200" height="630" fill="#09090b"/>
-  <text x="600" y="250" text-anchor="middle" font-family="'SF Mono','Fira Code',monospace" font-weight="800" font-size="100" fill="#fbbf24">grainulator</text>
+  <text x="600" y="250" text-anchor="middle" font-family="'SF Mono','Fira Code',monospace" font-weight="800" font-size="100" fill="#fbbf24">grainulation</text>
   <text x="600" y="340" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif" font-weight="400" font-size="36" fill="#9ba5b7">Structured research for decisions that matter</text>
   <text x="600" y="560" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif" font-weight="600" font-size="20" fill="#5a6478">8 tools -- zero dependencies -- one ecosystem</text>
 </svg>

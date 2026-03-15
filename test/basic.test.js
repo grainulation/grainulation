@@ -4,7 +4,7 @@ const assert = require('node:assert/strict');
 const { execSync } = require('node:child_process');
 const path = require('node:path');
 
-const BIN = path.join(__dirname, '..', 'bin', 'grainulator.js');
+const BIN = path.join(__dirname, '..', 'bin', 'grainulation.js');
 const run = (args = '') =>
   execSync(`node ${BIN} ${args}`, { encoding: 'utf-8', timeout: 10_000 });
 
@@ -23,7 +23,7 @@ function test(name, fn) {
   }
 }
 
-console.log('\n  grainulator tests\n');
+console.log('\n  grainulation tests\n');
 
 // ── Ecosystem registry ──────────────────────────────────────────
 
@@ -37,14 +37,14 @@ test('ecosystem includes wheat as entry point', () => {
   const wheat = getByName('wheat');
   assert.ok(wheat);
   assert.equal(wheat.entryPoint, true);
-  assert.equal(wheat.package, '@grainulator/wheat');
+  assert.equal(wheat.package, '@grainulation/wheat');
 });
 
-test('ecosystem getInstallable excludes grainulator itself', () => {
+test('ecosystem getInstallable excludes grainulation itself', () => {
   const { getInstallable } = require('../lib/ecosystem');
   const tools = getInstallable();
   assert.equal(tools.length, 7);
-  assert.ok(!tools.find((t) => t.name === 'grainulator'));
+  assert.ok(!tools.find((t) => t.name === 'grainulation'));
 });
 
 test('ecosystem getCategories groups correctly', () => {
@@ -58,19 +58,19 @@ test('ecosystem getCategories groups correctly', () => {
 
 test('no args shows ecosystem overview', () => {
   const out = run();
-  assert.ok(out.includes('grainulator'));
+  assert.ok(out.includes('grainulation'));
   assert.ok(out.includes('wheat'));
   assert.ok(out.includes('Ecosystem'));
 });
 
 test('--version prints version', () => {
   const out = run('--version');
-  assert.match(out.trim(), /^grainulator v\d+\.\d+\.\d+$/);
+  assert.match(out.trim(), /^grainulation v\d+\.\d+\.\d+$/);
 });
 
 test('--help shows overview', () => {
   const out = run('--help');
-  assert.ok(out.includes('grainulator'));
+  assert.ok(out.includes('grainulation'));
   assert.ok(out.includes('doctor'));
 });
 
@@ -153,7 +153,7 @@ test('router overview contains all tool names', () => {
 test('router overview mentions start command', () => {
   const { overview } = require('../lib/router');
   const text = overview();
-  assert.ok(text.includes('npx @grainulator/wheat init'));
+  assert.ok(text.includes('npx @grainulation/wheat init'));
 });
 
 test('router overview mentions doctor command', () => {
@@ -172,18 +172,18 @@ test('router overview mentions setup command', () => {
 
 test('-v also prints version', () => {
   const out = run('-v');
-  assert.match(out.trim(), /^grainulator v\d+\.\d+\.\d+$/);
+  assert.match(out.trim(), /^grainulation v\d+\.\d+\.\d+$/);
 });
 
 test('help command shows overview', () => {
   const out = run('help');
-  assert.ok(out.includes('grainulator'));
+  assert.ok(out.includes('grainulation'));
   assert.ok(out.includes('wheat'));
 });
 
 test('-h shows overview', () => {
   const out = run('-h');
-  assert.ok(out.includes('grainulator'));
+  assert.ok(out.includes('grainulation'));
   assert.ok(out.includes('Ecosystem'));
 });
 
@@ -197,7 +197,7 @@ test('doctor output includes Tools section', () => {
 
 test('doctor getVersion returns null for fake package', () => {
   const { getVersion } = require('../lib/doctor');
-  const v = getVersion('@grainulator/definitely-not-real-xyz');
+  const v = getVersion('@grainulation/definitely-not-real-xyz');
   assert.equal(v, null);
 });
 
