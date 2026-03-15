@@ -1,0 +1,66 @@
+/*
+ * grainulator-tokens.css
+ * Single source of truth for the grainulation design system.
+ *
+ * Three layers:
+ *   0  — Brand tokens (shared across all tools)
+ *   1a — Tool accent colors (per-tool via data-tool attribute)
+ *   1b — App extensions (functional UIs only, opt-in via .app-tier)
+ */
+
+/* ── Layer 0: Brand ──────────────────────────────────────────── */
+
+:root {
+  /* Backgrounds */
+  --bg: #0a0e1a;
+  --bg-2: #111827;
+
+  /* Surfaces */
+  --surface: rgba(255,255,255,0.03);
+  --surface-hover: rgba(255,255,255,0.06);
+
+  /* Borders */
+  --border: rgba(255,255,255,0.07);
+  --border-light: rgba(255,255,255,0.12);
+
+  /* Text */
+  --text: #e8ecf1;
+  --text-2: #9ba5b7;
+  --text-3: #8b95a5;
+  --text-muted: rgba(255,255,255,0.35);
+
+  /* Semantic */
+  --green: #34d399;
+  --red: #f87171;
+  --blue: #60a5fa;
+  --purple: #a78bfa;
+  --orange: #fb923c;
+
+  /* Typography */
+  --mono: 'SF Mono','Fira Code','Cascadia Code','Consolas',monospace;
+  --sans: -apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+
+  /* Layout */
+  --max-w: 1080px;
+  --ease: cubic-bezier(.22,1,.36,1);
+}
+
+/* ── Layer 1a: Tool Accents ──────────────────────────────────── */
+
+[data-tool="wheat"]       { --accent: #fbbf24; --accent-dim: rgba(251,191,36,0.12); }
+[data-tool="barn"]        { --accent: #e11d48; --accent-dim: rgba(225,29,72,0.12); }
+[data-tool="farmer"]      { --accent: #3b82f6; --accent-dim: rgba(59,130,246,0.12); }
+[data-tool="mill"]        { --accent: #a78bfa; --accent-dim: rgba(167,139,250,0.12); }
+[data-tool="silo"]        { --accent: #6ee7b7; --accent-dim: rgba(110,231,183,0.12); }
+[data-tool="harvest"]     { --accent: #fb923c; --accent-dim: rgba(251,146,60,0.12); }
+[data-tool="orchard"]     { --accent: #d4a574; --accent-dim: rgba(212,165,116,0.12); }
+[data-tool="grainulation"]{ --accent: #9ca3af; --accent-dim: rgba(156,163,175,0.12); }
+
+/* ── Layer 1b: App Extensions ────────────────────────────────── */
+
+.app-tier {
+  --accent-glow: color-mix(in srgb, var(--accent) 6%, transparent);
+  --card-bg: var(--surface);
+  --card-border: var(--border);
+  --card-hover-border: var(--border-light);
+}
