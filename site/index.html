@@ -15,18 +15,18 @@
 <meta name="twitter:description" content="Eight zero-dependency tools that turn questions into evidence and evidence into decisions.">
 <meta name="twitter:image" content="https://grainulation.github.io/grainulation/og-image.svg">
 <link rel="canonical" href="https://grainulation.github.io/grainulation/">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2309090b'/><text x='32' y='48' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='800' font-size='36' fill='%23a78bfa'>gr</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%230a0e1a'/><path d='M32,3.84 L18.18,3.84 C8.04,13.98 8.04,45.52 18.18,60.16 L32,60.16' fill='none' stroke='%239ca3af' stroke-width='1.28' stroke-linecap='round' stroke-linejoin='round'/><text x='32' y='33' text-anchor='middle' dominant-baseline='central' fill='%239ca3af' font-family='-apple-system,system-ui,sans-serif' font-size='24' font-weight='700'>G</text></svg>">
 <style>
 :root {
-  --bg: #09090b;
-  --bg-2: #111113;
+  --bg: #0a0e1a;
+  --bg-2: #111827;
   --surface: rgba(255,255,255,0.03);
   --surface-hover: rgba(255,255,255,0.06);
   --border: rgba(255,255,255,0.07);
   --border-light: rgba(255,255,255,0.12);
-  --accent: #a78bfa;
-  --accent-dim: rgba(167,139,250,0.12);
-  --accent-glow: rgba(167,139,250,0.06);
+  --accent: #9ca3af;
+  --accent-dim: rgba(156,163,175,0.12);
+  --accent-glow: rgba(156,163,175,0.06);
   --green: #22c55e;
   --green-dim: rgba(34,197,94,0.1);
   --red: #e11d48;
@@ -67,7 +67,7 @@ code,pre{font-family:var(--mono)}
 .hf1{animation-delay:.05s}.hf2{animation-delay:.15s}.hf3{animation-delay:.25s}.hf4{animation-delay:.4s}
 @keyframes hIn{to{opacity:1;transform:none}}
 
-nav{position:sticky;top:0;z-index:100;background:rgba(9,9,11,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:14px 0}
+nav{position:sticky;top:0;z-index:100;background:rgba(10,14,26,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:14px 0}
 nav .container{display:flex;align-items:center;justify-content:space-between}
 .nav-logo{font-weight:700;font-size:2rem;letter-spacing:-.02em;color:var(--text);text-decoration:none}
 .nav-logo span{color:var(--accent)}
@@ -163,14 +163,14 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
 .tool-role{font-size:.75rem;font-weight:600}
 .tool-desc{font-size:.8125rem;color:var(--text-2);line-height:1.55;margin-bottom:14px}
 .tool-install{font-family:var(--mono);font-size:.75rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:6px 12px;color:var(--text-3);display:inline-block;user-select:all}
-.tool-card.highlight{border-color:rgba(167,139,250,.3);position:relative}
+.tool-card.highlight{border-color:rgba(156,163,175,.3);position:relative}
 .tool-card.highlight::before{content:'START HERE';position:absolute;top:-10px;right:16px;background:var(--accent);color:#fff;font-family:var(--mono);font-size:.625rem;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:.05em}
 
 /* Features/philosophy */
 .features{padding:80px 0}
 .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
 .feature-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px 24px;transition:border-color .2s}
-.feature-card:hover{border-color:rgba(167,139,250,.25)}
+.feature-card:hover{border-color:rgba(156,163,175,.25)}
 .feature-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:18px;background:var(--accent-dim);color:var(--accent)}
 .feature-card h3{font-size:.9375rem;font-weight:700;margin-bottom:6px}
 .feature-card p{font-size:.8125rem;color:var(--text-2);line-height:1.6}
@@ -234,7 +234,7 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
 
 <nav aria-label="Main navigation">
   <div class="container">
-    <a href="#" class="nav-logo"><span>gr</span>ainulator</a>
+    <a href="#" class="nav-logo"><svg width="88" height="30" viewBox="0 0 140 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-left:4px"><path d="M24,2.9 L13.6,2.9 C6.0,10.5 6.0,34.1 13.6,45.1 L24,45.1" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><text x="24" y="24" text-anchor="middle" dominant-baseline="central" fill="#9ca3af" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="700">G</text><text x="30" y="24" dominant-baseline="central" fill="#e8ecf1" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="700">rainulation</text></svg></a>
     <div class="nav-links">
       <a href="#what">About</a>
       <a href="#tools">Tools</a>
@@ -252,7 +252,7 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
   <div class="container">
     <div class="hero-badge hf hf1">8 tools. Zero deps. One ecosystem.</div>
     <h1 class="hf hf2">Your team makes technical decisions on gut feel. <em>It does not have to be that way.</em></h1>
-    <p class="hero-sub hf hf3"><strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulator</strong> turns questions into typed, evidence-graded claims and compiles them into decision briefs. Research that holds up to scrutiny.</p>
+    <p class="hero-sub hf hf3"><strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulation</strong> turns questions into typed, evidence-graded claims and compiles them into decision briefs. Research that holds up to scrutiny.</p>
     <div class="hero-actions hf hf4">
       <a href="#quickstart" class="btn btn-primary">
         <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
@@ -270,7 +270,7 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
 <section class="what-is" id="what">
   <div class="container">
     <div class="what-box rv">
-      <p><strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulator</strong> is an ecosystem of eight command-line tools for structured technical research. You start with a question — "Should we migrate to GraphQL?" — and the tools guide you through research, adversarial challenge, and compilation into a decision brief.</p>
+      <p><strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulation</strong> is an ecosystem of eight command-line tools for structured technical research. You start with a question — "Should we migrate to GraphQL?" — and the tools guide you through research, adversarial challenge, and compilation into a decision brief.</p>
       <p>Every finding is tracked as a typed claim with an evidence tier (from "someone said it" to "we measured it in production"). The system forces you to challenge your own assumptions before shipping a recommendation.</p>
       <p>You need <strong><a href="https://docs.anthropic.com/en/docs/claude-code" style="color:var(--text)">Claude Code</a></strong>, <strong>Node.js 18+</strong>, and <strong>npx</strong>. No accounts, no cloud services, no npm install. Everything runs locally, everything is plain JSON and HTML.</p>
     </div>
@@ -457,7 +457,7 @@ Written: output/brief.html</div>
           </div>
         </div>
         <div class="tool-desc">The core. Ask a question, grow claims from multiple angles, compile a decision brief. Everything starts here.</div>
-        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulator</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#fbbf24">w</span>heat</strong> init</div>
+        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulation</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#fbbf24">w</span>heat</strong> init</div>
       </a>
 
       <a href="https://grainulation.github.io/farmer/" class="tool-card rv rv-d2" style="text-decoration:none;color:inherit">
@@ -471,7 +471,7 @@ Written: output/brief.html</div>
           </div>
         </div>
         <div class="tool-desc">Approve AI agent tool calls from your phone, another tab, or a meeting. Real-time WebSocket dashboard.</div>
-        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulator</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#22c55e">f</span>armer</strong> start</div>
+        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulation</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#22c55e">f</span>armer</strong> start</div>
       </a>
 
       <a href="https://grainulation.github.io/barn/" class="tool-card rv rv-d3" style="text-decoration:none;color:inherit">
@@ -485,7 +485,7 @@ Written: output/brief.html</div>
           </div>
         </div>
         <div class="tool-desc">Sprint detection, manifest generation, HTML templates. The shared foundation the ecosystem builds on.</div>
-        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulator</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#e11d48">b</span>arn</strong> detect-sprints</div>
+        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulation</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#e11d48">b</span>arn</strong> detect-sprints</div>
       </a>
 
       <a href="https://grainulation.github.io/mill/" class="tool-card rv rv-d4" style="text-decoration:none;color:inherit">
@@ -499,7 +499,7 @@ Written: output/brief.html</div>
           </div>
         </div>
         <div class="tool-desc">Turn compiled research into PDFs, CSVs, and static sites. Every format you need to share decisions.</div>
-        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulator</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#94a3b8">m</span>ill</strong> export --format pdf</div>
+        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulation</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#94a3b8">m</span>ill</strong> export --format pdf</div>
       </a>
 
       <a href="https://grainulation.github.io/silo/" class="tool-card rv rv-d1" style="text-decoration:none;color:inherit">
@@ -513,7 +513,7 @@ Written: output/brief.html</div>
           </div>
         </div>
         <div class="tool-desc">Reusable claim libraries. HIPAA constraints, migration risks, architecture patterns. Pull established knowledge, skip the re-research.</div>
-        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulator</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#60a5fa">s</span>ilo</strong> pull compliance</div>
+        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulation</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#60a5fa">s</span>ilo</strong> pull compliance</div>
       </a>
 
       <a href="https://grainulation.github.io/harvest/" class="tool-card rv rv-d2" style="text-decoration:none;color:inherit">
@@ -527,7 +527,7 @@ Written: output/brief.html</div>
           </div>
         </div>
         <div class="tool-desc">Cross-sprint learning. Track prediction accuracy, find systemic blind spots, detect stale claims across all your research.</div>
-        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulator</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#f97316">h</span>arvest</strong> analyze ./sprints/</div>
+        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulation</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#f97316">h</span>arvest</strong> analyze ./sprints/</div>
       </a>
 
       <a href="https://grainulation.github.io/orchard/" class="tool-card rv rv-d3" style="text-decoration:none;color:inherit">
@@ -541,7 +541,7 @@ Written: output/brief.html</div>
           </div>
         </div>
         <div class="tool-desc">Multi-sprint coordination. Dependencies, conflict detection, team assignment. The org-wide view of all active research.</div>
-        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulator</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#ec4899">o</span>rchard</strong> status</div>
+        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulation</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#ec4899">o</span>rchard</strong> status</div>
       </a>
 
       <a href="https://github.com/grainulation/grainulation" class="tool-card rv rv-d4" style="text-decoration:none;color:inherit">
@@ -550,12 +550,12 @@ Written: output/brief.html</div>
             <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
           </div>
           <div>
-            <div class="tool-name"><strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulator</strong></div>
+            <div class="tool-name"><strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulation</strong></div>
             <div class="tool-role" style="color:var(--accent)">Unified CLI</div>
           </div>
         </div>
         <div class="tool-desc">The meta-tool. Routes to the right tool, checks ecosystem health, manages configuration across all eight packages.</div>
-        <div class="tool-install">npx <strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulator</strong></div>
+        <div class="tool-install">npx <strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulation</strong></div>
       </a>
     </div>
   </div>
@@ -629,7 +629,7 @@ Written: output/brief.html</div>
           <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="faq-a">
-          <p><strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulator</strong> is language-agnostic. It researches decisions about any technology — databases, APIs, infrastructure, architecture. The tools run locally, but the research can be about anything.</p>
+          <p><strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulation</strong> is language-agnostic. It researches decisions about any technology — databases, APIs, infrastructure, architecture. The tools run locally, but the research can be about anything.</p>
         </div>
       </div>
 
@@ -639,7 +639,7 @@ Written: output/brief.html</div>
           <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="faq-a">
-          <p>RFCs and ADRs document a decision after it is made. <strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulator</strong> captures the research process — the evidence gathering, adversarial testing, and conflict resolution that leads to the decision. The output brief can serve as your ADR.</p>
+          <p>RFCs and ADRs document a decision after it is made. <strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulation</strong> captures the research process — the evidence gathering, adversarial testing, and conflict resolution that leads to the decision. The output brief can serve as your ADR.</p>
         </div>
       </div>
 
@@ -661,8 +661,8 @@ Written: output/brief.html</div>
 <!-- Footer -->
 <footer>
   <div class="container">
-    <p class="ft-eco"><span style="color:#fff">Part of the </span><strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulator</strong> ecosystem</p>
-    <p><strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulator</strong> — <a href="https://github.com/grainulation/grainulation">GitHub</a> — <a href="https://github.com/grainulation/grainulation#readme">Docs</a></p>
+    <p class="ft-eco">Part of <svg width="88" height="30" viewBox="0 0 140 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-left:4px"><path d="M24,2.9 L13.6,2.9 C6.0,10.5 6.0,34.1 13.6,45.1 L24,45.1" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><text x="24" y="24" text-anchor="middle" dominant-baseline="central" fill="#9ca3af" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="700">G</text><text x="30" y="24" dominant-baseline="central" fill="#e8ecf1" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="700">rainulation</text></svg></p>
+    <p><strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulation</strong> — <a href="https://github.com/grainulation/grainulation">GitHub</a> — <a href="https://github.com/grainulation/grainulation#readme">Docs</a></p>
   </div>
 </footer>
 
