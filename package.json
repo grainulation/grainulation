@@ -9,7 +9,8 @@
   "main": "./lib/ecosystem.js",
   "files": [
     "bin/",
-    "lib/"
+    "lib/",
+    "public/"
   ],
   "scripts": {
     "test": "node test/basic.test.js",

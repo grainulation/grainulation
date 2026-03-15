@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en" data-tool="grainulator">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>grainulation — Ecosystem Control Center</title>
+<style>
+/* ── Tokens (inline, zero deps) ── */
+:root {
+  --bg:  #0a0e1a;
+  --bg2: #111827;
+  --bg3: #1e293b;
+  --bg4: #334155;
+  --fg:  #e2e8f0;
+  --fg2: #94a3b8;
+  --fg3: #64748b;
+  --border: #1e293b;
+  --border-subtle: rgba(255,255,255,0.08);
+  --green:  #34d399;
+  --red:    #f87171;
+  --blue:   #60a5fa;
+  --orange: #fb923c;
+  --purple: #a78bfa;
+  --cyan:   #22d3ee;
+  --accent:        #94a3b8;
+  --accent-light:  #cbd5e1;
+  --accent-dim:    rgba(148,163,184,0.10);
+  --accent-border: rgba(148,163,184,0.25);
+  --radius: 8px;
+  --radius-sm: 4px;
+  --radius-lg: 12px;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+  --font-mono: 'SF Mono', 'Cascadia Code', 'JetBrains Mono', monospace;
+  --transition-fast: 0.1s ease;
+  --transition-base: 0.15s ease;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 13px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--fg3); }
+
+/* ── Layout ── */
+.app { max-width: 1080px; margin: 0 auto; padding: 32px 24px; }
+
+/* ── Header ── */
+.header {
+  text-align: center; padding-bottom: 32px;
+  border-bottom: 1px solid var(--border); margin-bottom: 32px;
+}
+.header h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
+.header h1 .g { color: var(--fg); }
+.header .subtitle { color: var(--fg3); font-size: 12px; margin-top: 4px; }
+.header-meta {
+  display: flex; align-items: center; justify-content: center;
+  gap: 16px; margin-top: 12px;
+}
+.conn-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); display: inline-block; }
+.conn-dot.disconnected { background: var(--red); }
+.meta-tag {
+  font-size: 10px; color: var(--fg3);
+  background: var(--bg2); padding: 2px 8px; border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+/* ── Doctor summary ── */
+.doctor-bar {
+  display: flex; gap: 12px; justify-content: center;
+  margin-bottom: 32px;
+}
+.doctor-stat {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 500;
+}
+.doctor-stat .dot { width: 10px; height: 10px; border-radius: 50%; }
+.doctor-stat .dot-pass { background: var(--green); }
+.doctor-stat .dot-warn { background: var(--orange); }
+.doctor-stat .dot-fail { background: var(--red); }
+
+/* ── Tool catalog ── */
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.8px; color: var(--fg3); margin-bottom: 16px;
+}
+
+.tool-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 12px; margin-bottom: 40px;
+}
+
+.tool-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px;
+  transition: all var(--transition-base);
+  position: relative; overflow: hidden;
+}
+.tool-card:hover { border-color: var(--accent-border); transform: translateY(-1px); }
+.tool-card::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 3px; height: 100%; border-radius: 2px 0 0 2px;
+}
+.tool-card-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 6px;
+}
+.tool-name { font-weight: 600; font-size: 14px; }
+.tool-status {
+  font-size: 9px; padding: 2px 8px; border-radius: 10px;
+  font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px;
+}
+.status-installed { background: rgba(52,211,153,0.12); color: var(--green); }
+.status-missing { background: rgba(148,163,184,0.08); color: var(--fg3); }
+.tool-role { font-size: 11px; color: var(--fg2); margin-bottom: 8px; }
+.tool-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 8px;
+}
+.tool-version {
+  font-size: 10px; font-family: var(--font-mono); color: var(--fg3);
+}
+.tool-method {
+  font-size: 9px; color: var(--fg3); background: var(--bg3);
+  padding: 1px 6px; border-radius: 8px;
+}
+.tool-actions { display: flex; gap: 6px; }
+.tool-btn {
+  font-size: 10px; padding: 3px 10px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border); background: var(--bg3);
+  color: var(--fg2); cursor: pointer; text-decoration: none;
+  transition: all var(--transition-fast);
+}
+.tool-btn:hover { background: var(--bg4); color: var(--fg); }
+.tool-btn-primary {
+  background: var(--accent-dim); border-color: var(--accent-border);
+  color: var(--fg);
+}
+.tool-btn-primary:hover { background: rgba(148,163,184,0.2); }
+
+/* ── Doctor checklist ── */
+.doctor-section { margin-bottom: 40px; }
+.check-list { display: flex; flex-direction: column; gap: 4px; }
+.check-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 12px; background: var(--bg2);
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  font-size: 12px;
+}
+.check-icon {
+  width: 18px; height: 18px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700; flex-shrink: 0;
+}
+.check-pass .check-icon { background: rgba(52,211,153,0.15); color: var(--green); }
+.check-warning .check-icon { background: rgba(251,146,60,0.15); color: var(--orange); }
+.check-fail .check-icon { background: rgba(248,113,113,0.15); color: var(--red); }
+.check-info .check-icon { background: rgba(148,163,184,0.10); color: var(--fg3); }
+.check-name { font-weight: 500; min-width: 100px; }
+.check-detail { color: var(--fg3); font-family: var(--font-mono); font-size: 11px; }
+.check-cat {
+  font-size: 9px; color: var(--fg3); background: var(--bg3);
+  padding: 1px 6px; border-radius: 8px; margin-left: auto;
+}
+
+/* ── Getting started ── */
+.getting-started {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 24px;
+  margin-bottom: 40px;
+}
+.getting-started h3 { font-size: 14px; margin-bottom: 12px; color: var(--fg); }
+.steps { display: flex; flex-direction: column; gap: 12px; }
+.step {
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.step-num {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--accent-dim); border: 1px solid var(--accent-border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: var(--accent-light);
+  flex-shrink: 0;
+}
+.step-content { flex: 1; }
+.step-title { font-size: 12px; font-weight: 600; margin-bottom: 2px; }
+.step-desc { font-size: 11px; color: var(--fg2); }
+.step-cmd {
+  margin-top: 4px; font-family: var(--font-mono); font-size: 11px;
+  background: var(--bg); padding: 4px 8px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border); color: var(--accent-light);
+  display: inline-block;
+}
+
+/* ── Cross-tool nav ── */
+.nav-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 8px; margin-bottom: 32px;
+}
+.nav-link {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px; background: var(--bg2);
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  text-decoration: none; color: var(--fg2);
+  font-size: 11px; font-weight: 500;
+  transition: all var(--transition-fast);
+}
+.nav-link:hover { background: var(--bg3); color: var(--fg); border-color: var(--accent-border); }
+.nav-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+}
+.nav-port { font-size: 9px; color: var(--fg3); font-family: var(--font-mono); margin-left: auto; }
+
+/* ── Footer ── */
+.footer {
+  text-align: center; padding-top: 24px; border-top: 1px solid var(--border);
+  color: var(--fg3); font-size: 10px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .tool-grid { grid-template-columns: 1fr; }
+  .nav-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .app { padding: 16px; }
+  .nav-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- Header -->
+  <div class="header">
+    <h1><span class="g">grainulation</span></h1>
+    <div class="subtitle">Structured research for decisions that satisfice</div>
+    <div class="header-meta">
+      <span class="conn-dot" id="connDot"></span>
+      <span class="meta-tag" id="versionTag">v0.1.0</span>
+      <span class="meta-tag" id="toolCount">0/8 tools</span>
+    </div>
+  </div>
+
+  <!-- Doctor summary bar -->
+  <div class="doctor-bar" id="doctorBar"></div>
+
+  <!-- Tool catalog -->
+  <div class="section-title">Tool Catalog</div>
+  <div class="tool-grid" id="toolGrid"></div>
+
+  <!-- Doctor checklist -->
+  <div class="section-title doctor-section">Health Checks</div>
+  <div class="check-list" id="checkList"></div>
+
+  <!-- Cross-tool navigation -->
+  <div class="section-title" style="margin-top:40px">Cross-Tool Navigation</div>
+  <div class="nav-grid" id="navGrid"></div>
+
+  <!-- Getting started -->
+  <div class="getting-started">
+    <h3>Getting Started</h3>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">1</span>
+        <div class="step-content">
+          <div class="step-title">Install wheat (the research engine)</div>
+          <div class="step-desc">Wheat is the core tool. Everything starts with a research sprint.</div>
+          <code class="step-cmd">npx @grainulation/wheat init</code>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <div class="step-content">
+          <div class="step-title">Run the ecosystem doctor</div>
+          <div class="step-desc">Check what's installed and what's available.</div>
+          <code class="step-cmd">npx grainulation doctor</code>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <div class="step-content">
+          <div class="step-title">Add tools as you need them</div>
+          <div class="step-desc">Each tool has a purpose. Start small, add as your research grows.</div>
+          <code class="step-cmd">npx grainulation setup</code>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">4</span>
+        <div class="step-content">
+          <div class="step-title">Slow down and trust the process</div>
+          <div class="step-desc">Research takes time. Claims build evidence. Evidence builds decisions.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">grainulation ecosystem &middot; slow down and trust the process</div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  const TOOL_ACCENTS = {
+    wheat: '#fbbf24', farmer: '#fb923c', barn: '#ef4444', mill: '#3b82f6',
+    silo: '#22d3ee', harvest: '#34d399', orchard: '#a3e635', grainulation: '#94a3b8',
+  };
+
+  let state = null;
+  let sse = null;
+
+  function connect() {
+    sse = new EventSource('/events');
+    document.getElementById('connDot').className = 'conn-dot';
+
+    sse.onmessage = (e) => {
+      try {
+        const msg = JSON.parse(e.data);
+        if (msg.type === 'state' && msg.data) {
+          state = msg.data;
+          render();
+        }
+      } catch { /* ignore */ }
+    };
+
+    sse.onerror = () => {
+      document.getElementById('connDot').className = 'conn-dot disconnected';
+      sse.close();
+      setTimeout(connect, 3000);
+    };
+  }
+
+  function render() {
+    if (!state) return;
+
+    const tools = state.ecosystem || [];
+    const doctor = state.doctorResults || { checks: [], summary: {} };
+    const installed = tools.filter(t => t.installed).length;
+
+    // Tool count
+    document.getElementById('toolCount').textContent = `${installed}/${tools.length} tools`;
+
+    // Doctor bar
+    const s = doctor.summary || {};
+    document.getElementById('doctorBar').innerHTML = [
+      { label: 'Pass', count: s.pass || 0, cls: 'dot-pass' },
+      { label: 'Warning', count: s.warning || 0, cls: 'dot-warn' },
+      { label: 'Fail', count: s.fail || 0, cls: 'dot-fail' },
+    ].map(d => `
+      <div class="doctor-stat">
+        <span class="dot ${d.cls}"></span>
+        <span>${d.count} ${d.label}</span>
+      </div>
+    `).join('');
+
+    // Tool catalog
+    document.getElementById('toolGrid').innerHTML = tools.map(t => {
+      const accent = TOOL_ACCENTS[t.name] || '#94a3b8';
+      const statusCls = t.installed ? 'status-installed' : 'status-missing';
+      const statusText = t.installed ? 'installed' : 'not found';
+
+      return `
+        <div class="tool-card" style="--tool-accent: ${accent}">
+          <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:${accent};border-radius:2px 0 0 2px;"></div>
+          <div class="tool-card-header">
+            <span class="tool-name">${esc(t.name)}</span>
+            <span class="tool-status ${statusCls}">${statusText}</span>
+          </div>
+          <div class="tool-role">${esc(t.role)}</div>
+          <div class="tool-footer">
+            <span class="tool-version">${t.installed ? 'v' + esc(t.version) : '--'}</span>
+            ${t.method ? `<span class="tool-method">${esc(t.method)}</span>` : ''}
+            <div class="tool-actions">
+              ${t.installed && t.name !== 'grainulation' ? `<a class="tool-btn tool-btn-primary" href="http://localhost:${t.port}" target="_blank">Open UI</a>` : ''}
+              ${!t.installed ? `<span class="tool-btn" title="npm install -g ${esc(t.pkg)}">Install</span>` : ''}
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+
+    // Doctor checklist
+    const checks = doctor.checks || [];
+    document.getElementById('checkList').innerHTML = checks.map(c => {
+      const cls = 'check-' + c.status;
+      const icon =
+        c.status === 'pass' ? '&#10003;' :
+        c.status === 'warning' ? '!' :
+        c.status === 'fail' ? '&#10007;' : '-';
+
+      return `
+        <div class="check-item ${cls}">
+          <span class="check-icon">${icon}</span>
+          <span class="check-name">${esc(c.name)}</span>
+          <span class="check-detail">${esc(c.detail)}</span>
+          <span class="check-cat">${esc(c.category)}</span>
+        </div>`;
+    }).join('');
+
+    // Cross-tool nav
+    document.getElementById('navGrid').innerHTML = tools
+      .filter(t => t.installed && t.name !== 'grainulation')
+      .map(t => {
+        const accent = TOOL_ACCENTS[t.name] || '#94a3b8';
+        return `
+          <a class="nav-link" href="http://localhost:${t.port}" target="_blank">
+            <span class="nav-dot" style="background:${accent}"></span>
+            ${esc(t.name)}
+            <span class="nav-port">:${t.port}</span>
+          </a>`;
+      }).join('') || '<div style="grid-column:1/-1;text-align:center;color:var(--fg3);padding:16px;font-size:12px;">No tools running. Install tools to see navigation links.</div>';
+  }
+
+  function esc(str) {
+    if (!str) return '';
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  connect();
+})();
+</script>
+</body>
+</html>
