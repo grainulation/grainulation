@@ -22,10 +22,10 @@
   --orange: #fb923c;
   --purple: #a78bfa;
   --cyan:   #22d3ee;
-  --accent:        #94a3b8;
-  --accent-light:  #cbd5e1;
-  --accent-dim:    rgba(148,163,184,0.10);
-  --accent-border: rgba(148,163,184,0.25);
+  --accent:        #9ca3af;
+  --accent-light:  #d1d5db;
+  --accent-dim:    rgba(156,163,175,0.10);
+  --accent-border: rgba(156,163,175,0.25);
   --radius: 8px;
   --radius-sm: 4px;
   --radius-lg: 12px;
@@ -122,7 +122,7 @@ body {
   font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px;
 }
 .status-installed { background: rgba(52,211,153,0.12); color: var(--green); }
-.status-missing { background: rgba(148,163,184,0.08); color: var(--fg3); }
+.status-missing { background: rgba(156,163,175,0.08); color: var(--fg3); }
 .tool-role { font-size: 11px; color: var(--fg2); margin-bottom: 8px; }
 .tool-footer {
   display: flex; align-items: center; justify-content: space-between;
@@ -147,7 +147,7 @@ body {
   background: var(--accent-dim); border-color: var(--accent-border);
   color: var(--fg);
 }
-.tool-btn-primary:hover { background: rgba(148,163,184,0.2); }
+.tool-btn-primary:hover { background: rgba(156,163,175,0.2); }
 
 /* ── Doctor checklist ── */
 .doctor-section { margin-bottom: 40px; }
@@ -166,7 +166,7 @@ body {
 .check-pass .check-icon { background: rgba(52,211,153,0.15); color: var(--green); }
 .check-warning .check-icon { background: rgba(251,146,60,0.15); color: var(--orange); }
 .check-fail .check-icon { background: rgba(248,113,113,0.15); color: var(--red); }
-.check-info .check-icon { background: rgba(148,163,184,0.10); color: var(--fg3); }
+.check-info .check-icon { background: rgba(156,163,175,0.10); color: var(--fg3); }
 .check-name { font-weight: 500; min-width: 100px; }
 .check-detail { color: var(--fg3); font-family: var(--font-mono); font-size: 11px; }
 .check-cat {
@@ -312,8 +312,8 @@ body {
   'use strict';
 
   const TOOL_ACCENTS = {
-    wheat: '#fbbf24', farmer: '#fb923c', barn: '#ef4444', mill: '#3b82f6',
-    silo: '#22d3ee', harvest: '#34d399', orchard: '#a3e635', grainulation: '#94a3b8',
+    wheat: '#fbbf24', farmer: '#fb923c', barn: '#e11d48', mill: '#3b82f6',
+    silo: '#22d3ee', harvest: '#34d399', orchard: '#14b8a6', grainulation: '#9ca3af',
   };
 
   let state = null;
@@ -365,7 +365,7 @@ body {
 
     // Tool catalog
     document.getElementById('toolGrid').innerHTML = tools.map(t => {
-      const accent = TOOL_ACCENTS[t.name] || '#94a3b8';
+      const accent = TOOL_ACCENTS[t.name] || '#9ca3af';
       const statusCls = t.installed ? 'status-installed' : 'status-missing';
       const statusText = t.installed ? 'installed' : 'not found';
 
@@ -410,7 +410,7 @@ body {
     document.getElementById('navGrid').innerHTML = tools
       .filter(t => t.installed && t.name !== 'grainulation')
       .map(t => {
-        const accent = TOOL_ACCENTS[t.name] || '#94a3b8';
+        const accent = TOOL_ACCENTS[t.name] || '#9ca3af';
         return `
           <a class="nav-link" href="http://localhost:${t.port}" target="_blank">
             <span class="nav-dot" style="background:${accent}"></span>
