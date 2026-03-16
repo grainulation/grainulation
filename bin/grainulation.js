@@ -16,7 +16,15 @@
  *   grainulation <tool> [args]    Delegate to a grainulation tool
  */
 
+const verbose = process.argv.includes('--verbose') || process.argv.includes('-v');
+function vlog(...a) {
+  if (!verbose) return;
+  const ts = new Date().toISOString();
+  process.stderr.write(`[${ts}] grainulation: ${a.join(' ')}\n`);
+}
+
 const command = process.argv[2];
+vlog('startup', `command=${command || '(none)'}`, `cwd=${process.cwd()}`);
 
 // Serve command — start the HTTP server (ESM module)
 if (command === 'serve') {
@@ -32,7 +40,7 @@ if (command === 'serve') {
 
   child.on('close', (code) => process.exit(code ?? 0));
   child.on('error', (err) => {
-    console.error(`Failed to start server: ${err.message}`);
+    console.error(`grainulation: failed to start server: ${err.message}`);
     process.exit(1);
   });
 } else {
