@@ -1,0 +1,29 @@
+name: Publish to npm
+on:
+  release:
+    types: [published]
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org
+      - name: Verify package
+        run: |
+          npm pack --dry-run 2>&1 | tee pack-output.txt
+          FILE_COUNT=$(grep 'total files' pack-output.txt | grep -oE '[0-9]+')
+          SIZE=$(npm pack --dry-run --json 2>/dev/null | node -e "const d=require('fs').readFileSync('/dev/stdin','utf8');const j=JSON.parse(d);console.log(j[0]?.size||0)")
+          if [ "$SIZE" -gt 512000 ]; then echo "Package too large: $SIZE bytes"; exit 1; fi
+      - name: Publish
+        run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
