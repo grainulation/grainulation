@@ -1,6 +1,6 @@
 /*
  * grainulation-tokens.css  v1.0.0
- * Shared design tokens for the grainulator ecosystem.
+ * Shared design tokens for the grainulation ecosystem.
  * Home: barn (the design-system tool)
  *
  * Usage:
@@ -239,7 +239,7 @@
 }
 
 /* ── grainulation: neutral/white (#9ca3af) ── */
-[data-tool="grainulator"],
+[data-tool="grainulation"],
 [data-tool="grainulation"] {
   --accent-50:  #f9fafb;
   --accent-200: #e5e7eb;

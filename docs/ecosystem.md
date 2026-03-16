@@ -1,0 +1,116 @@
+# Grainulation Ecosystem Reference
+
+The grainulation CLI is the unified entry point for all eight tools in the ecosystem. Each tool has its own npm package and can be used standalone, but the `grainulation` package connects them into an integrated workflow.
+
+## The Eight Tools
+
+| Tool | Package | Role |
+|---|---|---|
+| **wheat** | `@grainulation/wheat` | Research sprint engine. Slash commands, claims, compiler. |
+| **barn** | `@grainulation/barn` | Template library. Sprint templates and boilerplate. |
+| **farmer** | `@grainulation/farmer` | Permission dashboard. Mobile-first agent supervision. |
+| **harvest** | `@grainulation/harvest` | Metrics and analytics. Sprint health and prediction scoring. |
+| **mill** | `@grainulation/mill` | Export engine. Converts compilation output to PDF, CSV, HTML, etc. |
+| **silo** | `@grainulation/silo` | Knowledge packs. Portable claim bundles for reuse. |
+| **orchard** | `@grainulation/orchard` | Multi-sprint orchestration. Dependencies, teams, parallel execution. |
+| **grainulation** | `@grainulation/grainulation` | Unified CLI. Installs and coordinates all tools. |
+
+## Data Flow
+
+Tools communicate through files on disk. There is no background daemon or shared database. The data flow follows this path:
+
+```
+wheat (claims.json)
+  |
+  v
+wheat compile (compilation.json)
+  |
+  +---> mill (export to PDF, CSV, HTML, etc.)
+  +---> harvest (compute metrics, write to .harvest/)
+  +---> silo (pack claims for reuse)
+  |
+  v
+orchard (orchard.json -- coordinates multiple sprints)
+  |
+  v
+farmer (hooks -- supervises agent sessions)
+  |
+  v
+barn (templates -- bootstrap new sprints)
+```
+
+Key principle: `claims.json` is the source of truth. `compilation.json` is the validated snapshot. Every downstream tool reads from `compilation.json`, never from `claims.json` directly.
+
+## Unified CLI
+
+The `grainulation` package provides a single command that delegates to the appropriate tool:
+
+```bash
+npx @grainulation/grainulation wheat init
+npx @grainulation/grainulation mill export --format pdf
+npx @grainulation/grainulation harvest report
+npx @grainulation/grainulation silo load security-baseline
+npx @grainulation/grainulation orchard status
+```
+
+Or with the short alias:
+
+```bash
+npx grain wheat init
+npx grain mill export --format pdf
+```
+
+The unified CLI adds no functionality beyond delegation. Each tool works identically whether invoked through `grainulation` or directly.
+
+## Health Check System
+
+Run a cross-tool health check to verify the ecosystem is configured correctly:
+
+```bash
+npx @grainulation/grainulation health
+```
+
+The health check verifies:
+
+| Check | What it validates |
+|---|---|
+| `tools-installed` | All eight packages are resolvable |
+| `schema-compat` | All tools agree on `schema_version` |
+| `claims-valid` | `claims.json` passes structural validation |
+| `compilation-fresh` | `compilation.json` is not stale relative to `claims.json` |
+| `farmer-reachable` | Farmer server is running and responding on its configured port |
+| `hooks-configured` | Wheat's guard hooks point to a live farmer instance |
+| `orchard-consistent` | `orchard.json` dependency graph has no cycles |
+| `silo-cache` | Silo's pack cache is intact and readable |
+
+Output is a table of pass/fail results. Use `--json` for machine-readable output.
+
+## Cross-Tool Integration Points
+
+These are the specific integration surfaces between tools:
+
+**wheat + farmer** -- Wheat's guard hooks call farmer's `/hooks/permission` endpoint before generating output. `wheat connect farmer` automates the hook URL configuration.
+
+**wheat + mill** -- Mill reads `compilation.json` produced by `wheat compile`. No configuration needed beyond running both in the same directory.
+
+**wheat + harvest** -- Harvest reads `compilation.json` to compute metrics. It also reads `claims.json` commit history (via git log) for velocity and decay calculations.
+
+**wheat + silo** -- Silo reads `claims.json` to create packs, and writes merged claims back into `claims.json` when loading packs.
+
+**wheat + barn** -- Barn provides sprint templates that include pre-configured `CLAUDE.md`, directory structure, and optional starter claims.
+
+**orchard + wheat** -- Orchard reads `claims.json` from multiple sprint directories to detect cross-sprint conflicts and compute project-level status.
+
+**orchard + farmer** -- Orchard routes notifications through farmer to reach the correct team member's session.
+
+**harvest + mill** -- Mill can include harvest metrics in exported artifacts (e.g., a PDF appendix with sprint health data).
+
+## Version Compatibility
+
+Each tool maintains independent semver versioning. The `schema_version` field in `claims.json`, `compilation.json`, `pack.json`, and `orchard.json` ensures cross-tool compatibility. All tools in a project must agree on the same `schema_version`.
+
+```bash
+npx @grainulation/grainulation versions
+```
+
+Lists installed versions and their schema compatibility.

@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>grainulation — Structured research for decisions that matter</title>
+<title>Grainulation — Structured research for decisions that matter</title>
 <meta name="description" content="Eight zero-dependency tools that turn questions into evidence and evidence into decisions. Research, challenge, compile, ship.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="grainulation — Structured research for decisions that matter">
+<meta property="og:title" content="Grainulation — Structured research for decisions that matter">
 <meta property="og:description" content="Eight zero-dependency tools that turn questions into evidence and evidence into decisions. Research, challenge, compile, ship.">
 <meta property="og:image" content="https://grainulation.github.io/grainulation/og-image.svg">
 <meta property="og:url" content="https://grainulation.github.io/grainulation/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="grainulation — Structured research for decisions that matter">
+<meta name="twitter:title" content="Grainulation — Structured research for decisions that matter">
 <meta name="twitter:description" content="Eight zero-dependency tools that turn questions into evidence and evidence into decisions.">
 <meta name="twitter:image" content="https://grainulation.github.io/grainulation/og-image.svg">
 <link rel="canonical" href="https://grainulation.github.io/grainulation/">
@@ -115,10 +115,10 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
 .flow{padding:80px 0}
 .flow-diagram{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;padding:40px 20px}
 .flow-node{display:flex;flex-direction:column;align-items:center;gap:8px;position:relative}
-.flow-circle{width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:800;font-size:.875rem;border:2px solid;transition:transform .2s}
+.flow-circle{display:flex;align-items:center;justify-content:center;transition:transform .2s;padding-right:12px}
 .flow-circle:hover{transform:scale(1.08)}
 .flow-label{font-size:.75rem;color:var(--text-2);font-weight:600;text-align:center;max-width:90px}
-.flow-arrow{width:48px;display:flex;align-items:center;justify-content:center;color:var(--text-3);margin-bottom:20px}
+.flow-arrow{width:48px;display:flex;align-items:center;justify-content:center;color:var(--text-3)}
 .flow-arrow svg{width:24px;height:24px}
 .flow-branch{display:flex;flex-direction:column;align-items:center;gap:16px}
 .flow-branch-arrow{color:var(--text-3)}
@@ -130,7 +130,7 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
 .copy-btn:hover{color:var(--text);border-color:var(--border-light);background:rgba(255,255,255,0.10)}
 .copy-btn.copied{color:var(--green);border-color:var(--green)}
 
-@media(max-width:600px){.flow-diagram{flex-direction:column;gap:8px}.flow-arrow{transform:rotate(90deg);width:auto;height:32px;margin-bottom:0}}
+@media(max-width:600px){.flow-diagram{flex-direction:column;gap:8px}.flow-arrow{transform:rotate(90deg);width:auto;height:32px}}
 
 /* Example */
 .example{padding:80px 0}
@@ -164,7 +164,7 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
 .tool-desc{font-size:.8125rem;color:var(--text-2);line-height:1.55;margin-bottom:14px}
 .tool-install{font-family:var(--mono);font-size:.75rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:6px 12px;color:var(--text-3);display:inline-block;user-select:all}
 .tool-card.highlight{border-color:rgba(156,163,175,.3);position:relative}
-.tool-card.highlight::before{content:'START HERE';position:absolute;top:-10px;right:16px;background:var(--accent);color:#fff;font-family:var(--mono);font-size:.625rem;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:.05em}
+.tool-card.highlight::before{content:'START HERE';position:absolute;top:-10px;right:16px;background:var(--accent);color:#0a0e1a;font-family:var(--mono);font-size:.625rem;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:.05em}
 
 /* Features/philosophy */
 .features{padding:80px 0}
@@ -202,7 +202,7 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
   .term-block{max-width:100%;overflow-x:auto}
   .what-box{padding:28px 20px}
   .flow-diagram{padding:20px 10px}
-  .flow-circle{width:60px;height:60px;font-size:.75rem}
+  .flow-circle svg{height:36px !important;width:auto !important}
   .qs-step{padding:20px 16px}
   .copy-btn{display:none !important}
 }
@@ -224,6 +224,21 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
 .copy-btn{min-width:44px;min-height:24px;display:inline-flex;align-items:center;justify-content:center}
 .nav-links a{min-height:44px;display:inline-flex;align-items:center}
 </style>
+<meta name="theme-color" content="#9ca3af">
+<meta property="og:site_name" content="Grainulation">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "@grainulation/grainulation",
+  "description": "Eight zero-dependency tools that turn questions into evidence and evidence into decisions. Research, challenge, compile, ship.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "Grainulation", "url": "https://grainulation.com" },
+  "license": "https://opensource.org/licenses/MIT"
+}
+</script>
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
@@ -234,7 +249,7 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
 
 <nav aria-label="Main navigation">
   <div class="container">
-    <a href="#" class="nav-logo"><svg width="177" height="48" viewBox="0 0 140 38" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-left:4px"><path d="M22,6 L15.5,6 C9.5,11.5 9.5,26.5 15.5,32 L22,32" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><text x="23" y="19" text-anchor="middle" dominant-baseline="central" fill="#9ca3af" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">G</text><text x="29.5" y="19" dominant-baseline="central" fill="#e8ecf1" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">rainulation</text></svg></a>
+    <a href="#" class="nav-logo"><svg width="177" height="48" viewBox="0 0 140 38" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-left:4px"><path d="M22,8 L16,8 C10.5,12.5 10.5,25.5 16,30 L22,30" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><text x="23" y="19" text-anchor="middle" dominant-baseline="central" fill="#9ca3af" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">G</text><text x="29.5" y="19" dominant-baseline="central" fill="#e8ecf1" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">rainulation</text></svg></a>
     <div class="nav-links">
       <a href="#what">About</a>
       <a href="#tools">Tools</a>
@@ -252,7 +267,7 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
   <div class="container">
     <div class="hero-badge hf hf1">8 tools. Zero deps. One ecosystem.</div>
     <h1 class="hf hf2">Your team makes technical decisions on gut feel. <em>It does not have to be that way.</em></h1>
-    <p class="hero-sub hf hf3"><strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulation</strong> turns questions into typed, evidence-graded claims and compiles them into decision briefs. Research that holds up to scrutiny.</p>
+    <p class="hero-sub hf hf3"><strong style="color:#fff;font-weight:700"><span style="color:#9ca3af">g</span>rainulation</strong> turns questions into typed, evidence-graded claims and compiles them into decision briefs. Research that holds up to scrutiny.</p>
     <div class="hero-actions hf hf4">
       <a href="#quickstart" class="btn btn-primary">
         <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
@@ -270,7 +285,7 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
 <section class="what-is" id="what">
   <div class="container">
     <div class="what-box rv">
-      <p><strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulation</strong> is an ecosystem of eight command-line tools for structured technical research. You start with a question — "Should we migrate to GraphQL?" — and the tools guide you through research, adversarial challenge, and compilation into a decision brief.</p>
+      <p><strong style="color:#fff;font-weight:700"><span style="color:#9ca3af">g</span>rainulation</strong> is an ecosystem of eight command-line tools for structured technical research. You start with a question — "Should we migrate to GraphQL?" — and the tools guide you through research, adversarial challenge, and compilation into a decision brief.</p>
       <p>Every finding is tracked as a typed claim with an evidence tier (from "someone said it" to "we measured it in production"). The system forces you to challenge your own assumptions before shipping a recommendation.</p>
       <p>You need <strong><a href="https://docs.anthropic.com/en/docs/claude-code" style="color:var(--text)">Claude Code</a></strong>, <strong>Node.js 18+</strong>, and <strong>npx</strong>. No accounts, no cloud services, no npm install. Everything runs locally, everything is plain JSON and HTML.</p>
     </div>
@@ -284,12 +299,12 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
   <div class="container">
     <div class="section-label rv" style="text-align:center">How the tools connect</div>
     <h2 class="section-title rv rv-d1" style="text-align:center">From question to shipped decision</h2>
-    <p class="section-sub rv rv-d2" style="text-align:center;margin-left:auto;margin-right:auto">Start with <strong style="color:#fff;font-size:110%"><span style="color:#fbbf24">w</span>heat</strong>. Add tools only when you need them. Most sprints need just the core engine.</p>
+    <p class="section-sub rv rv-d2" style="text-align:center;margin-left:auto;margin-right:auto">Start with <strong style="color:#fff;font-weight:700"><span style="color:#fbbf24">w</span>heat</strong>. Add tools only when you need them. Most sprints need just the core engine.</p>
 
     <div class="flow-diagram rv rv-d3">
       <!-- <strong style="color:#fff;font-size:110%"><span style="color:#fbbf24">w</span>heat</strong> -->
       <div class="flow-node">
-        <div class="flow-circle" style="border-color:#fbbf24;color:#fbbf24;background:rgba(251,191,36,.06)"><strong style="color:#fff;font-size:110%"><span style="color:#fbbf24">w</span>heat</strong></div>
+        <div class="flow-circle"><svg width="92" height="48" viewBox="0 0 73 38" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22,8 L16,8 C10.5,12.5 10.5,25.5 16,30 L22,30" stroke="#fbbf24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><text x="24" y="19" text-anchor="middle" dominant-baseline="central" fill="#fbbf24" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">W</text><text x="32.5" y="19" dominant-baseline="central" fill="#e8ecf1" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">heat</text></svg></div>
         <div class="flow-label">Research</div>
       </div>
 
@@ -299,7 +314,7 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
 
       <!-- <strong style="color:#fff;font-size:110%"><span style="color:#3b82f6">f</span>armer</strong> -->
       <div class="flow-node">
-        <div class="flow-circle" style="border-color:#3b82f6;color:#3b82f6;background:rgba(59,130,246,.06)"><strong style="color:#fff;font-size:110%"><span style="color:#3b82f6">f</span>armer</strong></div>
+        <div class="flow-circle"><svg width="106" height="48" viewBox="0 0 84 38" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22,8 L16,8 C10.5,12.5 10.5,25.5 16,30 L22,30" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><text x="22" y="19" text-anchor="middle" dominant-baseline="central" fill="#3b82f6" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">F</text><text x="27" y="19" dominant-baseline="central" fill="#e8ecf1" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">armer</text></svg></div>
         <div class="flow-label">Permissions</div>
       </div>
 
@@ -309,7 +324,7 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
 
       <!-- <strong style="color:#fff;font-size:110%"><span style="color:#a78bfa">m</span>ill</strong> -->
       <div class="flow-node">
-        <div class="flow-circle" style="border-color:#a78bfa;color:#a78bfa;background:rgba(167,139,250,.06)"><strong style="color:#fff;font-size:110%"><span style="color:#a78bfa">m</span>ill</strong></div>
+        <div class="flow-circle"><svg width="63" height="48" viewBox="0 0 50 38" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22,8 L16,8 C10.5,12.5 10.5,25.5 16,30 L22,30" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><text x="24" y="19" text-anchor="middle" dominant-baseline="central" fill="#a78bfa" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">M</text><text x="32.5" y="19" dominant-baseline="central" fill="#e8ecf1" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">ill</text></svg></div>
         <div class="flow-label">Export</div>
       </div>
 
@@ -319,25 +334,25 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
 
       <!-- <strong style="color:#fff;font-size:110%"><span style="color:#fb923c">h</span>arvest</strong> -->
       <div class="flow-node">
-        <div class="flow-circle" style="border-color:var(--orange);color:var(--orange);background:rgba(249,115,22,.06)"><strong style="color:#fff;font-size:110%"><span style="color:#fb923c">h</span>arvest</strong></div>
+        <div class="flow-circle"><svg width="111" height="48" viewBox="0 0 88 38" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22,8 L16,8 C10.5,12.5 10.5,25.5 16,30 L22,30" stroke="#fb923c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><text x="23" y="19" text-anchor="middle" dominant-baseline="central" fill="#fb923c" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">H</text><text x="29.5" y="19" dominant-baseline="central" fill="#e8ecf1" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">arvest</text></svg></div>
         <div class="flow-label">Analytics</div>
       </div>
     </div>
 
     <!-- Supporting tools row -->
     <div style="text-align:center;margin-top:24px">
-      <div style="display:inline-flex;gap:32px;flex-wrap:wrap;justify-content:center" class="rv rv-d4">
-        <div style="display:flex;align-items:center;gap:8px">
-          <div style="width:12px;height:12px;border-radius:50%;border:2px solid var(--red)"></div>
-          <span style="font-size:.8125rem;color:var(--text-2)"><strong style="color:#fff;font-size:110%"><span style="color:#e11d48">b</span>arn</strong> — shared utilities</span>
+      <div style="display:inline-flex;gap:24px;flex-wrap:wrap;justify-content:center;align-items:start" class="rv rv-d4">
+        <div class="flow-node">
+          <div class="flow-circle"><svg width="78" height="48" viewBox="0 0 62 38" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22,8 L16,8 C10.5,12.5 10.5,25.5 16,30 L22,30" stroke="#f43f5e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><text x="22.5" y="19" text-anchor="middle" dominant-baseline="central" fill="#f43f5e" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">B</text><text x="28.5" y="19" dominant-baseline="central" fill="#e8ecf1" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">arn</text></svg></div>
+          <div class="flow-label">Shared utilities</div>
         </div>
-        <div style="display:flex;align-items:center;gap:8px">
-          <div style="width:12px;height:12px;border-radius:50%;border:2px solid #6ee7b7"></div>
-          <span style="font-size:.8125rem;color:var(--text-2)"><strong style="color:#fff;font-size:110%"><span style="color:#6ee7b7">s</span>ilo</strong> — knowledge packs</span>
+        <div class="flow-node">
+          <div class="flow-circle"><svg width="68" height="48" viewBox="0 0 54 38" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22,8 L16,8 C10.5,12.5 10.5,25.5 16,30 L22,30" stroke="#6ee7b7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><text x="22" y="19" text-anchor="middle" dominant-baseline="central" fill="#6ee7b7" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">S</text><text x="27.5" y="19" dominant-baseline="central" fill="#e8ecf1" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">ilo</text></svg></div>
+          <div class="flow-label">Knowledge packs</div>
         </div>
-        <div style="display:flex;align-items:center;gap:8px">
-          <div style="width:12px;height:12px;border-radius:50%;border:2px solid #d4a574"></div>
-          <span style="font-size:.8125rem;color:var(--text-2)"><strong style="color:#fff;font-size:110%"><span style="color:#d4a574">o</span>rchard</strong> — orchestration</span>
+        <div class="flow-node">
+          <div class="flow-circle"><svg width="114" height="48" viewBox="0 0 90 38" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22,8 L16,8 C10.5,12.5 10.5,25.5 16,30 L22,30" stroke="#14b8a6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><text x="23" y="19" text-anchor="middle" dominant-baseline="central" fill="#14b8a6" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">O</text><text x="29.5" y="19" dominant-baseline="central" fill="#e8ecf1" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">rchard</text></svg></div>
+          <div class="flow-label">Orchestration</div>
         </div>
       </div>
     </div>
@@ -357,7 +372,7 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
       <div class="qs-step rv rv-d1">
         <div class="qs-num">1</div>
         <h3>Initialize a sprint</h3>
-        <p>Start with the question you need answered. <strong style="color:#fff;font-size:110%"><span style="color:#fbbf24">w</span>heat</strong> creates a claims file and config.</p>
+        <p>Start with the question you need answered. <strong style="color:#fff;font-weight:700"><span style="color:#fbbf24">w</span>heat</strong> creates a claims file and config.</p>
         <div class="copy-wrap">
           <pre class="qs-code"><code><span class="dim">$</span> npx @grainulation/wheat init</code></pre>
           <button class="copy-btn" onclick="copyText(this,'npx @grainulation/wheat init')">Copy</button>
@@ -443,119 +458,95 @@ Written: output/brief.html</div>
   <div class="container">
     <div class="section-label rv" style="text-align:center">The ecosystem</div>
     <h2 class="section-title rv rv-d1" style="text-align:center">Eight tools. Each does one thing well.</h2>
-    <p class="section-sub rv rv-d2" style="text-align:center;margin-left:auto;margin-right:auto">Start with <strong style="color:#fff;font-size:110%"><span style="color:#fbbf24">w</span>heat</strong>. Everything else is optional. Add tools as your research practice grows.</p>
+    <p class="section-sub rv rv-d2" style="text-align:center;margin-left:auto;margin-right:auto">Start with <strong style="color:#fff;font-weight:700"><span style="color:#fbbf24">w</span>heat</strong>. Everything else is optional. Add tools as your research practice grows.</p>
 
     <div class="tools-grid">
       <a href="https://grainulation.github.io/wheat/" class="tool-card highlight rv rv-d1" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
-          <div class="tool-icon" style="background:rgba(251,191,36,.1);color:#fbbf24">
-            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-          </div>
+          <svg width="61" height="32" viewBox="0 0 73 38" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle"><path d="M22,8 L16,8 C10.5,12.5 10.5,25.5 16,30 L22,30" stroke="#fbbf24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><text x="24" y="19" text-anchor="middle" dominant-baseline="central" fill="#fbbf24" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">W</text><text x="32.5" y="19" dominant-baseline="central" fill="#e8ecf1" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">heat</text></svg>
           <div>
-            <div class="tool-name"><strong style="color:#fff;font-size:110%"><span style="color:#fbbf24">w</span>heat</strong></div>
             <div class="tool-role" style="color:#fbbf24">Research engine</div>
           </div>
         </div>
         <div class="tool-desc">The core. Ask a question, grow claims from multiple angles, compile a decision brief. Everything starts here.</div>
-        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulation</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#fbbf24">w</span>heat</strong> init</div>
+        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:#9ca3af">gr</span>ainulation</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#fbbf24">w</span>heat</strong> init</div>
       </a>
 
       <a href="https://grainulation.github.io/farmer/" class="tool-card rv rv-d2" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
-          <div class="tool-icon" style="background:rgba(59,130,246,.1);color:#3b82f6">
-            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-          </div>
+          <svg width="71" height="32" viewBox="0 0 84 38" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle"><path d="M22,8 L16,8 C10.5,12.5 10.5,25.5 16,30 L22,30" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><text x="22" y="19" text-anchor="middle" dominant-baseline="central" fill="#3b82f6" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">F</text><text x="27" y="19" dominant-baseline="central" fill="#e8ecf1" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">armer</text></svg>
           <div>
-            <div class="tool-name"><strong style="color:#fff;font-size:110%"><span style="color:#3b82f6">f</span>armer</strong></div>
             <div class="tool-role" style="color:#3b82f6">Permission dashboard</div>
           </div>
         </div>
         <div class="tool-desc">Approve AI agent tool calls from your phone, another tab, or a meeting. Real-time WebSocket dashboard.</div>
-        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulation</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#3b82f6">f</span>armer</strong> start</div>
+        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:#9ca3af">gr</span>ainulation</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#3b82f6">f</span>armer</strong> start</div>
       </a>
 
       <a href="https://grainulation.github.io/barn/" class="tool-card rv rv-d3" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
-          <div class="tool-icon" style="background:rgba(225,29,72,.1);color:var(--red)">
-            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          </div>
+          <svg width="52" height="32" viewBox="0 0 62 38" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle"><path d="M22,8 L16,8 C10.5,12.5 10.5,25.5 16,30 L22,30" stroke="#f43f5e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><text x="22.5" y="19" text-anchor="middle" dominant-baseline="central" fill="#f43f5e" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">B</text><text x="28.5" y="19" dominant-baseline="central" fill="#e8ecf1" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">arn</text></svg>
           <div>
-            <div class="tool-name"><strong style="color:#fff;font-size:110%"><span style="color:#e11d48">b</span>arn</strong></div>
-            <div class="tool-role" style="color:var(--red)">Shared utilities</div>
+            <div class="tool-role" style="color:#f43f5e">Shared utilities</div>
           </div>
         </div>
         <div class="tool-desc">Sprint detection, manifest generation, HTML templates. The shared foundation the ecosystem builds on.</div>
-        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulation</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#e11d48">b</span>arn</strong> detect-sprints</div>
+        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:#9ca3af">gr</span>ainulation</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#f43f5e">b</span>arn</strong> detect-sprints</div>
       </a>
 
       <a href="https://grainulation.github.io/mill/" class="tool-card rv rv-d4" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
-          <div class="tool-icon" style="background:rgba(167,139,250,.1);color:#a78bfa">
-            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-          </div>
+          <svg width="42" height="32" viewBox="0 0 50 38" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle"><path d="M22,8 L16,8 C10.5,12.5 10.5,25.5 16,30 L22,30" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><text x="24" y="19" text-anchor="middle" dominant-baseline="central" fill="#a78bfa" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">M</text><text x="32.5" y="19" dominant-baseline="central" fill="#e8ecf1" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">ill</text></svg>
           <div>
-            <div class="tool-name"><strong style="color:#fff;font-size:110%"><span style="color:#a78bfa">m</span>ill</strong></div>
             <div class="tool-role" style="color:#a78bfa">Export and publish</div>
           </div>
         </div>
         <div class="tool-desc">Turn compiled research into PDFs, CSVs, and static sites. Every format you need to share decisions.</div>
-        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulation</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#a78bfa">m</span>ill</strong> export --format pdf</div>
+        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:#9ca3af">gr</span>ainulation</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#a78bfa">m</span>ill</strong> export --format pdf</div>
       </a>
 
       <a href="https://grainulation.github.io/silo/" class="tool-card rv rv-d1" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
-          <div class="tool-icon" style="background:rgba(110,231,183,.1);color:#6ee7b7">
-            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-          </div>
+          <svg width="45" height="32" viewBox="0 0 54 38" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle"><path d="M22,8 L16,8 C10.5,12.5 10.5,25.5 16,30 L22,30" stroke="#6ee7b7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><text x="22" y="19" text-anchor="middle" dominant-baseline="central" fill="#6ee7b7" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">S</text><text x="27.5" y="19" dominant-baseline="central" fill="#e8ecf1" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">ilo</text></svg>
           <div>
-            <div class="tool-name"><strong style="color:#fff;font-size:110%"><span style="color:#6ee7b7">s</span>ilo</strong></div>
             <div class="tool-role" style="color:#6ee7b7">Knowledge packs</div>
           </div>
         </div>
         <div class="tool-desc">Reusable claim libraries. HIPAA constraints, migration risks, architecture patterns. Pull established knowledge, skip the re-research.</div>
-        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulation</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#6ee7b7">s</span>ilo</strong> pull compliance</div>
+        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:#9ca3af">gr</span>ainulation</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#6ee7b7">s</span>ilo</strong> pull compliance</div>
       </a>
 
       <a href="https://grainulation.github.io/harvest/" class="tool-card rv rv-d2" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
-          <div class="tool-icon" style="background:rgba(251,146,60,.1);color:#fb923c">
-            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
-          </div>
+          <svg width="74" height="32" viewBox="0 0 88 38" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle"><path d="M22,8 L16,8 C10.5,12.5 10.5,25.5 16,30 L22,30" stroke="#fb923c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><text x="23" y="19" text-anchor="middle" dominant-baseline="central" fill="#fb923c" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">H</text><text x="29.5" y="19" dominant-baseline="central" fill="#e8ecf1" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">arvest</text></svg>
           <div>
-            <div class="tool-name"><strong style="color:#fff;font-size:110%"><span style="color:#fb923c">h</span>arvest</strong></div>
             <div class="tool-role" style="color:#fb923c">Analytics</div>
           </div>
         </div>
         <div class="tool-desc">Cross-sprint learning. Track prediction accuracy, find systemic blind spots, detect stale claims across all your research.</div>
-        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulation</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#fb923c">h</span>arvest</strong> analyze ./sprints/</div>
+        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:#9ca3af">gr</span>ainulation</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#fb923c">h</span>arvest</strong> analyze ./sprints/</div>
       </a>
 
       <a href="https://grainulation.github.io/orchard/" class="tool-card rv rv-d3" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
-          <div class="tool-icon" style="background:rgba(212,165,116,.1);color:#d4a574">
-            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-          </div>
+          <svg width="76" height="32" viewBox="0 0 90 38" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle"><path d="M22,8 L16,8 C10.5,12.5 10.5,25.5 16,30 L22,30" stroke="#14b8a6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><text x="23" y="19" text-anchor="middle" dominant-baseline="central" fill="#14b8a6" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">O</text><text x="29.5" y="19" dominant-baseline="central" fill="#e8ecf1" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">rchard</text></svg>
           <div>
-            <div class="tool-name"><strong style="color:#fff;font-size:110%"><span style="color:#d4a574">o</span>rchard</strong></div>
-            <div class="tool-role" style="color:#d4a574">Orchestration</div>
+            <div class="tool-role" style="color:#14b8a6">Multi-sprint orchestration</div>
           </div>
         </div>
         <div class="tool-desc">Multi-sprint coordination. Dependencies, conflict detection, team assignment. The org-wide view of all active research.</div>
-        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulation</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#d4a574">o</span>rchard</strong> status</div>
+        <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:#9ca3af">gr</span>ainulation</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#14b8a6">o</span>rchard</strong> status</div>
       </a>
 
       <a href="https://github.com/grainulation/grainulation" class="tool-card rv rv-d4" style="text-decoration:none;color:inherit">
         <div class="tool-card-head">
-          <div class="tool-icon" style="background:var(--accent-dim);color:var(--accent)">
-            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
-          </div>
+          <svg width="118" height="32" viewBox="0 0 140 38" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle"><path d="M22,8 L16,8 C10.5,12.5 10.5,25.5 16,30 L22,30" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><text x="23" y="19" text-anchor="middle" dominant-baseline="central" fill="#9ca3af" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">G</text><text x="29.5" y="19" dominant-baseline="central" fill="#e8ecf1" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">rainulation</text></svg>
           <div>
-            <div class="tool-name"><strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulation</strong></div>
-            <div class="tool-role" style="color:var(--accent)">Unified CLI</div>
+            <div class="tool-role" style="color:#9ca3af">Unified CLI</div>
           </div>
         </div>
         <div class="tool-desc">The meta-tool. Routes to the right tool, checks ecosystem health, manages configuration across all eight packages.</div>
-        <div class="tool-install">npx <strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulation</strong></div>
+        <div class="tool-install">npx <strong style="color:#fff;font-size:110%"><span style="color:#9ca3af">gr</span>ainulation</strong></div>
       </a>
     </div>
   </div>
@@ -629,7 +620,7 @@ Written: output/brief.html</div>
           <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="faq-a">
-          <p><strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulation</strong> is language-agnostic. It researches decisions about any technology — databases, APIs, infrastructure, architecture. The tools run locally, but the research can be about anything.</p>
+          <p><strong style="color:#fff;font-weight:700"><span style="color:#9ca3af">g</span>rainulation</strong> is language-agnostic. It researches decisions about any technology — databases, APIs, infrastructure, architecture. The tools run locally, but the research can be about anything.</p>
         </div>
       </div>
 
@@ -639,7 +630,7 @@ Written: output/brief.html</div>
           <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="faq-a">
-          <p>RFCs and ADRs document a decision after it is made. <strong style="color:#fff;font-size:110%"><span style="color:var(--accent)">gr</span>ainulation</strong> captures the research process — the evidence gathering, adversarial testing, and conflict resolution that leads to the decision. The output brief can serve as your ADR.</p>
+          <p>RFCs and ADRs document a decision after it is made. <strong style="color:#fff;font-weight:700"><span style="color:#9ca3af">g</span>rainulation</strong> captures the research process — the evidence gathering, adversarial testing, and conflict resolution that leads to the decision. The output brief can serve as your ADR.</p>
         </div>
       </div>
 
@@ -649,7 +640,7 @@ Written: output/brief.html</div>
           <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="faq-a">
-          <p>No. Start with <strong style="color:#fff;font-size:110%"><span style="color:#fbbf24">w</span>heat</strong> alone — it handles the full research-to-decision workflow. Add other tools only when you need specific capabilities: <strong style="color:#fff;font-size:110%"><span style="color:#3b82f6">f</span>armer</strong> for AI permissions, <strong style="color:#fff;font-size:110%"><span style="color:#a78bfa">m</span>ill</strong> for export, <strong style="color:#fff;font-size:110%"><span style="color:#6ee7b7">s</span>ilo</strong> for reusable knowledge, and so on.</p>
+          <p>No. Start with <strong style="color:#fff;font-weight:700"><span style="color:#fbbf24">w</span>heat</strong> alone — it handles the full research-to-decision workflow. Add other tools only when you need specific capabilities: <strong style="color:#fff;font-weight:700"><span style="color:#3b82f6">f</span>armer</strong> for AI permissions, <strong style="color:#fff;font-weight:700"><span style="color:#a78bfa">m</span>ill</strong> for export, <strong style="color:#fff;font-weight:700"><span style="color:#6ee7b7">s</span>ilo</strong> for reusable knowledge, and so on.</p>
         </div>
       </div>
     </div>
@@ -659,7 +650,7 @@ Written: output/brief.html</div>
 </main>
 
 <!-- Footer -->
-<footer><div class="container"><div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap"><a href="https://github.com/grainulation/grainulation">GitHub</a><span style="color:var(--border-light)">·</span><a href="https://grainulation.github.io/grainulation/" style="text-decoration:none"><svg width="83" height="28" viewBox="0 0 140 38" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle"><path d="M22,6 L15.5,6 C9.5,11.5 9.5,26.5 15.5,32 L22,32" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><text x="23" y="19" text-anchor="middle" dominant-baseline="central" fill="#9ca3af" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">G</text><text x="29.5" y="19" dominant-baseline="central" fill="#e8ecf1" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">rainulation</text></svg></a><span style="color:var(--border-light)">·</span><a href="https://github.com/grainulation/grainulation#readme">Docs</a></div></div></footer>
+<footer><div class="container"><div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap"><a href="https://github.com/grainulation/grainulation">GitHub</a><span style="color:var(--border-light)">·</span><a href="https://grainulation.github.io/grainulation/" style="text-decoration:none"><svg width="83" height="28" viewBox="0 0 140 38" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle"><path d="M22,8 L16,8 C10.5,12.5 10.5,25.5 16,30 L22,30" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><text x="23" y="19" text-anchor="middle" dominant-baseline="central" fill="#9ca3af" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">G</text><text x="29.5" y="19" dominant-baseline="central" fill="#e8ecf1" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">rainulation</text></svg></a><span style="color:var(--border-light)">·</span><a href="https://github.com/grainulation/grainulation#readme">Docs</a></div></div></footer>
 
 </div>
 

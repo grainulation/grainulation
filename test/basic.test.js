@@ -162,10 +162,12 @@ test('router overview mentions doctor command', () => {
   assert.ok(text.includes('doctor'));
 });
 
-test('router overview mentions setup command', () => {
+test('router overview mentions process management commands', () => {
   const { overview } = require('../lib/router');
   const text = overview();
-  assert.ok(text.includes('setup'));
+  assert.ok(text.includes('up'));
+  assert.ok(text.includes('down'));
+  assert.ok(text.includes('ps'));
 });
 
 // ── CLI: extended tests ──────────────────────────────────────

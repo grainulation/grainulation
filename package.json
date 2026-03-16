@@ -1,12 +1,18 @@
 {
   "name": "@grainulation/grainulation",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Structured research for decisions that satisfice",
   "license": "MIT",
   "bin": {
-    "grainulation": "./bin/grainulation.js"
+    "grainulation": "bin/grainulation.js"
   },
   "main": "./lib/ecosystem.js",
+  "exports": {
+    ".": "./lib/ecosystem.js",
+    "./pm": "./lib/pm.js",
+    "./doctor": "./lib/doctor.js",
+    "./router": "./lib/router.js"
+  },
   "files": [
     "bin/",
     "lib/",
@@ -25,9 +31,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/grainulation/grainulation"
+    "url": "git+https://github.com/grainulation/grainulation.git"
   },
-  "homepage": "https://grainulation.dev",
+  "bugs": {
+    "url": "https://github.com/grainulation/grainulation/issues"
+  },
+  "homepage": "https://grainulation.github.io/grainulation/",
   "engines": {
     "node": ">=18"
   },

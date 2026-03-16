@@ -67,7 +67,7 @@ Everything else is optional. Add tools when you feel the friction.
 npx @grainulation/wheat init
 
 # Or install the unified CLI first
-npm install -g grainulation
+npm install -g @grainulation/grainulation
 
 # See what's installed
 grainulation doctor
