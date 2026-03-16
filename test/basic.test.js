@@ -153,7 +153,7 @@ test('router overview contains all tool names', () => {
 test('router overview mentions start command', () => {
   const { overview } = require('../lib/router');
   const text = overview();
-  assert.ok(text.includes('npx @grainulation/wheat init'));
+  assert.ok(text.includes('grainulation init'));
 });
 
 test('router overview mentions doctor command', () => {
@@ -235,6 +235,45 @@ test('setup Researcher role only has wheat', () => {
   const researcher = ROLES.find(r => r.name === 'Researcher');
   assert.ok(researcher);
   assert.deepEqual(researcher.tools, ['wheat']);
+});
+
+// ── Init command ─────────────────────────────────────────────────
+
+test('init shows context detection', () => {
+  // init may delegate to wheat and exit non-zero if wheat fails,
+  // so capture output regardless of exit code
+  try {
+    const out = run('init');
+    assert.ok(out.includes('grainulation init'));
+    assert.ok(out.includes('Detected context'));
+  } catch (err) {
+    // If it exited non-zero, still check stdout for context output
+    const out = (err.stdout || '') + (err.stderr || '');
+    assert.ok(out.includes('grainulation init'), 'init header missing');
+    assert.ok(out.includes('Detected context'), 'context detection missing');
+  }
+});
+
+// ── Status command ───────────────────────────────────────────────
+
+test('status shows installed tools section', () => {
+  const out = run('status');
+  assert.ok(out.includes('grainulation status'));
+  assert.ok(out.includes('Installed tools'));
+});
+
+test('status shows current directory', () => {
+  const out = run('status');
+  assert.ok(out.includes('Current directory'));
+});
+
+// ── Router: init and status in overview ──────────────────────────
+
+test('router overview mentions init command', () => {
+  const { overview } = require('../lib/router');
+  const text = overview();
+  assert.ok(text.includes('init'));
+  assert.ok(text.includes('status'));
 });
 
 // ── Summary ─────────────────────────────────────────────────────
