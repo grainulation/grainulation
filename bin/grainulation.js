@@ -17,6 +17,7 @@
  */
 
 const verbose = process.argv.includes('--verbose') || process.argv.includes('-v');
+const jsonMode = process.argv.includes('--json');
 function vlog(...a) {
   if (!verbose) return;
   const ts = new Date().toISOString();
@@ -45,5 +46,7 @@ if (command === 'serve') {
   });
 } else {
   const { route } = require('../lib/router');
-  route(process.argv.slice(2));
+  // Strip --json from args before routing (it's handled as a mode flag)
+  const args = process.argv.slice(2).filter((a) => a !== '--json');
+  route(args, { json: jsonMode });
 }
