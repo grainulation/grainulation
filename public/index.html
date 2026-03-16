@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-tool="grainulation">
+<html lang="en" dir="auto" data-tool="grainulation">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -73,7 +73,7 @@ body {
 .conn-dot.disconnected { background: var(--red); }
 .reconnect-banner { position:fixed;top:0;left:0;right:0;z-index:9999;padding:8px 16px;background:#92400e;color:#fbbf24;font-size:12px;text-align:center;transform:translateY(-100%);transition:transform .3s;font-family:system-ui,sans-serif }
 .reconnect-banner.visible { transform:translateY(0) }
-.reconnect-banner button { background:none;border:1px solid #fbbf24;color:#fbbf24;padding:2px 10px;border-radius:4px;cursor:pointer;font-size:11px;margin-left:8px }
+.reconnect-banner button { background:none;border:1px solid #fbbf24;color:#fbbf24;padding:2px 10px;border-radius:4px;cursor:pointer;font-size:11px;margin-inline-start:8px }
 .meta-tag {
   font-size: 10px; color: var(--fg3);
   background: var(--bg2); padding: 2px 8px; border-radius: 10px;
@@ -175,7 +175,7 @@ body {
 .check-detail { color: var(--fg3); font-family: var(--font-mono); font-size: 11px; }
 .check-cat {
   font-size: 9px; color: var(--fg3); background: var(--bg3);
-  padding: 1px 6px; border-radius: 8px; margin-left: auto;
+  padding: 1px 6px; border-radius: 8px; margin-inline-start: auto;
 }
 
 /* ── Getting started ── */
@@ -223,7 +223,7 @@ body {
 .nav-dot {
   width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
 }
-.nav-port { font-size: 9px; color: var(--fg3); font-family: var(--font-mono); margin-left: auto; }
+.nav-port { font-size: 9px; color: var(--fg3); font-family: var(--font-mono); margin-inline-start: auto; }
 
 /* ── Footer ── */
 .footer {
@@ -232,7 +232,7 @@ body {
 }
 
 /* ── A11y ── */
-.skip-link{position:absolute;top:-40px;left:0;background:var(--accent);color:#000;padding:8px 16px;z-index:10000;font-size:14px;font-weight:600;transition:top .2s}
+.skip-link{position:absolute;top:-40px;inset-inline-start:0;background:var(--accent);color:#000;padding:8px 16px;z-index:10000;font-size:14px;font-weight:600;transition:top .2s}
 .skip-link:focus{top:0}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
 @media (prefers-reduced-motion: reduce) {
@@ -328,6 +328,9 @@ body {
 (function() {
   'use strict';
 
+  // ── i18n passthrough ──
+  const t = (s, v) => v ? s.replace(/\{(\w+)\}/g, (_, k) => v[k] ?? k) : s;
+
   const TOOL_ACCENTS = {
     wheat: '#fbbf24', farmer: '#fb923c', barn: '#e11d48', mill: '#3b82f6',
     silo: '#22d3ee', harvest: '#34d399', orchard: '#14b8a6', grainulation: '#9ca3af',
@@ -340,11 +343,11 @@ body {
   function showBanner(count) {
     const b = document.getElementById('reconnectBanner');
     if (count > 5) {
-      b.innerHTML = 'Connection lost. <button onclick="retryCount=0;connect()">Retry now</button>';
+      b.innerHTML = t('Connection lost.') + ' <button onclick="retryCount=0;connect()">' + t('Retry now') + '</button>';
     } else if (count > 1) {
-      b.textContent = 'Reconnecting (attempt ' + count + ')...';
+      b.textContent = t('Reconnecting (attempt {count})...', { count });
     } else {
-      b.textContent = 'Reconnecting...';
+      b.textContent = t('Reconnecting...');
     }
     b.classList.add('visible');
   }
@@ -387,7 +390,7 @@ body {
 
     const tools = state.ecosystem || [];
     const doctor = state.doctorResults || { checks: [], summary: {} };
-    const installed = tools.filter(t => t.installed).length;
+    const installed = tools.filter(tl => tl.installed).length;
 
     // Tool count
     document.getElementById('toolCount').textContent = `${installed}/${tools.length} tools`;
@@ -395,9 +398,9 @@ body {
     // Doctor bar
     const s = doctor.summary || {};
     document.getElementById('doctorBar').innerHTML = [
-      { label: 'Pass', count: s.pass || 0, cls: 'dot-pass' },
-      { label: 'Warning', count: s.warning || 0, cls: 'dot-warn' },
-      { label: 'Fail', count: s.fail || 0, cls: 'dot-fail' },
+      { label: t('Pass'), count: s.pass || 0, cls: 'dot-pass' },
+      { label: t('Warning'), count: s.warning || 0, cls: 'dot-warn' },
+      { label: t('Fail'), count: s.fail || 0, cls: 'dot-fail' },
     ].map(d => `
       <div class="doctor-stat">
         <span class="dot ${d.cls}"></span>
@@ -406,25 +409,25 @@ body {
     `).join('');
 
     // Tool catalog
-    document.getElementById('toolGrid').innerHTML = tools.map(t => {
-      const accent = TOOL_ACCENTS[t.name] || '#9ca3af';
-      const statusCls = t.installed ? 'status-installed' : 'status-missing';
-      const statusText = t.installed ? 'installed' : 'not found';
+    document.getElementById('toolGrid').innerHTML = tools.map(tl => {
+      const accent = TOOL_ACCENTS[tl.name] || '#9ca3af';
+      const statusCls = tl.installed ? 'status-installed' : 'status-missing';
+      const statusText = tl.installed ? t('installed') : t('not found');
 
       return `
         <div class="tool-card" style="--tool-accent: ${accent}">
           <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:${accent};border-radius:2px 0 0 2px;"></div>
           <div class="tool-card-header">
-            <span class="tool-name">${esc(t.name)}</span>
+            <span class="tool-name">${esc(tl.name)}</span>
             <span class="tool-status ${statusCls}">${statusText}</span>
           </div>
-          <div class="tool-role">${esc(t.role)}</div>
+          <div class="tool-role">${esc(tl.role)}</div>
           <div class="tool-footer">
-            <span class="tool-version">${t.installed ? 'v' + esc(t.version) : '--'}</span>
-            ${t.method ? `<span class="tool-method">${esc(t.method)}</span>` : ''}
+            <span class="tool-version">${tl.installed ? 'v' + esc(tl.version) : '--'}</span>
+            ${tl.method ? `<span class="tool-method">${esc(tl.method)}</span>` : ''}
             <div class="tool-actions">
-              ${t.installed && t.name !== 'grainulation' ? `<a class="tool-btn tool-btn-primary" href="http://localhost:${t.port}" target="_blank">Open UI</a>` : ''}
-              ${!t.installed ? `<span class="tool-btn" title="npm install -g ${esc(t.pkg)}">Install</span>` : ''}
+              ${tl.installed && tl.name !== 'grainulation' ? `<a class="tool-btn tool-btn-primary" href="http://localhost:${tl.port}" target="_blank">${t('Open UI')}</a>` : ''}
+              ${!tl.installed ? `<span class="tool-btn" title="npm install -g ${esc(tl.pkg)}">${t('Install')}</span>` : ''}
             </div>
           </div>
         </div>`;
@@ -450,16 +453,16 @@ body {
 
     // Cross-tool nav
     document.getElementById('navGrid').innerHTML = tools
-      .filter(t => t.installed && t.name !== 'grainulation')
-      .map(t => {
-        const accent = TOOL_ACCENTS[t.name] || '#9ca3af';
+      .filter(tl => tl.installed && tl.name !== 'grainulation')
+      .map(tl => {
+        const accent = TOOL_ACCENTS[tl.name] || '#9ca3af';
         return `
-          <a class="nav-link" href="http://localhost:${t.port}" target="_blank">
+          <a class="nav-link" href="http://localhost:${tl.port}" target="_blank">
             <span class="nav-dot" style="background:${accent}"></span>
-            ${esc(t.name)}
-            <span class="nav-port">:${t.port}</span>
+            ${esc(tl.name)}
+            <span class="nav-port">:${tl.port}</span>
           </a>`;
-      }).join('') || '<div style="grid-column:1/-1;text-align:center;color:var(--fg3);padding:16px;font-size:12px;">No tools running. Install tools to see navigation links.</div>';
+      }).join('') || '<div style="grid-column:1/-1;text-align:center;color:var(--fg3);padding:16px;font-size:12px;">' + t('No tools running. Install tools to see navigation links.') + '</div>';
   }
 
   function esc(str) {
