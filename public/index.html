@@ -63,11 +63,10 @@ body {
   border-bottom: 1px solid var(--border); margin-bottom: 32px;
 }
 .header h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
-.header h1 .g { color: var(--fg); }
 .header .subtitle { color: var(--fg3); font-size: 12px; margin-top: 4px; }
 .header-meta {
   display: flex; align-items: center; justify-content: center;
-  gap: 16px; margin-top: 12px;
+  gap: 12px; margin-top: 12px; flex-wrap: wrap;
 }
 .conn-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); display: inline-block; }
 .conn-dot.disconnected { background: var(--red); }
@@ -79,6 +78,13 @@ body {
   background: var(--bg2); padding: 2px 8px; border-radius: 10px;
   border: 1px solid var(--border);
 }
+.health-badge {
+  font-size: 10px; font-weight: 600; padding: 2px 10px; border-radius: 10px;
+  text-transform: uppercase; letter-spacing: 0.3px;
+}
+.health-badge.healthy { background: rgba(52,211,153,0.12); color: var(--green); }
+.health-badge.degraded { background: rgba(251,146,60,0.12); color: var(--orange); }
+.health-badge.unhealthy { background: rgba(248,113,113,0.12); color: var(--red); }
 
 /* ── Doctor summary ── */
 .doctor-bar {
@@ -94,6 +100,44 @@ body {
 .doctor-stat .dot-warn { background: var(--orange); }
 .doctor-stat .dot-fail { background: var(--red); }
 
+/* ── Active sprint ── */
+.sprint-panel {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 24px;
+  margin-bottom: 32px; border-left: 3px solid #fbbf24;
+}
+.sprint-panel.sprint-empty {
+  border-left-color: var(--bg4);
+}
+.sprint-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 8px;
+}
+.sprint-label {
+  font-size: 10px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.8px; color: #fbbf24;
+}
+.sprint-panel.sprint-empty .sprint-label { color: var(--fg3); }
+.sprint-phase {
+  font-size: 9px; padding: 2px 8px; border-radius: 10px;
+  font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px;
+  background: rgba(251,191,36,0.12); color: #fbbf24;
+}
+.sprint-question {
+  font-size: 14px; font-weight: 600; color: var(--fg);
+  margin-bottom: 10px; line-height: 1.4;
+}
+.sprint-stats {
+  display: flex; gap: 16px; font-size: 11px; color: var(--fg2);
+}
+.sprint-stat { display: flex; align-items: center; gap: 4px; }
+.sprint-stat-value {
+  font-weight: 600; font-family: var(--font-mono); color: var(--fg);
+}
+.sprint-empty-msg {
+  font-size: 12px; color: var(--fg3);
+}
+
 /* ── Tool catalog ── */
 .section-title {
   font-size: 11px; font-weight: 600; text-transform: uppercase;
@@ -107,25 +151,29 @@ body {
 
 .tool-card {
   background: var(--bg2); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 16px;
+  border-radius: var(--radius); padding: 16px 16px 16px 20px;
   transition: all var(--transition-base);
   position: relative; overflow: hidden;
 }
 .tool-card:hover { border-color: var(--accent-border); transform: translateY(-1px); }
-.tool-card::before {
-  content: ''; position: absolute; top: 0; left: 0;
-  width: 3px; height: 100%; border-radius: 2px 0 0 2px;
-}
+.tool-card:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
 .tool-card-header {
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex; align-items: center; gap: 10px;
   margin-bottom: 6px;
 }
-.tool-name { font-weight: 600; font-size: 14px; }
+.tool-icon {
+  width: 28px; height: 28px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 800; font-family: var(--font-sans);
+  flex-shrink: 0; color: #fff;
+}
+.tool-name { font-weight: 600; font-size: 14px; flex: 1; }
 .tool-status {
   font-size: 9px; padding: 2px 8px; border-radius: 10px;
   font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px;
 }
 .status-installed { background: rgba(52,211,153,0.12); color: var(--green); }
+.status-available { background: rgba(156,163,175,0.08); color: var(--fg3); }
 .status-missing { background: rgba(156,163,175,0.08); color: var(--fg3); }
 .tool-role { font-size: 11px; color: var(--fg2); margin-bottom: 8px; }
 .tool-footer {
@@ -139,14 +187,15 @@ body {
   font-size: 9px; color: var(--fg3); background: var(--bg3);
   padding: 1px 6px; border-radius: 8px;
 }
-.tool-actions { display: flex; gap: 6px; }
+.tool-actions { display: flex; gap: 6px; margin-inline-start: auto; }
 .tool-btn {
   font-size: 10px; padding: 3px 10px; border-radius: var(--radius-sm);
   border: 1px solid var(--border); background: var(--bg3);
   color: var(--fg2); cursor: pointer; text-decoration: none;
-  transition: all var(--transition-fast);
+  transition: all var(--transition-fast); font-family: var(--font-sans);
 }
 .tool-btn:hover { background: var(--bg4); color: var(--fg); }
+.tool-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 .tool-btn-primary {
   background: var(--accent-dim); border-color: var(--accent-border);
   color: var(--fg);
@@ -155,7 +204,7 @@ body {
 
 /* ── Doctor checklist ── */
 .doctor-section { margin-bottom: 40px; }
-.check-list { display: flex; flex-direction: column; gap: 4px; }
+.check-list { display: flex; flex-direction: column; gap: 4px; margin-bottom: 40px; }
 .check-item {
   display: flex; align-items: center; gap: 10px;
   padding: 8px 12px; background: var(--bg2);
@@ -220,6 +269,7 @@ body {
   transition: all var(--transition-fast);
 }
 .nav-link:hover { background: var(--bg3); color: var(--fg); border-color: var(--accent-border); }
+.nav-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 .nav-dot {
   width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
 }
@@ -243,6 +293,7 @@ body {
 @media (max-width: 768px) {
   .tool-grid { grid-template-columns: 1fr; }
   .nav-grid { grid-template-columns: repeat(2, 1fr); }
+  .sprint-stats { flex-wrap: wrap; }
 }
 @media (max-width: 480px) {
   .app { padding: 16px; }
@@ -257,53 +308,62 @@ body {
 <div class="app">
   <!-- Header -->
   <header class="header" role="banner">
-    <h1><svg width="122" height="44" viewBox="0 0 124 38" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle"><path d="M22,6 L15.5,6 C9.5,11.5 9.5,26.5 15.5,32 L22,32" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><text x="23" y="19" text-anchor="middle" dominant-baseline="central" fill="#9ca3af" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">G</text><text x="29.5" y="19" dominant-baseline="central" fill="#e8ecf1" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">rainulation</text></svg></h1>
-    <div class="subtitle">Structured research for decisions that satisfice</div>
+    <h1><svg width="122" height="44" viewBox="0 0 124 38" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle" aria-label="grainulation" role="img"><path d="M22,8 L16,8 C10.5,12.5 10.5,25.5 16,30 L22,30" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><text x="23" y="19" text-anchor="middle" dominant-baseline="central" fill="#9ca3af" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">G</text><text x="29.5" y="19" dominant-baseline="central" fill="#e8ecf1" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">rainulation</text></svg></h1>
+    <div class="subtitle">Ecosystem Control Center</div>
     <div class="header-meta">
-      <span class="conn-dot" id="connDot"></span>
+      <span class="conn-dot" id="connDot" title="Server connection status"></span>
       <span class="meta-tag" id="versionTag">v0.1.0</span>
       <span class="meta-tag" id="toolCount">0/8 tools</span>
+      <span class="health-badge" id="healthBadge" aria-label="Ecosystem health status">--</span>
     </div>
   </header>
 
   <main id="main-content" role="main" aria-label="Grainulation workspace">
   <!-- Doctor summary bar -->
-  <div class="doctor-bar" id="doctorBar"></div>
+  <div class="doctor-bar" id="doctorBar" role="status" aria-label="Health check summary"></div>
+
+  <!-- Active sprint -->
+  <section class="sprint-panel sprint-empty" id="sprintPanel" aria-label="Active sprint">
+    <div class="sprint-header">
+      <span class="sprint-label">Active Sprint</span>
+    </div>
+    <div class="sprint-empty-msg">No active wheat sprint detected.</div>
+  </section>
 
   <!-- Tool catalog -->
-  <div class="section-title">Tool Catalog</div>
-  <div class="tool-grid" id="toolGrid"></div>
+  <div class="section-title" id="toolCatalogLabel">Tool Catalog</div>
+  <div class="tool-grid" id="toolGrid" role="list" aria-labelledby="toolCatalogLabel"></div>
 
   <!-- Doctor checklist -->
-  <div class="section-title doctor-section">Health Checks</div>
-  <div class="check-list" id="checkList"></div>
+  <div class="section-title" id="healthLabel">Health Checks</div>
+  <div class="check-list" id="checkList" role="list" aria-labelledby="healthLabel"></div>
 
   <!-- Cross-tool navigation -->
-  <div class="section-title" style="margin-top:40px">Cross-Tool Navigation</div>
-  <div class="nav-grid" id="navGrid"></div>
+  <div class="section-title" id="navLabel">Cross-Tool Navigation</div>
+  <nav class="nav-grid" id="navGrid" aria-labelledby="navLabel"></nav>
 
   <!-- Getting started -->
-  <div class="getting-started">
-    <h3>Getting Started</h3>
+  <section class="getting-started" aria-label="Getting started guide">
+    <h3>Quick Start</h3>
     <div class="steps">
       <div class="step">
-        <span class="step-num">1</span>
+        <span class="step-num" aria-hidden="true">1</span>
         <div class="step-content">
-          <div class="step-title">Install wheat (the research engine)</div>
-          <div class="step-desc">Wheat is the core tool. Everything starts with a research sprint.</div>
+          <div class="step-title">Initialize a research sprint</div>
+          <div class="step-desc">Wheat is the core tool. Everything starts with a research question.</div>
           <code class="step-cmd">npx @grainulation/wheat init</code>
         </div>
       </div>
       <div class="step">
-        <span class="step-num">2</span>
+        <span class="step-num" aria-hidden="true">2</span>
         <div class="step-content">
           <div class="step-title">Run the ecosystem doctor</div>
-          <div class="step-desc">Check what's installed and what's available.</div>
+          <div class="step-desc">Check what is installed and what is available.</div>
           <code class="step-cmd">npx grainulation doctor</code>
         </div>
       </div>
       <div class="step">
-        <span class="step-num">3</span>
+        <span class="step-num" aria-hidden="true">3</span>
         <div class="step-content">
           <div class="step-title">Add tools as you need them</div>
           <div class="step-desc">Each tool has a purpose. Start small, add as your research grows.</div>
@@ -311,16 +371,16 @@ body {
         </div>
       </div>
       <div class="step">
-        <span class="step-num">4</span>
+        <span class="step-num" aria-hidden="true">4</span>
         <div class="step-content">
           <div class="step-title">Slow down and trust the process</div>
           <div class="step-desc">Research takes time. Claims build evidence. Evidence builds decisions.</div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="footer">grainulation ecosystem &middot; slow down and trust the process</div>
+  <footer class="footer">grainulation ecosystem &middot; slow down and trust the process</footer>
   </main>
 </div>
 
@@ -328,153 +388,264 @@ body {
 (function() {
   'use strict';
 
-  // ── i18n passthrough ──
-  const t = (s, v) => v ? s.replace(/\{(\w+)\}/g, (_, k) => v[k] ?? k) : s;
-
-  const TOOL_ACCENTS = {
-    wheat: '#fbbf24', farmer: '#fb923c', barn: '#e11d48', mill: '#3b82f6',
-    silo: '#22d3ee', harvest: '#34d399', orchard: '#14b8a6', grainulation: '#9ca3af',
+  // ── Tool metadata ──
+  var TOOL_ACCENTS = {
+    wheat: '#fbbf24', farmer: '#22c55e', barn: '#ef4444', mill: '#94a3b8',
+    silo: '#60a5fa', harvest: '#f97316', orchard: '#14b8a6', grainulation: '#a78bfa'
   };
 
-  let state = null;
-  let sse = null;
+  var TOOL_ICONS = {
+    wheat: 'W', farmer: 'F', barn: 'B', mill: 'M',
+    silo: 'S', harvest: 'H', orchard: 'O', grainulation: 'G'
+  };
 
-  let retryCount = 0;
+  var SVG_CHECK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
+  var SVG_CROSS = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>';
+
+  var state = null;
+  var sprintData = null;
+  var sse = null;
+  var retryCount = 0;
+
+  // ── Helpers ──
+  function esc(str) {
+    return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  // ── Reconnect banner ──
   function showBanner(count) {
-    const b = document.getElementById('reconnectBanner');
+    var b = document.getElementById('reconnectBanner');
     if (count > 5) {
-      b.innerHTML = t('Connection lost.') + ' <button onclick="retryCount=0;connect()">' + t('Retry now') + '</button>';
+      b.innerHTML = 'Connection lost. <button onclick="location.reload()">Retry now</button>';
     } else if (count > 1) {
-      b.textContent = t('Reconnecting (attempt {count})...', { count });
+      b.textContent = 'Reconnecting (attempt ' + count + ')...';
     } else {
-      b.textContent = t('Reconnecting...');
+      b.textContent = 'Reconnecting...';
     }
     b.classList.add('visible');
   }
-  function hideBanner() { document.getElementById('reconnectBanner').classList.remove('visible'); }
 
+  function hideBanner() {
+    document.getElementById('reconnectBanner').classList.remove('visible');
+  }
+
+  // ── SSE connection ──
   function connect() {
     sse = new EventSource('/events');
     document.getElementById('connDot').className = 'conn-dot';
 
-    sse.onmessage = (e) => {
+    sse.onmessage = function(e) {
       try {
-        const msg = JSON.parse(e.data);
+        var msg = JSON.parse(e.data);
         if (msg.type === 'state' && msg.data) {
           state = msg.data;
           render();
-          const ls = document.getElementById('live-status');
+          var ls = document.getElementById('live-status');
           if (ls) ls.textContent = 'Updated: ecosystem state refreshed';
         }
-      } catch { /* ignore */ }
+      } catch (err) { /* ignore parse errors */ }
     };
 
-    sse.onopen = () => {
+    sse.onopen = function() {
       retryCount = 0;
       hideBanner();
       document.getElementById('connDot').className = 'conn-dot';
+      fetchSprint();
     };
 
-    sse.onerror = () => {
+    sse.onerror = function() {
       document.getElementById('connDot').className = 'conn-dot disconnected';
       sse.close();
-      const delay = Math.min(30000, 1000 * Math.pow(2, retryCount)) + Math.random() * 1000;
+      var delay = Math.min(30000, 1000 * Math.pow(2, retryCount)) + Math.random() * 1000;
       retryCount++;
       showBanner(retryCount);
       setTimeout(connect, delay);
     };
   }
 
+  // ── Sprint detection (tries wheat port) ──
+  function fetchSprint() {
+    // Try to detect an active wheat sprint via wheat's API
+    // Wheat runs on port 9091 by default
+    var controller = new AbortController();
+    var timeoutId = setTimeout(function() { controller.abort(); }, 2000);
+
+    fetch('http://localhost:9091/api/sprint', { signal: controller.signal })
+      .then(function(r) { return r.ok ? r.json() : null; })
+      .then(function(data) {
+        clearTimeout(timeoutId);
+        if (data && data.question) {
+          sprintData = data;
+          renderSprint();
+        }
+      })
+      .catch(function() {
+        clearTimeout(timeoutId);
+        sprintData = null;
+        renderSprint();
+      });
+  }
+
+  // ── Render sprint panel ──
+  function renderSprint() {
+    var panel = document.getElementById('sprintPanel');
+    if (!sprintData || !sprintData.question) {
+      panel.className = 'sprint-panel sprint-empty';
+      panel.innerHTML =
+        '<div class="sprint-header"><span class="sprint-label">Active Sprint</span></div>' +
+        '<div class="sprint-empty-msg">No active wheat sprint detected. Run <code class="step-cmd" style="margin:0;display:inline">npx @grainulation/wheat init</code> to start one.</div>';
+      return;
+    }
+
+    var s = sprintData;
+    panel.className = 'sprint-panel';
+    panel.innerHTML =
+      '<div class="sprint-header">' +
+        '<span class="sprint-label">Active Sprint</span>' +
+        (s.phase ? '<span class="sprint-phase">' + esc(s.phase) + '</span>' : '') +
+      '</div>' +
+      '<div class="sprint-question">' + esc(s.question) + '</div>' +
+      '<div class="sprint-stats">' +
+        (s.claimCount != null ? '<span class="sprint-stat"><span class="sprint-stat-value">' + s.claimCount + '</span> claims</span>' : '') +
+        (s.resolvedCount != null ? '<span class="sprint-stat"><span class="sprint-stat-value">' + s.resolvedCount + '</span> resolved</span>' : '') +
+        (s.sprintName ? '<span class="sprint-stat">' + esc(s.sprintName) + '</span>' : '') +
+      '</div>';
+  }
+
+  // ── Main render ──
   function render() {
     if (!state) return;
 
-    const tools = state.ecosystem || [];
-    const doctor = state.doctorResults || { checks: [], summary: {} };
-    const installed = tools.filter(tl => tl.installed).length;
+    var tools = state.ecosystem || [];
+    var doctor = state.doctorResults || { checks: [], summary: {} };
+    var installed = tools.filter(function(tl) { return tl.installed; }).length;
 
-    // Tool count
-    document.getElementById('toolCount').textContent = `${installed}/${tools.length} tools`;
+    // Header: tool count
+    document.getElementById('toolCount').textContent = installed + '/' + tools.length + ' tools';
+
+    // Header: health badge
+    var badge = document.getElementById('healthBadge');
+    var sum = doctor.summary || {};
+    if ((sum.fail || 0) > 0) {
+      badge.className = 'health-badge unhealthy';
+      badge.textContent = 'unhealthy';
+    } else if ((sum.warning || 0) > 0) {
+      badge.className = 'health-badge degraded';
+      badge.textContent = 'degraded';
+    } else {
+      badge.className = 'health-badge healthy';
+      badge.textContent = 'healthy';
+    }
 
     // Doctor bar
-    const s = doctor.summary || {};
     document.getElementById('doctorBar').innerHTML = [
-      { label: t('Pass'), count: s.pass || 0, cls: 'dot-pass' },
-      { label: t('Warning'), count: s.warning || 0, cls: 'dot-warn' },
-      { label: t('Fail'), count: s.fail || 0, cls: 'dot-fail' },
-    ].map(d => `
-      <div class="doctor-stat">
-        <span class="dot ${d.cls}"></span>
-        <span>${d.count} ${d.label}</span>
-      </div>
-    `).join('');
+      { label: 'Pass', count: sum.pass || 0, cls: 'dot-pass' },
+      { label: 'Warning', count: sum.warning || 0, cls: 'dot-warn' },
+      { label: 'Fail', count: sum.fail || 0, cls: 'dot-fail' }
+    ].map(function(d) {
+      return '<div class="doctor-stat"><span class="dot ' + d.cls + '"></span><span>' + d.count + ' ' + d.label + '</span></div>';
+    }).join('');
 
     // Tool catalog
-    document.getElementById('toolGrid').innerHTML = tools.map(tl => {
-      const accent = TOOL_ACCENTS[tl.name] || '#9ca3af';
-      const statusCls = tl.installed ? 'status-installed' : 'status-missing';
-      const statusText = tl.installed ? t('installed') : t('not found');
+    document.getElementById('toolGrid').innerHTML = tools.map(function(tl) {
+      var accent = TOOL_ACCENTS[tl.name] || '#9ca3af';
+      var icon = TOOL_ICONS[tl.name] || '?';
+      var statusCls = tl.installed ? 'status-installed' : 'status-available';
+      var statusText = tl.installed ? 'installed' : 'available';
 
-      return `
-        <div class="tool-card" style="--tool-accent: ${accent}">
-          <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:${accent};border-radius:2px 0 0 2px;"></div>
-          <div class="tool-card-header">
-            <span class="tool-name">${esc(tl.name)}</span>
-            <span class="tool-status ${statusCls}">${statusText}</span>
-          </div>
-          <div class="tool-role">${esc(tl.role)}</div>
-          <div class="tool-footer">
-            <span class="tool-version">${tl.installed ? 'v' + esc(tl.version) : '--'}</span>
-            ${tl.method ? `<span class="tool-method">${esc(tl.method)}</span>` : ''}
-            <div class="tool-actions">
-              ${tl.installed && tl.name !== 'grainulation' ? `<a class="tool-btn tool-btn-primary" href="http://localhost:${tl.port}" target="_blank">${t('Open UI')}</a>` : ''}
-              ${!tl.installed ? `<span class="tool-btn" title="npm install -g ${esc(tl.pkg)}">${t('Install')}</span>` : ''}
-            </div>
-          </div>
-        </div>`;
+      var actions = '';
+      if (tl.installed && tl.name !== 'grainulation') {
+        actions = '<a class="tool-btn tool-btn-primary" href="http://localhost:' + tl.port + '" target="_blank" rel="noopener">Open</a>';
+      } else if (!tl.installed) {
+        actions = '<button class="tool-btn" type="button" title="npx ' + esc(tl.pkg) + '" onclick="copyCmd(this, \'' + esc(tl.pkg) + '\')">Install</button>';
+      }
+
+      return '<div class="tool-card" role="listitem">' +
+        '<div style="position:absolute;top:0;left:0;width:3px;height:100%;background:' + accent + ';border-radius:2px 0 0 2px;" aria-hidden="true"></div>' +
+        '<div class="tool-card-header">' +
+          '<span class="tool-icon" style="background:' + accent + '" aria-hidden="true">' + icon + '</span>' +
+          '<span class="tool-name">' + esc(tl.name) + '</span>' +
+          '<span class="tool-status ' + statusCls + '">' + statusText + '</span>' +
+        '</div>' +
+        '<div class="tool-role">' + esc(tl.role) + '</div>' +
+        '<div class="tool-footer">' +
+          '<span class="tool-version">' + (tl.installed ? 'v' + esc(tl.version) : '--') + '</span>' +
+          (tl.method ? '<span class="tool-method">' + esc(tl.method) + '</span>' : '') +
+          '<div class="tool-actions">' + actions + '</div>' +
+        '</div>' +
+      '</div>';
     }).join('');
 
     // Doctor checklist
-    const checks = doctor.checks || [];
-    document.getElementById('checkList').innerHTML = checks.map(c => {
-      const cls = 'check-' + c.status;
-      const icon =
-        c.status === 'pass' ? '&#10003;' :
+    var checks = doctor.checks || [];
+    document.getElementById('checkList').innerHTML = checks.map(function(c) {
+      var cls = 'check-' + c.status;
+      var icon =
+        c.status === 'pass' ? SVG_CHECK :
         c.status === 'warning' ? '!' :
-        c.status === 'fail' ? '&#10007;' : '-';
+        c.status === 'fail' ? SVG_CROSS : '-';
 
-      return `
-        <div class="check-item ${cls}">
-          <span class="check-icon">${icon}</span>
-          <span class="check-name">${esc(c.name)}</span>
-          <span class="check-detail">${esc(c.detail)}</span>
-          <span class="check-cat">${esc(c.category)}</span>
-        </div>`;
+      return '<div class="check-item ' + cls + '" role="listitem">' +
+        '<span class="check-icon">' + icon + '</span>' +
+        '<span class="check-name">' + esc(c.name) + '</span>' +
+        '<span class="check-detail">' + esc(c.detail) + '</span>' +
+        '<span class="check-cat">' + esc(c.category) + '</span>' +
+      '</div>';
     }).join('');
 
     // Cross-tool nav
-    document.getElementById('navGrid').innerHTML = tools
-      .filter(tl => tl.installed && tl.name !== 'grainulation')
-      .map(tl => {
-        const accent = TOOL_ACCENTS[tl.name] || '#9ca3af';
-        return `
-          <a class="nav-link" href="http://localhost:${tl.port}" target="_blank">
-            <span class="nav-dot" style="background:${accent}"></span>
-            ${esc(tl.name)}
-            <span class="nav-port">:${tl.port}</span>
-          </a>`;
-      }).join('') || '<div style="grid-column:1/-1;text-align:center;color:var(--fg3);padding:16px;font-size:12px;">' + t('No tools running. Install tools to see navigation links.') + '</div>';
+    var navTools = tools.filter(function(tl) { return tl.installed && tl.name !== 'grainulation'; });
+    if (navTools.length > 0) {
+      document.getElementById('navGrid').innerHTML = navTools.map(function(tl) {
+        var accent = TOOL_ACCENTS[tl.name] || '#9ca3af';
+        return '<a class="nav-link" href="http://localhost:' + tl.port + '" target="_blank" rel="noopener">' +
+          '<span class="nav-dot" style="background:' + accent + '" aria-hidden="true"></span>' +
+          esc(tl.name) +
+          '<span class="nav-port">:' + tl.port + '</span>' +
+        '</a>';
+      }).join('');
+    } else {
+      document.getElementById('navGrid').innerHTML =
+        '<div style="grid-column:1/-1;text-align:center;color:var(--fg3);padding:16px;font-size:12px;">No tools running. Install tools to see navigation links.</div>';
+    }
   }
 
-  function esc(str) {
-    return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
-  }
+  // ── Copy install command ──
+  window.copyCmd = function(btn, pkg) {
+    var cmd = 'npx ' + pkg;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(cmd).then(function() {
+        var orig = btn.textContent;
+        btn.textContent = 'Copied';
+        setTimeout(function() { btn.textContent = orig; }, 1500);
+      });
+    }
+  };
 
   // ── Keyboard navigation ──
-  document.addEventListener('keydown', (e) => {
+  document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+    // j/k to navigate tool cards
+    if (e.target === document.body && (e.key === 'j' || e.key === 'k')) {
+      var cards = Array.from(document.querySelectorAll('.tool-card'));
+      if (cards.length === 0) return;
+      var focused = document.activeElement;
+      var idx = cards.indexOf(focused);
+      if (e.key === 'j') idx = Math.min(idx + 1, cards.length - 1);
+      else idx = Math.max(idx - 1, 0);
+      cards[idx].focus();
+    }
   });
+
+  // Make tool cards focusable
+  var observer = new MutationObserver(function() {
+    document.querySelectorAll('.tool-card:not([tabindex])').forEach(function(el) {
+      el.setAttribute('tabindex', '0');
+    });
+  });
+  observer.observe(document.getElementById('toolGrid'), { childList: true });
 
   connect();
 })();
