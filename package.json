@@ -1,7 +1,6 @@
 {
   "name": "@grainulation/grainulation",
   "version": "1.0.0",
-  "type": "module",
   "description": "Structured research for decisions that satisfice",
   "license": "MIT",
   "bin": {
@@ -20,7 +19,7 @@
     "public/"
   ],
   "scripts": {
-    "test": "node test/basic.test.cjs",
+    "test": "node test/basic.test.js",
     "start": "node bin/grainulation.js"
   },
   "keywords": [
