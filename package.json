@@ -36,7 +36,7 @@
   "bugs": {
     "url": "https://github.com/grainulation/grainulation/issues"
   },
-  "homepage": "https://grainulation.github.io/grainulation/",
+  "homepage": "https://grainulation.com",
   "engines": {
     "node": ">=18"
   },
