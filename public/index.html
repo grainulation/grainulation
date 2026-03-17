@@ -585,7 +585,6 @@ body {
 
     sse.onopen = function() {
       retryCount = 0;
-      hideBanner();
       document.getElementById('connDot').className = 'conn-dot';
       if (window._grainSetState) window._grainSetState('idle');
       fetchSprint();
@@ -598,7 +597,6 @@ body {
       sse.close();
       var delay = Math.min(30000, 1000 * Math.pow(2, retryCount)) + Math.random() * 1000;
       retryCount++;
-      showBanner(retryCount);
       setTimeout(connect, delay);
     };
   }
