@@ -397,7 +397,6 @@ body {
   <canvas id="grainLogo" width="256" height="256"></canvas>
   <div class="header-spacer"></div>
   <div class="header-right">
-    <span class="meta-tag" id="toolCount">0/8 tools</span>
     <span class="conn-dot" id="connDot" title="Server connection status"></span>
   </div>
 </header>
@@ -758,7 +757,7 @@ body {
 
     document.getElementById('runningCount').textContent = runningCount;
     document.getElementById('stoppedCount').textContent = stoppedCount;
-    document.getElementById('toolCount').textContent = installedCount + '/' + mergedTools.length + ' tools';
+
 
     // Tool grid
     document.getElementById('toolGrid').innerHTML = mergedTools.map(function(tl) {
