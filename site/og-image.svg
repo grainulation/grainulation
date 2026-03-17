@@ -1,6 +1,8 @@
 <svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1200" height="630" fill="#09090b"/>
-  <text x="600" y="250" text-anchor="middle" font-family="'SF Mono','Fira Code',monospace" font-weight="800" font-size="100" fill="#fbbf24">grainulation</text>
-  <text x="600" y="340" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif" font-weight="400" font-size="36" fill="#9ba5b7">Structured research for decisions that matter</text>
-  <text x="600" y="560" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif" font-weight="600" font-size="20" fill="#5a6478">8 tools -- zero dependencies -- one ecosystem</text>
+  <rect width="1200" height="630" fill="#0a0e1a"/>
+  <path d="M293.76,230 L273.76,230 C233.76,260 233.76,350 273.76,380 L293.76,380" stroke="#9ca3af" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <text x="318.76" y="305" dominant-baseline="central" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif" font-weight="800" font-size="88" fill="#9ca3af">Gr</text>
+  <text x="420.84" y="305" dominant-baseline="central" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif" font-weight="800" font-size="88" fill="#e8ecf1">ainulation</text>
+  <text x="600" y="430" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif" font-weight="400" font-size="28" fill="#9ba5b7">Structured research for decisions that matter</text>
+  <text x="600" y="570" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif" font-weight="600" font-size="18" fill="#5a6478">grainulation</text>
 </svg>
