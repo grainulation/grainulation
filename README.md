@@ -1,8 +1,16 @@
-# @grainulation/grainulation
+<p align="center">
+  <img src="site/wordmark.svg" alt="grainulation" width="400">
+</p>
 
-[![npm version](https://img.shields.io/npm/v/@grainulation/grainulation)](https://www.npmjs.com/package/@grainulation/grainulation) [![npm downloads](https://img.shields.io/npm/dm/@grainulation/grainulation)](https://www.npmjs.com/package/@grainulation/grainulation) [![license](https://img.shields.io/npm/l/@grainulation/grainulation)](https://github.com/grainulation/grainulation/blob/main/LICENSE) [![node](https://img.shields.io/node/v/@grainulation/grainulation)](https://nodejs.org) [![CI](https://github.com/grainulation/grainulation/actions/workflows/ci.yml/badge.svg)](https://github.com/grainulation/grainulation/actions)
+<p align="center">
+  <a href="https://www.npmjs.com/package/@grainulation/grainulation"><img src="https://img.shields.io/npm/v/@grainulation/grainulation" alt="npm version"></a>
+  <a href="https://www.npmjs.com/package/@grainulation/grainulation"><img src="https://img.shields.io/npm/dm/@grainulation/grainulation" alt="npm downloads"></a>
+  <a href="https://github.com/grainulation/grainulation/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/@grainulation/grainulation" alt="license"></a>
+  <a href="https://nodejs.org"><img src="https://img.shields.io/node/v/@grainulation/grainulation" alt="node"></a>
+  <a href="https://github.com/grainulation/grainulation/actions"><img src="https://github.com/grainulation/grainulation/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+</p>
 
-**Structured research for decisions that satisfice.**
+<p align="center"><strong>Structured research for decisions that satisfice.</strong></p>
 
 Most decisions fail not because the team lacked data, but because they lacked a process for turning data into evidence and evidence into conviction. Grainulation is that process.
 
