@@ -32,7 +32,7 @@ jobs:
             console.log('Zero dependencies verified');
           "
       - name: Run tests
-        run: node --test test/
+        run: npm test
       - name: CLI help check
         run: node bin/grainulation.js --help
 
