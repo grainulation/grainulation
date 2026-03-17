@@ -16,23 +16,13 @@ The brief is not the goal. The brief is the receipt. The goal is the thinking th
 
 ## The journey
 
-```
- Question                Evidence                  Decision
-    |                       |                         |
-    |   /init               |   /research             |   /brief
-    |   Define the          |   Grow claims           |   Compile the
-    |   question            |   from multiple          |   recommendation
-    |                       |   angles                |
-    v                       v                         v
- +-------+   /research   +--------+   /compile    +-------+
- | Seed  | ------------> | Claims | ----------->  | Brief |
- +-------+               +--------+               +-------+
-              ^                |
-              |   /challenge   |   /witness
-              |   /blind-spot  |   /feedback
-              +----------------+
-                 Adversarial
-                  pressure
+```mermaid
+flowchart LR
+    Q["Question"] -->|"/init"| S["Seed Claims"]
+    S -->|"/research"| C["Grow Evidence"]
+    C -->|"/compile"| B["Compile Brief"]
+    C -->|"/challenge /blind-spot"| A["Adversarial Pressure"]
+    A -->|"/witness /feedback"| C
 ```
 
 Every step is tracked. Every claim has provenance. Every decision is reproducible.
