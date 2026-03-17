@@ -39,10 +39,9 @@ bin/grainulation.js       CLI entrypoint -- routes to individual tools
 lib/router.js             Command routing to the correct tool package
 lib/ecosystem.js          Ecosystem health checks and tool discovery
 lib/doctor.js             Diagnostic tool -- validates tool installations
-lib/scaffold.js           Project scaffolding for new grainulation setups
 lib/setup.js              First-run setup and configuration
 lib/pm.js                 Package management for grainulation tools
-lib/server.js             Local server -- unified ecosystem dashboard
+lib/server.mjs            Local server -- unified ecosystem dashboard (ESM)
 public/                   Web UI -- ecosystem overview and status
 site/                     Public website (grainulation.com)
 test/                     Node built-in test runner tests

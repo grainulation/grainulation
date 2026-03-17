@@ -31,7 +31,7 @@ vlog('startup', `command=${command || '(none)'}`, `cwd=${process.cwd()}`);
 if (command === 'serve') {
   const path = require('node:path');
   const { spawn } = require('node:child_process');
-  const serverPath = path.join(__dirname, '..', 'lib', 'server.js');
+  const serverPath = path.join(__dirname, '..', 'lib', 'server.mjs');
 
   // Forward remaining args to the server
   const serverArgs = process.argv.slice(3);

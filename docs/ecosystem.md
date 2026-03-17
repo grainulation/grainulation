@@ -53,13 +53,6 @@ npx @grainulation/grainulation silo load security-baseline
 npx @grainulation/grainulation orchard status
 ```
 
-Or with the short alias:
-
-```bash
-npx grain wheat init
-npx grain mill export --format pdf
-```
-
 The unified CLI adds no functionality beyond delegation. Each tool works identically whether invoked through `grainulation` or directly.
 
 ## Health Check System
@@ -67,21 +60,16 @@ The unified CLI adds no functionality beyond delegation. Each tool works identic
 Run a cross-tool health check to verify the ecosystem is configured correctly:
 
 ```bash
-npx @grainulation/grainulation health
+npx @grainulation/grainulation doctor
 ```
 
-The health check verifies:
+The doctor checks:
 
 | Check | What it validates |
 |---|---|
-| `tools-installed` | All eight packages are resolvable |
-| `schema-compat` | All tools agree on `schema_version` |
-| `claims-valid` | `claims.json` passes structural validation |
-| `compilation-fresh` | `compilation.json` is not stale relative to `claims.json` |
-| `farmer-reachable` | Farmer server is running and responding on its configured port |
-| `hooks-configured` | Wheat's guard hooks point to a live farmer instance |
-| `orchard-consistent` | `orchard.json` dependency graph has no cycles |
-| `silo-cache` | Silo's pack cache is intact and readable |
+| Node.js | Version is >= 18 |
+| npm | npm is available on the system |
+| Tool detection | Each of the 8 packages is resolvable via global npm, npx cache, local node_modules, source checkout, or npx --no-install |
 
 Output is a table of pass/fail results. Use `--json` for machine-readable output.
 
@@ -107,10 +95,4 @@ These are the specific integration surfaces between tools:
 
 ## Version Compatibility
 
-Each tool maintains independent semver versioning. The `schema_version` field in `claims.json`, `compilation.json`, `pack.json`, and `orchard.json` ensures cross-tool compatibility. All tools in a project must agree on the same `schema_version`.
-
-```bash
-npx @grainulation/grainulation versions
-```
-
-Lists installed versions and their schema compatibility.
+Each tool maintains independent semver versioning. The `schema_version` field in `claims.json`, `compilation.json`, `pack.json`, and `orchard.json` ensures cross-tool compatibility. All tools in a project must agree on the same `schema_version`. Run `grainulation doctor --json` to see installed versions.
