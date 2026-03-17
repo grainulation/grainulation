@@ -20,7 +20,7 @@
     "public/"
   ],
   "scripts": {
-    "test": "node test/basic.test.js",
+    "test": "node test/basic.test.cjs",
     "start": "node bin/grainulation.js"
   },
   "keywords": [
