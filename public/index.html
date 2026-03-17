@@ -684,34 +684,25 @@ body {
       return;
     }
 
-    // Separate main sprints from examples/archived
-    var main = [], sub = [];
+    // Only show active/candidate sprints — drop examples and archived
+    var active = [];
     for (var i = 0; i < allSprints.length; i++) {
       var s = allSprints[i];
-      if (s.status === 'example' || s.status === 'archived') {
-        sub.push(s);
-      } else {
-        main.push(s);
+      if (s.status !== 'example' && s.status !== 'archived') {
+        active.push(s);
       }
     }
 
-    var html = '<div class="sprint-header"><span class="sprint-label">Active Sprints</span></div>';
+    var html = '<div class="sprint-header"><span class="sprint-label">Sprints</span>' +
+      (active.length > 1 ? '<span style="font-size:10px;color:var(--fg3);margin-left:auto">' + active.length + ' active</span>' : '') +
+    '</div>';
 
-    if (main.length) {
-      for (var j = 0; j < main.length; j++) {
-        html += sprintCard(main[j], activeSprint && main[j].name === activeSprint.name);
+    if (active.length) {
+      for (var j = 0; j < active.length; j++) {
+        html += sprintCard(active[j], activeSprint && active[j].name === activeSprint.name);
       }
     } else {
       html += '<div class="sprint-empty-msg">No active sprint.</div>';
-    }
-
-    if (sub.length) {
-      html += '<div class="sprint-sub-header">' +
-        '<span class="sprint-sub-label">' + sub.length + ' example' + (sub.length > 1 ? 's' : '') + '</span>' +
-      '</div>';
-      for (var k = 0; k < sub.length; k++) {
-        html += sprintCard(sub[k], false);
-      }
     }
 
     panel.className = 'sprint-panel';
