@@ -1,6 +1,7 @@
 {
   "name": "@grainulation/grainulation",
   "version": "1.0.0",
+  "type": "module",
   "description": "Structured research for decisions that satisfice",
   "license": "MIT",
   "bin": {
