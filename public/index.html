@@ -1062,14 +1062,19 @@ body {
       case 'orbit':
         _bracket(ctx, s, TOOL.color, 0.15);
         _drawName(ctx, s, 1, 0.4);
-        var pts = _getClosedPts(s), speed = 1600, trailFrac = 0.28;
-        var pos = (e % speed) / speed;
-        var headIdx = Math.floor(pos * pts.length);
+        var pts = _getOpenPts(s), speed = 1200, trailFrac = 0.28;
+        var halfCycle = (e % speed) / speed;
+        var cycle = (e % (speed * 2)) / (speed * 2);
+        var pos = cycle < 0.5 ? halfCycle : 1 - halfCycle;
+        var headIdx = Math.floor(pos * (pts.length - 1));
         var trailLen = Math.floor(trailFrac * pts.length);
+        var dir = cycle < 0.5 ? 1 : -1;
         ctx.lineWidth = s * LW; ctx.lineCap = 'round';
         for(var i = 0; i < trailLen; i++) {
-          var idx = ((headIdx - trailLen + i) % pts.length + pts.length) % pts.length;
-          var nxt = (idx + 1) % pts.length;
+          var idx = headIdx - dir * (trailLen - i);
+          if(idx < 0 || idx >= pts.length) continue;
+          var nxt = idx + dir;
+          if(nxt < 0 || nxt >= pts.length) continue;
           ctx.globalAlpha = (i / trailLen) * 0.7; ctx.strokeStyle = TOOL.color;
           ctx.beginPath(); ctx.moveTo(pts[idx].x, pts[idx].y); ctx.lineTo(pts[nxt].x, pts[nxt].y); ctx.stroke();
         }
