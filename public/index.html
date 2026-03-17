@@ -456,6 +456,19 @@ body {
 (function() {
   'use strict';
 
+  // ── Farmer token (fetched from running farmer server) ──
+  var FARMER_TOKEN = '';
+  function toolUrl(name, port) {
+    var base = 'http://localhost:' + port;
+    return (name === 'farmer' && FARMER_TOKEN) ? base + '?token=' + FARMER_TOKEN : base;
+  }
+  // Fetch token from farmer's localhost-only endpoint
+  fetch('http://localhost:9090/api/local/token').then(function(r) {
+    return r.ok ? r.json() : null;
+  }).then(function(d) {
+    if (d && d.token) FARMER_TOKEN = d.token;
+  }).catch(function() {});
+
   // ── Tool metadata ──
   var TOOLS = [
     { name: 'wheat',        port: 9091, accent: '#fbbf24', icon: 'W', role: 'Research sprint engine', category: 'core' },
@@ -574,12 +587,14 @@ body {
       retryCount = 0;
       hideBanner();
       document.getElementById('connDot').className = 'conn-dot';
+      if (window._grainSetState) window._grainSetState('idle');
       fetchSprint();
       probeAll();
     };
 
     sse.onerror = function() {
       document.getElementById('connDot').className = 'conn-dot disconnected';
+      if (window._grainSetState) window._grainSetState('orbit');
       sse.close();
       var delay = Math.min(30000, 1000 * Math.pow(2, retryCount)) + Math.random() * 1000;
       retryCount++;
@@ -786,7 +801,7 @@ body {
         actions = '<span class="tool-method">self</span>';
       } else if (isRunning) {
         actions =
-          '<a class="tool-btn tool-btn-open" href="http://localhost:' + tl.port + '" target="_blank" rel="noopener">Open</a>' +
+          '<a class="tool-btn tool-btn-open" href="' + toolUrl(tl.name, tl.port) + '" target="_blank" rel="noopener">Open</a>' +
           '<button class="tool-btn tool-btn-stop" type="button" onclick="pmStop(\'' + tl.name + '\')"' + (tl.inFlight ? ' disabled' : '') + '>Stop</button>';
       } else {
         actions =
@@ -836,7 +851,7 @@ body {
       document.getElementById('navGrid').innerHTML = navTools.map(function(tl) {
         var isAlive = tl.alive;
         var cls = 'nav-link' + (isAlive ? '' : ' nav-offline');
-        var href = isAlive ? 'http://localhost:' + tl.port : '#';
+        var href = isAlive ? toolUrl(tl.name, tl.port) : '#';
         var target = isAlive ? ' target="_blank" rel="noopener"' : '';
         return '<a class="' + cls + '" href="' + href + '"' + target + '>' +
           '<span class="nav-dot" style="background:' + (isAlive ? tl.accent : 'var(--bg4)') + '" aria-hidden="true"></span>' +
@@ -899,6 +914,16 @@ body {
     });
   });
   observer.observe(document.getElementById('toolGrid'), { childList: true });
+
+  // ── Patch footer farmer link with token ──
+  if (FARMER_TOKEN) {
+    var fLinks = document.querySelectorAll('.footer-links a');
+    for (var i = 0; i < fLinks.length; i++) {
+      if (fLinks[i].textContent.trim() === 'farmer') {
+        fLinks[i].href = toolUrl('farmer', 9090);
+      }
+    }
+  }
 
   // ── Init ──
   connect();
