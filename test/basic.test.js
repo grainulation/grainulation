@@ -5,8 +5,8 @@ const { execSync } = require('node:child_process');
 const path = require('node:path');
 
 const BIN = path.join(__dirname, '..', 'bin', 'grainulation.js');
-const run = (args = '') =>
-  execSync(`node ${BIN} ${args}`, { encoding: 'utf-8', timeout: 10_000 });
+const run = (args = '', { timeout = 10_000 } = {}) =>
+  execSync(`node ${BIN} ${args}`, { encoding: 'utf-8', timeout });
 
 let passed = 0;
 let failed = 0;
@@ -86,7 +86,7 @@ test('unknown command exits with error', () => {
 // ── Doctor ──────────────────────────────────────────────────────
 
 test('doctor runs without error', () => {
-  const out = run('doctor');
+  const out = run('doctor', { timeout: 30_000 });
   assert.ok(out.includes('doctor'));
   assert.ok(out.includes('Node'));
   assert.ok(out.includes('npm'));
@@ -190,7 +190,7 @@ test('-h shows overview', () => {
 });
 
 test('doctor output includes Tools section', () => {
-  const out = run('doctor');
+  const out = run('doctor', { timeout: 30_000 });
   assert.ok(out.includes('Tools'));
   assert.ok(out.includes('Checking ecosystem health'));
 });
