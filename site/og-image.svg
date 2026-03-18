@@ -1,8 +1,9 @@
 <svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
   <rect width="1200" height="630" fill="#0a0e1a"/>
-  <path d="M293.76,230 L273.76,230 C233.76,260 233.76,350 273.76,380 L293.76,380" stroke="#9ca3af" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  <text x="318.76" y="305" dominant-baseline="central" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif" font-weight="800" font-size="88" fill="#9ca3af">Gr</text>
-  <text x="420.84" y="305" dominant-baseline="central" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif" font-weight="800" font-size="88" fill="#e8ecf1">ainulation</text>
-  <text x="600" y="430" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif" font-weight="400" font-size="28" fill="#9ba5b7">Structured research for decisions that matter</text>
-  <text x="600" y="570" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif" font-weight="600" font-size="18" fill="#5a6478">grainulation</text>
+  <g transform="translate(251.25, 179.5) scale(4.5)">
+    <path d="M22,8 L16,8 C10.5,12.5 10.5,25.5 16,30 L22,30" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <text x="25" y="25" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800"><tspan fill="#9ca3af">G</tspan><tspan fill="#e8ecf1">rainulation</tspan></text>
+  </g>
+  <text x="600" y="460" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-weight="400" font-size="28" fill="#9ba5b7">Structured research for decisions that matter</text>
+  <text x="600" y="570" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-weight="600" font-size="18" fill="#5a6478">grainulation</text>
 </svg>
