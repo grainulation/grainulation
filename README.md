@@ -45,7 +45,7 @@ Eight tools. Each does one thing. Use what you need.
 | Tool | What it does | Install |
 |------|-------------|---------|
 | [wheat](https://github.com/grainulation/wheat) | Research engine. Grow structured evidence. | `npx @grainulation/wheat init` |
-| [farmer](https://github.com/grainulation/farmer) | Permission dashboard. Approve AI actions in real time. | `npm i -g @grainulation/farmer` |
+| [farmer](https://github.com/grainulation/farmer) | Permission dashboard. Approve AI actions in real time (admin + viewer roles). | `npm i -g @grainulation/farmer` |
 | [barn](https://github.com/grainulation/barn) | Shared tools. Templates, validators, sprint detection. | `npm i -g @grainulation/barn` |
 | [mill](https://github.com/grainulation/mill) | Format conversion. Export to PDF, CSV, slides, 24 formats. | `npm i -g @grainulation/mill` |
 | [silo](https://github.com/grainulation/silo) | Knowledge storage. Reusable claim libraries and packs. | `npm i -g @grainulation/silo` |
