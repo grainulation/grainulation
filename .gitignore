@@ -4,3 +4,4 @@
 .farmer-token
 .farmer.pid
 node_modules/
+coverage/
