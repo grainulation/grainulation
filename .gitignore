@@ -1,4 +1,6 @@
 .farmer-audit.jsonl
+.farmer-audit.*.jsonl
 .farmer-state.json
 .farmer-token
 .farmer.pid
+node_modules/
