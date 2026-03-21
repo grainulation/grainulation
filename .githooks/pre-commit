@@ -1,9 +1,9 @@
 #!/bin/sh
 set -e
 
-# Lint with Biome (skip if not installed)
+# Lint with Biome (skip if npx is not available, but fail on lint errors)
 if command -v npx >/dev/null 2>&1; then
-  npx --no biome check --staged --no-errors-on-unmatched 2>/dev/null || true
+  npx --no biome check --staged --no-errors-on-unmatched
 fi
 
 # Syntax-check staged JS files

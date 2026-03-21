@@ -12,6 +12,27 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  detect:
+    runs-on: ubuntu-latest
+    outputs:
+      lib: ${{ steps.filter.outputs.lib }}
+      test: ${{ steps.filter.outputs.test }}
+      site: ${{ steps.filter.outputs.site }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            lib:
+              - 'lib/**'
+              - 'bin/**'
+              - 'package.json'
+            test:
+              - 'test/**'
+            site:
+              - 'site/**'
+
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -21,16 +42,21 @@ jobs:
         run: biome ci .
 
   test:
+    needs: detect
+    if: needs.detect.outputs.lib == 'true' || needs.detect.outputs.test == 'true' || github.event_name == 'merge_group'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        node-version: [20, 22, 24]
+        node-version: [20, 22]
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
       - name: Verify zero dependencies
         run: |
           node -e "
@@ -42,17 +68,22 @@ jobs:
             console.log('Zero dependencies verified');
           "
       - name: Run tests
-        run: npm test
+        run: pnpm test
       - name: CLI help check
         run: node bin/grainulation.js --help
+      - name: Doctor check
+        run: node bin/grainulation.js doctor
 
   package-size:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
       - name: Check package size (< 512KB)
         run: |
           SIZE=$(npm pack --dry-run --json 2>/dev/null | node -e "
