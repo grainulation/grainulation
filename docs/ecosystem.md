@@ -4,16 +4,16 @@ The grainulation CLI is the unified entry point for all eight tools in the ecosy
 
 ## The Eight Tools
 
-| Tool | Package | Role |
-|---|---|---|
-| **wheat** | `@grainulation/wheat` | Research sprint engine. Slash commands, claims, compiler. |
-| **barn** | `@grainulation/barn` | Template library. Sprint templates and boilerplate. |
-| **farmer** | `@grainulation/farmer` | Permission dashboard. Mobile-first agent supervision. |
-| **harvest** | `@grainulation/harvest` | Metrics and analytics. Sprint health and prediction scoring. |
-| **mill** | `@grainulation/mill` | Export engine. Converts compilation output to PDF, CSV, HTML, etc. |
-| **silo** | `@grainulation/silo` | Knowledge packs. Portable claim bundles for reuse. |
-| **orchard** | `@grainulation/orchard` | Multi-sprint orchestration. Dependencies, teams, parallel execution. |
-| **grainulation** | `@grainulation/grainulation` | Unified CLI. Installs and coordinates all tools. |
+| Tool             | Package                      | Role                                                                 |
+| ---------------- | ---------------------------- | -------------------------------------------------------------------- |
+| **wheat**        | `@grainulation/wheat`        | Research sprint engine. Slash commands, claims, compiler.            |
+| **barn**         | `@grainulation/barn`         | Template library. Sprint templates and boilerplate.                  |
+| **farmer**       | `@grainulation/farmer`       | Permission dashboard. Mobile-first agent supervision.                |
+| **harvest**      | `@grainulation/harvest`      | Metrics and analytics. Sprint health and prediction scoring.         |
+| **mill**         | `@grainulation/mill`         | Export engine. Converts compilation output to PDF, CSV, HTML, etc.   |
+| **silo**         | `@grainulation/silo`         | Knowledge packs. Portable claim bundles for reuse.                   |
+| **orchard**      | `@grainulation/orchard`      | Multi-sprint orchestration. Dependencies, teams, parallel execution. |
+| **grainulation** | `@grainulation/grainulation` | Unified CLI. Installs and coordinates all tools.                     |
 
 ## Data Flow
 
@@ -65,10 +65,10 @@ npx @grainulation/grainulation doctor
 
 The doctor checks:
 
-| Check | What it validates |
-|---|---|
-| Node.js | Version is >= 18 |
-| npm | npm is available on the system |
+| Check          | What it validates                                                                                                        |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Node.js        | Version is >= 18                                                                                                         |
+| npm            | npm is available on the system                                                                                           |
 | Tool detection | Each of the 8 packages is resolvable via global npm, npx cache, local node_modules, source checkout, or npx --no-install |
 
 Output is a table of pass/fail results. Use `--json` for machine-readable output.

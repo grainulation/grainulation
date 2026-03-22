@@ -12,15 +12,15 @@ node -e "const e = require('./lib/ecosystem'); console.log(JSON.stringify(e.getA
 
 If that fails (not running from the grainulation repo root), use the known tool list:
 
-| Repo | Port |
-|------|------|
-| farmer | 9090 |
-| wheat | 9091 |
-| barn | 9093 |
-| mill | 9094 |
-| silo | 9095 |
-| harvest | 9096 |
-| orchard | 9097 |
+| Repo         | Port |
+| ------------ | ---- |
+| farmer       | 9090 |
+| wheat        | 9091 |
+| barn         | 9093 |
+| mill         | 9094 |
+| silo         | 9095 |
+| harvest      | 9096 |
+| orchard      | 9097 |
 | grainulation | 9098 |
 
 All repos live as siblings under the same parent directory. Detect the root by checking `../farmer`, `../wheat`, etc. relative to CWD, or use `$HOME/repo/grainulation/` as fallback.
@@ -30,6 +30,7 @@ All repos live as siblings under the same parent directory. Detect the root by c
 ### Step 1: Survey all repos
 
 For each repo, check:
+
 - `git status` -- is the working tree clean? Flag dirty repos.
 - `npm test` -- do tests currently pass? Flag failing repos.
 - Is the change relevant to this repo? Some changes may not apply to all 8.
@@ -46,6 +47,7 @@ wheat         yes     pass    yes
 ### Step 2: Present the plan
 
 Tell the user exactly what you plan to do in each applicable repo. Include:
+
 - Which files will be modified/created
 - What the change looks like
 - Which repos will be skipped and why
@@ -55,6 +57,7 @@ Ask for confirmation before proceeding.
 ### Step 3: Execute in parallel using worktree isolation
 
 For each applicable repo, launch a parallel Agent with `isolation: "worktree"`:
+
 - Enter the worktree
 - Apply the change
 - Run `npm test`
@@ -78,12 +81,14 @@ harvest       yes       FAIL    no          [error details]
 ### Step 5: Handle failures
 
 If any repos failed:
+
 - Show the error for each
 - Offer options: retry individually, skip, or roll back all changes
 
 ### Step 6: Notify farmer
 
 If farmer is running (probe localhost:9090/health), send a notification:
+
 ```
 curl -s -X POST http://127.0.0.1:9090/hooks/notification -H 'Content-Type: application/json' -d '{"message":"batch complete: <summary>"}' 2>/dev/null || true
 ```
