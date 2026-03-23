@@ -4,6 +4,7 @@
   "private": true,
   "description": "Structured research for decisions that satisfice",
   "license": "MIT",
+	"type": "module",
   "workspaces": [
     "packages/*"
   ],
