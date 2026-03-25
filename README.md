@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/@grainulation/grainulation"><img src="https://img.shields.io/npm/v/@grainulation/grainulation" alt="npm version"></a>
+  <a href="https://www.npmjs.com/package/@grainulation/grainulation"><img src="https://img.shields.io/npm/v/@grainulation/grainulation?label=%40grainulation%2Fgrainulation" alt="npm version"></a>
   <a href="https://www.npmjs.com/package/@grainulation/grainulation"><img src="https://img.shields.io/npm/dm/@grainulation/grainulation" alt="npm downloads"></a>
   <a href="https://github.com/grainulation/grainulation/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="license"></a>
   <a href="https://nodejs.org"><img src="https://img.shields.io/node/v/@grainulation/grainulation" alt="node"></a>
