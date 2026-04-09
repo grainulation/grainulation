@@ -2,6 +2,11 @@
 .farmer-audit.*.jsonl
 .farmer-state.json
 .farmer-token
+.farmer-config.json
 .farmer.pid
 node_modules/
 coverage/
+
+# Grainulator runtime files
+.wheat-tips.md
+.wheat-compile.lock
