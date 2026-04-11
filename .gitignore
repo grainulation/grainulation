@@ -1,11 +1,13 @@
-.farmer-audit.jsonl
-.farmer-audit.*.jsonl
-.farmer-state.json
 .farmer-token
-.farmer-config.json
+.farmer-state.json
 .farmer.pid
+.farmer-audit*.jsonl
+.farmer-config.json
 node_modules/
 coverage/
+
+# Claude Code
+.claude/
 
 # Grainulator runtime files
 .wheat-tips.md
