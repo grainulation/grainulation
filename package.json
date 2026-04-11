@@ -25,8 +25,7 @@
     "test": "node test/basic.test.js",
     "lint": "biome ci .",
     "format": "biome check --write .",
-    "start": "node bin/grainulation.js",
-    "postinstall": "git config core.hooksPath .githooks || true"
+    "start": "node bin/grainulation.js"
   },
   "keywords": [
     "research",
