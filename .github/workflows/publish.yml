@@ -27,5 +27,13 @@ jobs:
           SIZE=$(npm pack --dry-run --json 2>/dev/null | node -e "const d=require('fs').readFileSync('/dev/stdin','utf8');const j=JSON.parse(d);console.log(j[0]?.size||0)")
           echo "Package size: ${SIZE} bytes"
           if [ "$SIZE" -gt 512000 ]; then echo "::error::Package too large: $SIZE bytes (limit 512KB)"; exit 1; fi
+      - name: Check if already published
+        id: version-check
+        run: |
+          CURRENT=$(node -p "require(\"./package.json\").version")
+          PUBLISHED=$(npm view @grainulation/grainulation version 2>/dev/null || echo none)
+          echo "current=$CURRENT published=$PUBLISHED"
+          if [ "$CURRENT" = "$PUBLISHED" ]; then echo "skip=true" >> $GITHUB_OUTPUT; else echo "skip=false" >> $GITHUB_OUTPUT; fi
       - name: Publish
+        if: steps.version-check.outputs.skip != 'true'
         run: npm publish --provenance --access public
