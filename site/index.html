@@ -271,6 +271,10 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
         <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
         Get started
       </a>
+      <a href="https://grainulator.app" class="btn btn-ghost">
+        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Try the demo
+      </a>
       <a href="#tools" class="btn btn-ghost">
         <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
         Explore the tools
@@ -283,9 +287,26 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
 <section class="what-is" id="what">
   <div class="container">
     <div class="what-box rv">
+      <p>Everything in <strong style="color:#fff;font-weight:700"><span style="color:#9ca3af">g</span>rainulation</strong> starts with a <strong style="color:#fff">claim</strong> — a single typed statement with an evidence grade. Claims have types (factual, risk, estimate, constraint, recommendation) and tiers (from "someone said it" to "measured in production"). The compiler validates them. The tools help you collect them.</p>
       <p><strong style="color:#fff;font-weight:700"><span style="color:#9ca3af">g</span>rainulation</strong> is an ecosystem of CLI tools for structured technical research. Start with <strong style="color:#fff;font-size:110%"><span style="color:#fbbf24">w</span>heat</strong> — you will discover the others as you need them. Ask a question ("Should we migrate to GraphQL?"), research from multiple angles, challenge your findings, and compile into a decision brief.</p>
       <p>The compiler is JavaScript code, not an LLM call. Same claims in, same result out, every time. It catches contradictions, flags weak evidence, and blocks output until issues are resolved. Your decision brief has a git audit trail showing how every claim was collected and challenged.</p>
       <p>You need <strong><a href="https://docs.anthropic.com/en/docs/claude-code" style="color:var(--text)">Claude Code</a></strong>, <strong>Node.js 20+</strong>, and <strong>npx</strong>. No accounts, no cloud services, no API keys for the core tools. Zero npm dependencies across the entire ecosystem — built on Node.js built-ins only. Everything runs locally, everything is plain JSON and HTML.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Before/after contrast -->
+<section style="padding:60px 0 0">
+  <div class="container" style="max-width:700px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px" class="rv">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px">
+        <div style="font-weight:700;font-size:.8125rem;color:var(--red);margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em">Ask ChatGPT</div>
+        <p style="color:var(--text-2);font-size:.875rem;line-height:1.6">"We should probably use GraphQL because it's more modern." One paragraph, no sources, no way to challenge it.</p>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--green);border-radius:14px;padding:24px">
+        <div style="font-weight:700;font-size:.8125rem;color:var(--green);margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em">Ask Grainulation</div>
+        <p style="color:var(--text-2);font-size:.875rem;line-height:1.6">14 typed claims across 4 topics. 3 risks flagged. 1 contradiction caught. Recommendation with evidence grade. Full git audit trail.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -463,10 +484,10 @@ Written: output/brief.html</div>
         <div class="tool-card-head">
           <svg width="61" height="32" viewBox="0 0 73 38" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;position:relative;top:-4px"><path d="M22,8 L16,8 C10.5,12.5 10.5,25.5 16,30 L22,30" stroke="#fbbf24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><text x="24" y="19" text-anchor="middle" dominant-baseline="central" fill="#fbbf24" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">W</text><text x="32.5" y="19" dominant-baseline="central" fill="#e8ecf1" font-family="-apple-system,system-ui,sans-serif" font-size="18.2" font-weight="800">heat</text></svg>
           <div>
-            <div class="tool-role" style="color:#fbbf24">Research engine</div>
+            <div class="tool-role" style="color:#fbbf24">Evidence compiler</div>
           </div>
         </div>
-        <div class="tool-desc">The core. Ask a question, grow claims from multiple angles, compile a decision brief. Everything starts here.</div>
+        <div class="tool-desc">The core engine. Ask a question, collect typed claims from multiple angles, compile a validated decision brief. 7-pass compiler, zero npm dependencies. Everything starts here.</div>
         <div class="tool-install">npx @<strong style="color:#fff;font-size:110%"><span style="color:#9ca3af">gr</span>ainulation</strong>/<strong style="color:#fff;font-size:110%"><span style="color:#fbbf24">w</span>heat</strong> init</div>
       </a>
 
@@ -586,7 +607,7 @@ Written: output/brief.html</div>
           <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
         </div>
         <h3>Zero dependencies</h3>
-        <p>Standard library only. No supply chain anxiety. No left-pad. Every tool ships what it needs and nothing more.</p>
+        <p>Node.js built-ins only. Zero npm dependencies across all eight packages. No supply chain anxiety. No left-pad. No API keys for the compiler. Every tool ships what it needs and nothing more.</p>
       </div>
     </div>
   </div>
@@ -628,7 +649,7 @@ Written: output/brief.html</div>
           <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="faq-a">
-          <p>RFCs and ADRs document a decision after it is made. <strong style="color:#fff;font-weight:700"><span style="color:#9ca3af">g</span>rainulation</strong> captures the research process — the evidence gathering, adversarial testing, and conflict resolution that leads to the decision. The output brief can serve as your ADR.</p>
+          <p>RFCs and ADRs document a decision after it is made. <strong style="color:#fff;font-weight:700"><span style="color:#9ca3af">g</span>rainulation</strong> captures the research process — evidence gathering, adversarial testing, and conflict resolution — and validates it through a compiler. The output brief can serve as your ADR, with a full git audit trail showing how every claim was collected, challenged, and resolved.</p>
         </div>
       </div>
 
