@@ -15,8 +15,7 @@
   },
   "files": [
     "bin/",
-    "lib/",
-    "public/"
+    "lib/"
   ],
   "scripts": {
     "test": "node test/basic.test.js",
