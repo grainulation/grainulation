@@ -1,6 +1,6 @@
 {
   "name": "@grainulation/grainulation",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Structured research for decisions that satisfice",
   "license": "MIT",
   "workspaces": [
