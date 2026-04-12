@@ -163,14 +163,14 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
 
 /* Tools grid */
 .tools{padding:80px 0}
-.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
-.tool-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px;transition:border-color .2s,transform .15s}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;align-items:stretch}
+.tool-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px;transition:border-color .2s,transform .15s;display:flex;flex-direction:column}
 .tool-card:hover{border-color:rgba(255,255,255,.15);transform:translateY(-2px);text-decoration:none}
 .tool-card-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
 .tool-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;flex-shrink:0;border:1px solid var(--border)}
 .tool-name{font-family:var(--mono);font-weight:700;font-size:1rem}
 .tool-role{font-size:.75rem;font-weight:600}
-.tool-desc{font-size:.8125rem;color:var(--text-2);line-height:1.55;margin-bottom:14px}
+.tool-desc{font-size:.8125rem;color:var(--text-2);line-height:1.55;margin-bottom:14px;flex-grow:1}
 .tool-install{font-family:var(--mono);font-size:.75rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:6px 12px;color:var(--text-3);display:inline-block;user-select:all}
 .tool-card.highlight{border-color:rgba(156,163,175,.3);position:relative}
 .tool-card.highlight::before{content:'START HERE';position:absolute;top:-10px;right:16px;background:var(--accent);color:#0a0e1a;font-family:var(--mono);font-size:.625rem;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:.05em}
@@ -471,6 +471,8 @@ Written: output/brief.html</div>
     </div>
   </div>
 </section>
+
+<hr class="sep">
 
 <!-- Tools grid -->
 <section class="tools" id="tools">
