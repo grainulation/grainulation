@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
-      contents: read
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -39,5 +39,17 @@ jobs:
       - name: Test
         run: pnpm test
 
+      - name: Generate SBOM
+        run: npx --yes @cyclonedx/cyclonedx-npm --output-format JSON --output-file sbom.cdx.json
+
       - name: Publish
         run: pnpm publish --provenance --access public --no-git-checks
+
+      - name: Attach SBOM to release
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          tag="${GITHUB_REF#refs/tags/}"
+          gh release upload "$tag" sbom.cdx.json --clobber \
+            || gh release create "$tag" sbom.cdx.json --title "$tag" --notes "Automated release for $tag"
