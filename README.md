@@ -87,6 +87,10 @@ You build the crop (wheat), the steward (farmer), the barn, the mill, the silo, 
 
 Grainulation: the machine that processes the grain.
 
+## Releases
+
+See [CHANGELOG.md](./CHANGELOG.md) for release history.
+
 ## License
 
 MIT
