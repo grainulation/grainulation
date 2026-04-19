@@ -15,8 +15,17 @@
   },
   "files": [
     "bin/",
-    "lib/"
+    "lib/",
+    "public/",
+    "site/",
+    "CHANGELOG.md",
+    "LICENSE",
+    "CODE_OF_CONDUCT.md",
+    "CONTRIBUTING.md",
+    "SECURITY.md",
+    "README.md"
   ],
+  "type": "commonjs",
   "scripts": {
     "test": "node test/basic.test.js",
     "lint": "biome ci .",
