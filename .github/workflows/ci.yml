@@ -57,16 +57,19 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - name: Verify zero dependencies
+      - name: Verify zero third-party dependencies
         run: |
-          node -e "
-            const pkg = require('./package.json');
-            if (pkg.dependencies && Object.keys(pkg.dependencies).length > 0) {
-              console.error('grainulation: found runtime dependencies:', pkg.dependencies);
-              process.exit(1);
-            }
-            console.log('Zero dependencies verified');
-          "
+          # Internal @grainulation/* deps are allowed; any other dep fails.
+          foreign=$(node -e "
+            const d = require('./package.json').dependencies || {};
+            const bad = Object.keys(d).filter(n => !n.startsWith('@grainulation/'));
+            console.log(bad.join(','));
+          ")
+          if [ -n "$foreign" ]; then
+            echo "ERROR: package.json has third-party dependencies: $foreign"
+            echo "Only @grainulation/* internal deps are permitted."
+            exit 1
+          fi
       - name: Run tests
         run: pnpm test
       - name: CLI help check
