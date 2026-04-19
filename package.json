@@ -45,5 +45,8 @@
   "author": "grainulation contributors",
   "devDependencies": {
     "@biomejs/biome": "2.4.8"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
