@@ -6,7 +6,10 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
-    paths: ['site/**']
+    paths:
+      - 'site/**'
+      - 'package.json'
+      - '.github/workflows/pages.yml'
   workflow_dispatch:
 
 permissions:
@@ -26,6 +29,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund --ignore-scripts
+
+      - name: Vendor shared assets (sync-assets)
+        run: node node_modules/@grainulation/barn/tools/sync-assets.js --target ./site --verbose
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

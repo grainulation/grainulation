@@ -54,5 +54,8 @@
   "author": "grainulation contributors",
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@grainulation/barn": "^1.3.0"
   }
 }
