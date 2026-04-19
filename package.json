@@ -28,8 +28,8 @@
   "type": "commonjs",
   "scripts": {
     "test": "node test/basic.test.js",
-    "lint": "biome ci .",
-    "format": "biome check --write .",
+    "lint": "npx @biomejs/biome@2.4.8 ci .",
+    "format": "npx @biomejs/biome@2.4.8 check --write .",
     "start": "node bin/grainulation.js"
   },
   "keywords": [
@@ -52,9 +52,6 @@
   },
   "packageManager": "pnpm@10.30.0",
   "author": "grainulation contributors",
-  "devDependencies": {
-    "@biomejs/biome": "2.4.8"
-  },
   "publishConfig": {
     "access": "public"
   }
