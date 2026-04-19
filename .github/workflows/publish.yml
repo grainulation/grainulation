@@ -42,8 +42,17 @@ jobs:
       - name: Generate SBOM
         run: npx --yes @cyclonedx/cyclonedx-npm --output-format JSON --output-file sbom.cdx.json
 
+      - name: Upgrade npm for trusted publishing
+        run: npm install -g npm@latest
+
+      # Publish via npm (not pnpm) — the other 7 ecosystem packages all use
+      # npm publish with the same Trusted Publisher setup and succeed. pnpm
+      # 10.30's publish signs provenance correctly but then 404s on the
+      # registry PUT (see failed run 24622860059). The pnpm install/test
+      # flow above already produced everything we need; npm publish just
+      # reads package.json files[] and ships the tarball.
       - name: Publish
-        run: pnpm publish --provenance --access public --no-git-checks
+        run: npm publish --provenance --access public
 
       - name: Attach SBOM to release
         if: startsWith(github.ref, 'refs/tags/')
