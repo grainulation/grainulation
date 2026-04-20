@@ -113,6 +113,40 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
+      - name: Post-deploy HEAD smoke
+        if: success()
+        env:
+          HOST: grainulation.com
+        run: |
+          set -u
+          # Wait briefly for Pages CDN to pick up the new deploy
+          sleep 20
+          FAILED=0
+          # Required paths — 200 on all
+          for path in "/" "/favicon.svg" "/llms.txt" "/sitemap.xml" "/7100366149211580be04515b58b6e6d0.txt"; do
+            URL="https://$HOST$path"
+            # Retry 3x with 10s backoff to absorb CDN propagation jitter
+            CODE=""
+            for i in 1 2 3; do
+              CODE=$(curl -sS -o /dev/null -L -w "%{http_code}" --max-time 15 "$URL" || echo "000")
+              if [ "$CODE" = "200" ]; then break; fi
+              [ $i -lt 3 ] && sleep 10
+            done
+            if [ "$CODE" = "200" ]; then
+              echo "OK  $URL -> $CODE"
+            else
+              echo "::error::FAIL $URL -> $CODE"
+              FAILED=1
+            fi
+          done
+          # Content-type sanity on favicon (catches the case where /favicon.svg returns HTML, e.g. 404 page)
+          CT=$(curl -sS -I -L --max-time 15 "https://$HOST/favicon.svg" | awk -F': ' 'tolower($1)=="content-type"{print tolower($2)}' | tr -d '\r' | head -1)
+          case "$CT" in
+            image/svg*) echo "OK  favicon content-type: $CT" ;;
+            *) echo "::error::FAIL favicon content-type is \"$CT\" — expected image/svg+xml"; FAILED=1 ;;
+          esac
+          [ $FAILED -eq 0 ] || exit 1
+
       - name: Notify IndexNow
         if: success()
         env:
