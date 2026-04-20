@@ -27,7 +27,7 @@
   ],
   "type": "commonjs",
   "scripts": {
-    "test": "node test/basic.test.js",
+    "test": "node test/basic.test.js && node --test test/tarball.test.mjs",
     "lint": "npx @biomejs/biome@2.4.8 ci .",
     "format": "npx @biomejs/biome@2.4.8 check --write .",
     "start": "node bin/grainulation.js"
