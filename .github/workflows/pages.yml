@@ -51,3 +51,38 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Notify IndexNow
+        if: success()
+        env:
+          HOST: grainulation.com
+          INDEXNOW_KEY: 7100366149211580be04515b58b6e6d0
+        run: |
+          set -u
+          sleep 15
+          URLS=$(curl -sSf "https://$HOST/sitemap.xml" | grep -oE '<loc>[^<]+</loc>' | sed -E 's/<\/?loc>//g' || true)
+          if [ -z "$URLS" ]; then
+            echo "No URLs extracted from sitemap — skipping IndexNow submission"
+            exit 0
+          fi
+          PAYLOAD=$(HOST="$HOST" KEY="$INDEXNOW_KEY" URLS="$URLS" node -e '
+            const host = process.env.HOST;
+            const key = process.env.KEY;
+            const urlList = process.env.URLS.split(/\s+/).filter(Boolean);
+            process.stdout.write(JSON.stringify({
+              host, key,
+              keyLocation: `https://${host}/${key}.txt`,
+              urlList
+            }));
+          ')
+          COUNT=$(echo "$URLS" | wc -l | tr -d ' ')
+          echo "Submitting $COUNT URLs to IndexNow for $HOST"
+          HTTP_CODE=$(curl -sS -o /tmp/indexnow-resp.txt -w "%{http_code}" \
+            -X POST -H "Content-Type: application/json" \
+            -d "$PAYLOAD" https://api.indexnow.org/indexnow || echo "000")
+          echo "IndexNow response: $HTTP_CODE"
+          cat /tmp/indexnow-resp.txt || true
+          case "$HTTP_CODE" in
+            200|202) echo "OK" ;;
+            *) echo "::warning::IndexNow returned $HTTP_CODE — not blocking deploy" ;;
+          esac
