@@ -289,7 +289,7 @@ footer .ft-eco{color:var(--text-3);margin-bottom:8px}
   <div class="container">
     <div class="what-box rv">
       <p>Everything in <strong style="color:#fff;font-weight:700"><span style="color:#9ca3af">g</span>rainulation</strong> starts with a <strong style="color:#fff">claim</strong> — a single typed statement with an evidence grade. Claims have types (factual, risk, estimate, constraint, recommendation) and tiers (from "someone said it" to "measured in production"). The compiler validates them. The tools help you collect them.</p>
-      <p><strong style="color:#fff;font-weight:700"><span style="color:#9ca3af">g</span>rainulation</strong> is an ecosystem of CLI tools for structured technical research. Start with <strong style="color:#fff;font-size:110%"><span style="color:#fbbf24">w</span>heat</strong> — you will discover the others as you need them. Ask a question ("Should we migrate from microservices to a modular monolith?"), research from multiple angles, challenge your findings, and compile into a decision brief.</p>
+      <p><strong style="color:#fff;font-weight:700"><span style="color:#9ca3af">g</span>rainulation</strong> is an ecosystem of CLI tools for structured technical research. Start with <strong style="color:#fff;font-size:110%"><span style="color:#fbbf24">w</span>heat</strong> — you will discover the others as you need them. Ask a question ("Should we migrate from microservices back to a modular monolith?"), research from multiple angles, challenge your findings, and compile into a decision brief.</p>
       <p>The compiler is JavaScript code, not an LLM call. Same claims in, same result out, every time. It catches contradictions, flags weak evidence, and blocks output until issues are resolved. Your decision brief has a git audit trail showing how every claim was collected and challenged.</p>
       <p>You need <strong><a href="https://docs.anthropic.com/en/docs/claude-code" style="color:var(--text)">Claude Code</a></strong>, <strong>Node.js 20+</strong>, and <strong>npx</strong>. No accounts, no cloud services, no API keys for the core tools. Zero npm dependencies across the entire ecosystem — built on Node.js built-ins only. Everything runs locally, everything is plain JSON and HTML.</p>
     </div>
@@ -429,24 +429,24 @@ Written: output/brief.html</div>
   <div class="container">
     <div class="section-label rv">Real example</div>
     <h2 class="section-title rv rv-d1">Question to decision in 10 minutes</h2>
-    <p class="section-sub rv rv-d2">A team needs to decide whether to extract a service from their monolith. Here is the full sprint, start to finish.</p>
+    <p class="section-sub rv rv-d2">A team needs to decide whether to consolidate a service back into their monolith. Here is the full sprint, start to finish.</p>
 
     <div style="display:flex;flex-direction:column;gap:16px" id="term-sim-container">
       <div class="term-block">
 <span class="prompt">$</span> <span class="cmd">npx @grainulation/wheat init</span>
 
-<span class="output">  Question: Should we extract the payments service from our monolith?
-  Audience: Platform team + payments leads
-  Constraints: Must maintain transactional guarantees across extraction</span>
+<span class="output">  Question: Should we consolidate the auth service back into our monolith?
+  Audience: Platform team + auth leads
+  Constraints: Must maintain session continuity across consolidation</span>
 
 <span class="success">  Sprint created. claims.json + wheat.config.json ready.</span></div>
 
       <div class="term-block">
-<span class="prompt">wheat&gt;</span> <span class="cmd">/research "extraction cost, latency impact, data-coupling risk"</span>
+<span class="prompt">wheat&gt;</span> <span class="cmd">/research "consolidation cost, latency impact, data-coupling risk"</span>
 
-<span class="output">  r001 [factual|documented]  Co-locating services cuts p99 latency 20-40%
-  r002 [risk|documented]     Shared-database coupling blocks clean extract
-  r003 [estimate|web]        Extraction effort: 3-5 weeks per service
+<span class="output">  r001 [factual|documented]  Co-locating services cuts p99 latency dramatically
+  r002 [risk|documented]     Shared-database coupling complicates consolidation
+  r003 [estimate|web]        Consolidation effort: 3-5 weeks per service
   r004 [factual|documented]  Cross-service chattiness adds 2-5ms per hop</span></div>
 
       <div class="term-block">
@@ -458,7 +458,7 @@ Written: output/brief.html</div>
       <div class="term-block">
 <span class="prompt">wheat&gt;</span> <span class="cmd">/prototype</span>
 
-<span class="output">  p001 [factual|tested]  Measured 28ms p99 drop on /payments/charge
+<span class="output">  p001 [factual|tested]  Measured p99 drop on /auth/session when consolidated
   p002 [risk|tested]     Dual-write race during cut-over window</span></div>
 
       <div class="term-block">
@@ -467,8 +467,8 @@ Written: output/brief.html</div>
 <span class="success">  Compiled 8 claims (1 conflict resolved)
   Written: output/brief.html</span>
 
-<span class="output">  Recommendation: Extract the payments service only.
-  Keep the rest of the monolith; revisit after 6 months.</span></div>
+<span class="output">  Recommendation: Consolidate the auth service back into the monolith.
+  Leave other services extracted; revisit after 6 months.</span></div>
     </div>
   </div>
 </section>
