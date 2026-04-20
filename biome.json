@@ -28,6 +28,12 @@
     }
   },
   "files": {
-    "includes": ["**/*.js", "**/*.mjs", "**/*.css"]
+    "includes": [
+      "**/*.js",
+      "**/*.mjs",
+      "**/*.css",
+      "!site/grainulation-print.css",
+      "!site/grainulation-tokens.css"
+    ]
   }
 }
