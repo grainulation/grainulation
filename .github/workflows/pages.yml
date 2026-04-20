@@ -29,6 +29,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
@@ -39,6 +41,65 @@ jobs:
 
       - name: Vendor shared assets (sync-assets)
         run: node node_modules/@grainulation/barn/tools/sync-assets.js --target ./site --verbose
+
+      - name: Refresh sitemap lastmod from git
+        if: hashFiles('site/sitemap.xml') != ''
+        env:
+          HOST: grainulation.com
+        run: |
+          set -e
+          node <<'EOF'
+          const fs = require('fs');
+          const path = require('path');
+          const { execSync } = require('child_process');
+
+          const HOST = process.env.HOST;
+          const sitemapPath = 'site/sitemap.xml';
+          if (!fs.existsSync(sitemapPath)) {
+            console.log('No sitemap.xml — nothing to refresh');
+            process.exit(0);
+          }
+
+          let content = fs.readFileSync(sitemapPath, 'utf8');
+
+          function findFile(url) {
+            let p = url.replace(`https://${HOST}`, '').replace(`http://${HOST}`, '').replace(/^\/+/, '');
+            if (!p) return 'site/index.html';
+            const direct = path.join('site', p);
+            if (fs.existsSync(direct) && fs.statSync(direct).isFile()) return direct;
+            const withHtml = path.join('site', p + '.html');
+            if (fs.existsSync(withHtml)) return withHtml;
+            const indexHtml = path.join('site', p, 'index.html');
+            if (fs.existsSync(indexHtml)) return indexHtml;
+            return null;
+          }
+
+          function gitLastmod(filepath) {
+            try {
+              const out = execSync(`git log -1 --format=%cs -- "${filepath}"`, { encoding: 'utf8' }).trim();
+              return out || null;
+            } catch { return null; }
+          }
+
+          let refreshed = 0;
+          content = content.replace(/<url>([\s\S]*?)<\/url>/g, (block) => {
+            const locMatch = block.match(/<loc>(.*?)<\/loc>/);
+            if (!locMatch) return block;
+            const url = locMatch[1].trim();
+            const file = findFile(url);
+            if (!file) { console.log(`::warning::Could not resolve ${url} to a file`); return block; }
+            const date = gitLastmod(file);
+            if (!date) { console.log(`::warning::No git date for ${file}`); return block; }
+            refreshed++;
+            if (/<lastmod>.*?<\/lastmod>/.test(block)) {
+              return block.replace(/<lastmod>.*?<\/lastmod>/, `<lastmod>${date}</lastmod>`);
+            }
+            return block.replace(`<loc>${url}</loc>`, `<loc>${url}</loc>\n    <lastmod>${date}</lastmod>`);
+          });
+
+          fs.writeFileSync(sitemapPath, content);
+          console.log(`Sitemap refreshed for ${HOST} (${refreshed} URL(s))`);
+          EOF
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
