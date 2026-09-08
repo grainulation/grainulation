@@ -1,5 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#0a0e1a"/>
-  <path d="M36,12 L26,12 C17,19 17,45 26,52 L36,52" stroke="#9ca3af" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  <text x="38" y="33" text-anchor="middle" dominant-baseline="central" fill="#9ca3af" font-family="-apple-system,system-ui,sans-serif" font-size="30" font-weight="800">G</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32"><rect width="24" height="24" rx="3" fill="#060d10"/><path fill="#8df6ff" d="M5 3h4v4H5zm10 0h4v4h-4zM5 10h4v4H5zm10 0h4v4h-4zM5 17h4v4H5zm10 0h4v4h-4z"/></svg>

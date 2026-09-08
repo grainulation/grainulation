@@ -27,7 +27,7 @@ if [ ! -f "$HTML" ]; then
 fi
 
 # 1. <link rel="icon" href="/favicon-32.png" ...> present in index.html
-if grep -qE '<link[[:space:]]+rel="icon"[^>]*href="/favicon-32\.png"' "$HTML"; then
+if grep -qE '<link[[:space:]]+rel="icon"[^>]*href="/favicon-32\.png(\?[^"]*)?"' "$HTML"; then
   ok "icon <link> points to /favicon-32.png"
 else
   err "missing or drifted: <link rel=\"icon\" href=\"/favicon-32.png\" ...> in $HTML"

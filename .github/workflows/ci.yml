@@ -12,43 +12,22 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  detect:
-    runs-on: ubuntu-latest
-    outputs:
-      lib: ${{ steps.filter.outputs.lib }}
-      test: ${{ steps.filter.outputs.test }}
-      site: ${{ steps.filter.outputs.site }}
-    steps:
-      - uses: actions/checkout@v4
-      - uses: dorny/paths-filter@v3
-        id: filter
-        with:
-          filters: |
-            lib:
-              - 'lib/**'
-              - 'bin/**'
-              - 'package.json'
-            test:
-              - 'test/**'
-            site:
-              - 'site/**'
-
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: biomejs/setup-biome@v2
+        with:
+          version: '2.4.8'
       - name: Lint and format
         run: biome ci .
 
   test:
-    needs: detect
-    if: needs.detect.outputs.lib == 'true' || needs.detect.outputs.test == 'true' || github.event_name == 'merge_group'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        node-version: [20, 22]
+        node-version: [24, 25]
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -84,7 +63,7 @@ jobs:
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 25
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - name: Check package size (< 512KB)
@@ -112,3 +91,18 @@ jobs:
       - uses: actions/checkout@v4
       - name: Run SEO regression check
         run: bash scripts/seo-check.sh
+
+  static-site:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [24, 25]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Build organization site without legacy asset generation
+        run: node scripts/build-site.mjs
+      - name: Check unchanged authored homepage
+        run: cmp site/index.html dist/site/index.html
