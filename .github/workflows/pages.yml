@@ -1,15 +1,9 @@
-# .github/workflows/pages.yml — Deploy site/ to GitHub Pages
-# Copy this file to each repo's .github/workflows/ directory
-
-name: Deploy to GitHub Pages
+name: Deploy organization site
 
 on:
   push:
     branches: [main]
-    paths:
-      - 'site/**'
-      - 'package.json'
-      - '.github/workflows/pages.yml'
+    paths: ['site/**', 'scripts/build-site.mjs', '.github/workflows/pages.yml']
   workflow_dispatch:
 
 permissions:
@@ -23,161 +17,21 @@ concurrency:
 
 jobs:
   deploy:
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
-
-      - name: Install dependencies
-        run: npm install --no-audit --no-fund --ignore-scripts
-
-      - name: Vendor shared assets (sync-assets)
-        run: node node_modules/@grainulation/barn/tools/sync-assets.js --target ./site --verbose
-
-      - name: Refresh sitemap lastmod from git
-        if: hashFiles('site/sitemap.xml') != ''
-        env:
-          HOST: grainulation.com
-        run: |
-          set -e
-          node <<'EOF'
-          const fs = require('fs');
-          const path = require('path');
-          const { execSync } = require('child_process');
-
-          const HOST = process.env.HOST;
-          const sitemapPath = 'site/sitemap.xml';
-          if (!fs.existsSync(sitemapPath)) {
-            console.log('No sitemap.xml — nothing to refresh');
-            process.exit(0);
-          }
-
-          let content = fs.readFileSync(sitemapPath, 'utf8');
-
-          function findFile(url) {
-            let p = url.replace(`https://${HOST}`, '').replace(`http://${HOST}`, '').replace(/^\/+/, '');
-            if (!p) return 'site/index.html';
-            const direct = path.join('site', p);
-            if (fs.existsSync(direct) && fs.statSync(direct).isFile()) return direct;
-            const withHtml = path.join('site', p + '.html');
-            if (fs.existsSync(withHtml)) return withHtml;
-            const indexHtml = path.join('site', p, 'index.html');
-            if (fs.existsSync(indexHtml)) return indexHtml;
-            return null;
-          }
-
-          function gitLastmod(filepath) {
-            try {
-              const out = execSync(`git log -1 --format=%cs -- "${filepath}"`, { encoding: 'utf8' }).trim();
-              return out || null;
-            } catch { return null; }
-          }
-
-          let refreshed = 0;
-          content = content.replace(/<url>([\s\S]*?)<\/url>/g, (block) => {
-            const locMatch = block.match(/<loc>(.*?)<\/loc>/);
-            if (!locMatch) return block;
-            const url = locMatch[1].trim();
-            const file = findFile(url);
-            if (!file) { console.log(`::warning::Could not resolve ${url} to a file`); return block; }
-            const date = gitLastmod(file);
-            if (!date) { console.log(`::warning::No git date for ${file}`); return block; }
-            refreshed++;
-            if (/<lastmod>.*?<\/lastmod>/.test(block)) {
-              return block.replace(/<lastmod>.*?<\/lastmod>/, `<lastmod>${date}</lastmod>`);
-            }
-            return block.replace(`<loc>${url}</loc>`, `<loc>${url}</loc>\n    <lastmod>${date}</lastmod>`);
-          });
-
-          fs.writeFileSync(sitemapPath, content);
-          console.log(`Sitemap refreshed for ${HOST} (${refreshed} URL(s))`);
-          EOF
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+          node-version: 25
+      - name: Build the organization site
+        run: node scripts/build-site.mjs
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
         with:
-          path: site
-
+          path: dist/site
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-      - name: Post-deploy HEAD smoke
-        if: success()
-        env:
-          HOST: grainulation.com
-        run: |
-          set -u
-          # Wait briefly for Pages CDN to pick up the new deploy
-          sleep 20
-          FAILED=0
-          # Required paths — 200 on all
-          for path in "/" "/favicon.svg" "/llms.txt" "/sitemap.xml" "/7100366149211580be04515b58b6e6d0.txt"; do
-            URL="https://$HOST$path"
-            # Retry 3x with 10s backoff to absorb CDN propagation jitter
-            CODE=""
-            for i in 1 2 3; do
-              CODE=$(curl -sS -o /dev/null -L -w "%{http_code}" --max-time 15 "$URL" || echo "000")
-              if [ "$CODE" = "200" ]; then break; fi
-              [ $i -lt 3 ] && sleep 10
-            done
-            if [ "$CODE" = "200" ]; then
-              echo "OK  $URL -> $CODE"
-            else
-              echo "::error::FAIL $URL -> $CODE"
-              FAILED=1
-            fi
-          done
-          # Content-type sanity on favicon (catches the case where /favicon.svg returns HTML, e.g. 404 page)
-          CT=$(curl -sS -I -L --max-time 15 "https://$HOST/favicon.svg" | awk -F': ' 'tolower($1)=="content-type"{print tolower($2)}' | tr -d '\r' | head -1)
-          case "$CT" in
-            image/svg*) echo "OK  favicon content-type: $CT" ;;
-            *) echo "::error::FAIL favicon content-type is \"$CT\" — expected image/svg+xml"; FAILED=1 ;;
-          esac
-          [ $FAILED -eq 0 ] || exit 1
-
-      - name: Notify IndexNow
-        if: success()
-        env:
-          HOST: grainulation.com
-          INDEXNOW_KEY: 7100366149211580be04515b58b6e6d0
-        run: |
-          set -u
-          sleep 15
-          URLS=$(curl -sSf "https://$HOST/sitemap.xml" | grep -oE '<loc>[^<]+</loc>' | sed -E 's/<\/?loc>//g' || true)
-          if [ -z "$URLS" ]; then
-            echo "No URLs extracted from sitemap — skipping IndexNow submission"
-            exit 0
-          fi
-          PAYLOAD=$(HOST="$HOST" KEY="$INDEXNOW_KEY" URLS="$URLS" node -e '
-            const host = process.env.HOST;
-            const key = process.env.KEY;
-            const urlList = process.env.URLS.split(/\s+/).filter(Boolean);
-            process.stdout.write(JSON.stringify({
-              host, key,
-              keyLocation: `https://${host}/${key}.txt`,
-              urlList
-            }));
-          ')
-          COUNT=$(echo "$URLS" | wc -l | tr -d ' ')
-          echo "Submitting $COUNT URLs to IndexNow for $HOST"
-          HTTP_CODE=$(curl -sS -o /tmp/indexnow-resp.txt -w "%{http_code}" \
-            -X POST -H "Content-Type: application/json" \
-            -d "$PAYLOAD" https://api.indexnow.org/indexnow || echo "000")
-          echo "IndexNow response: $HTTP_CODE"
-          cat /tmp/indexnow-resp.txt || true
-          case "$HTTP_CODE" in
-            200|202) echo "OK" ;;
-            *) echo "::warning::IndexNow returned $HTTP_CODE — not blocking deploy" ;;
-          esac

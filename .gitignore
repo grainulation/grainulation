@@ -20,3 +20,6 @@ coverage/
 
 # IDE / editor
 .idea/
+
+# Generated static site artifact
+dist/

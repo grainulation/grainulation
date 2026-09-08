@@ -1,67 +1,13 @@
-name: Publish
+name: Legacy package publication retired
 
 on:
-  push:
-    tags:
-      - "v*"
+  workflow_dispatch:
 
-concurrency:
-  group: publish-${{ github.ref }}
-  cancel-in-progress: false
+permissions:
+  contents: read
 
 jobs:
-  publish:
+  explain:
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          registry-url: https://registry.npmjs.org
-          cache: pnpm
-
-      - name: Verify tag matches package.json
-        run: |
-          tag="${GITHUB_REF#refs/tags/v}"
-          pkg=$(node -p "require('./package.json').version")
-          if [ "$tag" != "$pkg" ]; then
-            echo "ERROR: tag v$tag does not match package.json $pkg"
-            exit 1
-          fi
-
-      - name: Install
-        run: pnpm install --frozen-lockfile
-
-      - name: Format check
-        run: pnpm run lint
-
-      - name: Test
-        run: pnpm test
-
-      - name: Generate SBOM
-        run: npx --yes @cyclonedx/cyclonedx-npm --output-format JSON --output-file sbom.cdx.json
-
-      - name: Upgrade npm for trusted publishing
-        run: npm install -g npm@latest
-
-      # Publish via npm (not pnpm) — the other 7 ecosystem packages all use
-      # npm publish with the same Trusted Publisher setup and succeed. pnpm
-      # 10.30's publish signs provenance correctly but then 404s on the
-      # registry PUT (see failed run 24622860059). The pnpm install/test
-      # flow above already produced everything we need; npm publish just
-      # reads package.json files[] and ships the tarball.
-      - name: Publish
-        run: npm publish --provenance --access public
-
-      - name: Attach SBOM to release
-        if: startsWith(github.ref, 'refs/tags/')
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          tag="${GITHUB_REF#refs/tags/}"
-          gh release upload "$tag" sbom.cdx.json --clobber \
-            || gh release create "$tag" sbom.cdx.json --title "$tag" --notes "Automated release for $tag"
+      - run: echo 'The organization repository builds a website. CLI releases belong to grainulator; this workflow performs no publication.'
