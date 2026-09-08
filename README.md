@@ -1,31 +1,82 @@
-# Grainulation
+<p align="center">
+  <a href="https://grainulation.com"><img src="site/favicon.svg" alt="Grainulation — six-dot mark" width="80" height="80"></a>
+</p>
 
-Grainulation is the organization behind [Grainulator](https://github.com/grainulation/grainulator), evidence and verification tools for model-assisted work. This checkout contains the rebuilt organization website for [grainulation.com](https://grainulation.com).
+<h1 align="center">Grainulation</h1>
 
-The current architecture has two maintained repositories: **Grainulator** owns the product, CLI, MCP tools, research playground, and product website; **Grainulation** owns this organization website. These local changes have not been published, and repository archival has not been performed.
+<p align="center"><strong>Intelligence, put to work.</strong></p>
 
-## Preview and build the website
+<p align="center">
+  Open tools for work with AI.<br>
+  Evidence you can inspect. Checks you define. Context you keep.
+</p>
 
-Use Node.js 24 or later; Node 25 is the local default. The static build needs no dependency installation:
+<p align="center">
+  <a href="https://grainulation.com"><img src="https://img.shields.io/badge/visit-grainulation.com-8df6ff?style=for-the-badge" alt="Visit grainulation.com"></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/grainulation/grainulation/releases"><img src="https://img.shields.io/github/v/release/grainulation/grainulation?label=release" alt="Latest GitHub release"></a>
+  <a href="https://github.com/grainulation/grainulation/actions/workflows/ci.yml"><img src="https://github.com/grainulation/grainulation/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI on main"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="MIT license"></a>
+</p>
+
+<p align="center">
+  <a href="#our-product">Our product</a> ·
+  <a href="#work-on-the-website">Work on the website</a> ·
+  <a href="#repository-contents">Repository contents</a> ·
+  <a href="https://github.com/grainulation/grainulation/issues">Feedback</a>
+</p>
+
+---
+
+## Our product
+
+Models keep getting better. We build the tools that help you turn their output into work you can inspect, verify, and continue.
+
+**[Grainulator](https://github.com/grainulation/grainulator)** brings evidence, verification, memory, and session handoff into one product. Keep your model and agent; add a record of what supports the answer, checks that matter to your task, and clear next actions.
+
+**[Explore Grainulator](https://grainulator.app/)** · **[Try the playground](https://grainulator.app/playground/)** · **[Product setup](https://github.com/grainulation/grainulator/blob/main/docs/INSTALLATION.md)**
+
+The public playground lets you configure a workflow and export a session. Model execution happens through your local Grainulator installation and provider account.
+
+| Repository | What lives here |
+| --- | --- |
+| **[Grainulator](https://github.com/grainulation/grainulator)** | The product: CLI, MCP tools, research sessions, plugins, and product website. |
+| **Grainulation — this repository** | The organization website at [grainulation.com](https://grainulation.com). |
+
+## Work on the website
+
+Requires **Node.js 24+**; Node 25 is the development default. The preview command below also uses **Python 3**. The static build needs no dependency installation.
 
 ```sh
+git clone https://github.com/grainulation/grainulation.git
+cd grainulation
 node scripts/build-site.mjs
 python3 -m http.server 4518 --bind 127.0.0.1 --directory dist/site
 ```
 
-Open http://127.0.0.1:4518. The build copies the authored `site/` into `dist/site/`; it does not run the historical shared-asset generator. The Pages workflow is prepared to upload that artifact. Running the build does not deploy anything.
+Open **[localhost:4518](http://127.0.0.1:4518/)**. The build copies the authored `site/` files into `dist/site/`. Product links retain their public destinations; running this website does not require a local product server.
 
-For the paired local product and organization previews, run `node scripts/preview.mjs` from the sibling `grainulator-dogfood` checkout. Product setup and local artifact installation are documented in that checkout's `docs/INSTALLATION.md`.
+Before opening a pull request, run the site metadata check:
+
+```sh
+bash scripts/seo-check.sh
+```
+
+The [CI workflow](.github/workflows/ci.yml) runs formatting, SEO, package compatibility tests, and static builds on Node 24 and 25. The [Pages workflow](.github/workflows/pages.yml) deploys website changes merged into `main`. A local build does not deploy anything.
 
 ## Repository contents
 
-- `site/` — current organization website, branding, and metadata.
-- `scripts/build-site.mjs` — dependency-free static artifact build.
-- `.github/workflows/pages.yml` — organization website deployment workflow.
-- `bin/`, `lib/`, `public/`, `test/`, and the existing package manifest — retained historical ecosystem CLI source and compatibility tests.
+```text
+site/                    Organization website, branding, and metadata
+scripts/build-site.mjs   Static artifact build
+scripts/seo-check.sh     Site metadata checks
+.github/workflows/       CI and website deployment
+```
 
-The retained CLI source and its historical package metadata have not been removed or migrated in this checkout. They are not the current product entry point. The package publication workflow is retired; use the consolidated Grainulator product for new work. Remaining documents that describe the earlier ecosystem are historical references, not installation instructions for the new build.
+The earlier ecosystem CLI remains in `bin/`, `lib/`, `public/`, and `test/`, alongside its historical package metadata. That source is retained for compatibility and history; new product work belongs in Grainulator. The organization package's publication workflow is retired.
 
-## History and license
+Questions about the website belong in [this repository's issues](https://github.com/grainulation/grainulation/issues). Product feedback belongs in [Grainulator's issues](https://github.com/grainulation/grainulator/issues).
 
-[CHANGELOG.md](CHANGELOG.md) preserves prior releases. Source history and existing repository stars remain intact. MIT licensed; see [LICENSE](LICENSE).
+[Release history](CHANGELOG.md) · [MIT license](LICENSE)
