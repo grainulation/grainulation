@@ -1,22 +1,13 @@
 # Grainulation
 
-> Open tools for work with AI. Grainulation builds Grainulator.
+> Open tools for clearer AI work. Grainulation builds Grainulator.
 
-Grainulation is the organization. Grainulator is the flagship product: a portable workflow for model-assisted research, evidence, verification, and continuation. The consolidation brings the earlier tools into internal modules within one product instead of asking users to choose among separate tool installs.
+Grainulation builds open tools for work with AI. Grainulator is its main product. It helps people keep the facts behind a result, check the work, and see what still needs review.
 
 ## Product
 
-- [Grainulator](https://grainulator.app/): product overview and evidence-check example.
-- [Research playground](https://grainulator.app/playground): configure a provider, model, research passes, claims ledger, and evidence gate; inspect and export a session.
-- [Source](https://github.com/grainulation/grainulator): product source and documentation.
-- [Organization](https://github.com/grainulation): project history and contributions.
+- [Grainulator](https://grainulator.app/): product overview and a saved example of an evidence check.
+- [Setup guide](https://github.com/grainulation/grainulator/blob/main/docs/AGENT-SETUP.md): use Grainulator with Claude Code, Codex, or another agent.
+- [Source](https://github.com/grainulation/grainulator): code and documentation.
 
-## Principles and boundaries
-
-- Keep model and host interfaces explicit. Provider or adapter support determines compatibility.
-- Keep claims, evidence, and uncertainty visible. A source link or model agreement does not establish independent verification.
-- Preserve context, configuration, and completed work in portable sessions.
-- Treat independent checks as the standard for task completion.
-- Evaluate improvements with controlled tasks and independent criteria. Do not infer model-quality gains from a product demonstration.
-
-The earlier repositories retain their history while consolidation proceeds. This document describes the new product direction; release availability and installation instructions belong in the product documentation.
+The saved example does not make a new model request. Check the [setup guide](https://github.com/grainulation/grainulator/blob/main/docs/AGENT-SETUP.md) for installation details.

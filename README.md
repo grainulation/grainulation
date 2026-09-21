@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://grainulation.com"><img src="site/favicon.svg" alt="Grainulation — six-dot mark" width="80" height="80"></a>
+  <a href="https://grainulation.com"><img src="site/logo-mark.png" alt="Grainulation logo" width="80" height="80"></a>
 </p>
 
 <h1 align="center">Grainulation</h1>

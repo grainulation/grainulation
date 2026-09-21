@@ -1,16 +1,10 @@
 @media print{
-  :root{color-scheme:light;--page:#fff;--surface:transparent;--panel:transparent;--text:#111;--muted:#333;--accent:#111;--line:#bbb}
+  :root{color-scheme:light;--page:#fff;--surface:#fff;--text:#111;--muted:#333;--accent:#111;--line:#bbb}
   body{font-size:10pt}.page-shell{max-width:none;padding:0}
-  .site-header nav,.skip-link,.edition{display:none}
-  .hero,.product,.principles,.open-work,.closing{padding:1.5rem 0}
+  .site-header nav,.skip-link{display:none}
+  .hero{padding:1.5rem 0}.product{padding:1.5rem 0}
   h1{font-size:36pt;margin:1rem 0}h2{font-size:20pt}
-  h1,h2,h3{break-after:avoid}p,li{orphans:3;widows:3}
-  .product-heading,.principles,.open-work{display:block}
-  .working-record{display:block;break-inside:avoid}.working-record>div{padding:1rem}
-  .record-core{border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .record-core dl>div{flex-direction:row}.record-core dt{min-width:8rem}
-  .principle-list{margin-top:1rem}.principle-list li{break-inside:avoid}
-  .primary-link,.arrow-link{border:0;padding:.5rem 0;text-decoration:underline}
-  .open-work>div:last-child{margin-top:1rem}.product-intro{margin-top:1rem;max-width:none}
+  h1,h2{break-after:avoid}p{orphans:3;widows:3}
+  .primary-link{border:0;padding:.5rem 0;text-decoration:underline}
   @page{margin:1.5cm}
 }
